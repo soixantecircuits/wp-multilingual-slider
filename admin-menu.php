@@ -190,7 +190,7 @@ add_action('admin_menu', 'home_create_menu');
 
 
 function admin_init() {
-	$path = WP_PLUGIN_URL .'/accueil';//dirname(__FILE__);//get_bloginfo('template_url');
+	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
 	wp_enqueue_script( 'accueil_script', $path.'/js/ui_controller.js', array('jquery'), 0.1, TRUE );
     $myStyleUrl = $path. '/css/style_home.css';
 	wp_register_style('myStyleSheets', $myStyleUrl);
@@ -209,7 +209,7 @@ function admin_init() {
 function home_create_menu() {
 
 	//create new top-level menu
-	$path =  WP_PLUGIN_URL .'/accueil';//dirname(__FILE__); //get_bloginfo('template_url');
+	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__); //get_bloginfo('template_url');
 	
 	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', __FILE__, 'home_settings_page', $path.'/accueil.png');
 
@@ -269,10 +269,10 @@ function home_settings_page() {
 	<h3>Options du slide </h3>
 	  <?php 
         if(!empty($sel_lang)){ 
-          $path = WP_PLUGIN_URL .'/accueil';
+          $path = WP_PLUGIN_URL .'/wp-multilingual-slider';
           global $lang_codes;
 		  foreach($sel_lang as $l){?>
-    <h3><img src="../wp-content/plugins/accueil/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
+    <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
     <p>Pour ajouter une diapositive en <?php echo $l['native_name'];?> cliquez sur <i>Ajouter un slide <?php echo $lang_codes[$l];?></i></p>
         <span name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" class="add button-primary"><?php _e("Ajouter un slide").'" "'.$l['native_name']; ?> </span>
 		<br>
