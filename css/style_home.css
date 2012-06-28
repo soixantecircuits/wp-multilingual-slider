@@ -1,0 +1,26 @@
+.table{
+  margin-top:10px;
+  border-bottom:1px solid #CCC;
+  width:500px;
+}
+
+.table th{
+  text-align:left;
+  padding: 5px 0px;
+}
+
+#content_home textarea{
+  overflow-x: scroll;  
+  width: 420px;
+  height: 23px;
+  resize: none; 
+}
+
+p.img_home{
+  width: 120px;
+  height: 120px;
+  display: block;
+  float: left;
+  overflow: hidden;
+}
+
