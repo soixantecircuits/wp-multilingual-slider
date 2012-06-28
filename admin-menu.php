@@ -310,31 +310,32 @@ function home_settings_page() {
 	}
 	else{
 ?>
-    <!--<table class="table_<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
+<!-- TODO FIX input form -->
+    <table class="table_<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
         <tr valign="top">
         <th scope="row"><?php _e("Titre");?> :</th>
-        <td><textarea name="<?php echo $l;?>_Titre-0" id="<?php echo $l;?>_Titre-0"></textarea></td>
+        <td><input name="<?php echo $l;?>_Titre-0" id="<?php echo $l;?>_Titre-0"></input></td>
         </tr>
 
         <tr valign="top">
         <th scope="row"><?php _e("Image")?> :</th>
-        <td><textarea style="display:none;"name="<?php echo $l;?>_Image-0" id="<?php echo $l;?>_Image-0"></textarea> <a href="/wp-admin/media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-0" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");?> <img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15"></a></td>
+        <td><textarea style="display:none;"name="<?php echo $l;?>_Image-0" id="<?php echo $l;?>_Image-0"></textarea> <a href="wp-admin/media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-0" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");?> <!--<img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15">--></a></td>
         </tr>
 
         <tr valign="top">
         <th scope="row"><?php _e("Légende");?> :</th>
-        <td><textarea name="<?php echo $l;?>_Legend-0" id="<?php echo $l;?>_Legend-0"></textarea></td>
+        <td><input name="<?php echo $l;?>_Legend-0" id="<?php echo $l;?>_Legend-0"></input></td>
         </tr>
 
         <tr valign="top">
         <th scope="row"><?php _e("Liens vers");?> :</th>
-        <td><textarea name="<?php echo $l;?>_Url-0" id="<?php echo $l;?>_Url-0"></textarea></td>
+        <td><input name="<?php echo $l;?>_Url-0" id="<?php echo $l;?>_Url-0"></input></td>
         </tr>
 
-    </table>-->
-<?php    
-}
-}
+    </table>
+<?php
+		}
+	}
 }
 ?>
 	
