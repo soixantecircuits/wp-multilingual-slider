@@ -273,8 +273,8 @@ function home_settings_page() {
           global $lang_codes;
 		  foreach($sel_lang as $l){?>
     <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
-    <p>Pour ajouter une diapositive en <?php echo $l['native_name'];?> cliquez sur <i>Ajouter un slide <?php echo $lang_codes[$l];?></i></p>
-        <span name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" class="add button-primary"><?php _e("Ajouter un slide").'" "'.$l['native_name']; ?> </span>
+    <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?><?php echo $lang_codes[$l];?></i></p>
+        <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" class="add button-primary"><?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?> </button>
 		<br>
 	<?php
 	$home_content = 'home_content_'.$l;
@@ -310,26 +310,27 @@ function home_settings_page() {
 	}
 	else{
 ?>
-<!-- TODO FIX input form -->
-    <table class="table_<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
-        <tr valign="top">
-        <th scope="row"><?php _e("Titre");?> :</th>
-        <td><input name="<?php echo $l;?>_Titre-0" id="<?php echo $l;?>_Titre-0"></input></td>
+    <table class="table-<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
+        <tr align="left">
+          <th scope="row"><?php _e("Titre");?> :</th>
+          <td><input name="title-<?php echo $l;?>-0" class="title-<?php echo $l;?>" id="title-<?php echo $l;?>-0"></input></td>
         </tr>
 
-        <tr valign="top">
-        <th scope="row"><?php _e("Image")?> :</th>
-        <td><textarea style="display:none;"name="<?php echo $l;?>_Image-0" id="<?php echo $l;?>_Image-0"></textarea> <a href="wp-admin/media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-0" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");?> <!--<img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15">--></a></td>
+        <tr align="left">
+          <th scope="row"><?php _e("Légende");?> :</th>
+          <td><input name="legend-<?php echo $l;?>-0" class="legend-<?php echo $l;?>" id="legend-<?php echo $l;?>-0"></input></td>
         </tr>
 
-        <tr valign="top">
-        <th scope="row"><?php _e("Légende");?> :</th>
-        <td><input name="<?php echo $l;?>_Legend-0" id="<?php echo $l;?>_Legend-0"></input></td>
+        <tr align="left">
+	       <th scope="row"><?php _e("Url");?> :</th>
+			 <td><input name="url-<?php echo $l;?>-0" class="url-<?php echo $l;?>" id="url-<?php echo $l;?>-0"></input></td>
         </tr>
 
-        <tr valign="top">
-        <th scope="row"><?php _e("Liens vers");?> :</th>
-        <td><input name="<?php echo $l;?>_Url-0" id="<?php echo $l;?>_Url-0"></input></td>
+        <tr align="left">
+          <th scope="row"><?php _e("Image")?> :</th>
+          <td><textarea style="display:none;" name="image-<?php echo $l;?>-0" class="image-<?php echo $l;?>" id="image-<?php echo $l;?>-0"></textarea>
+				<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-0" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");
+				?><!--<img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15">--></a></td>
         </tr>
 
     </table>
@@ -367,7 +368,7 @@ function home_settings_page() {
 	}
 	?>
     <p class="submit">
-    <span id="save_home" style="background-color:#D3FF82;" class="button-primary"><?php _e('Sauvegarder') ?> </span>
+    <button type="button" id="save_home" style="background:#33AA22;color:#FFF" class="button-primary"><?php _e('Sauvegarder') ?></button>
     </p>
 </form>
 </div>

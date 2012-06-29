@@ -24,3 +24,7 @@ p.img_home{
   overflow: hidden;
 }
 
+#content_home table {
+	padding-top: 15px;
+	border-bottom: solid 1px;
+}

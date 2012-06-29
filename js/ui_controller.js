@@ -1,6 +1,5 @@
 //script d'utilisation du backoffice.
 
-
 jQuery(document).ready(function(){
 
 var formfield_img = "";
@@ -11,8 +10,7 @@ jQuery(".add_media").click(function(){
 		formfield_img = jQuery(this).siblings();
     formfield_title = jQuery(jQuery(this).parents('tr').siblings().get(0)).find('td>textarea')
     formfield_legend = jQuery(jQuery(this).parents('tr').siblings().get(1)).find('td>textarea')
-
-		//tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
+	//tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
 });
 
 if(jQuery('form#content_home').length > 0){
@@ -34,39 +32,66 @@ if(jQuery('form#content_home').length > 0){
   }
 }
 
+function refresh_order(code) {
+	var tables  = jQuery(".table-"+code);
+	var titles  = jQuery(".title-"+code);
+	var images  = jQuery(".image-"+code);
+	var imgurl  = jQuery(".thickbox");
+	var legends = jQuery(".legend-"+code);
+	var urls    = jQuery(".url-"+code);
+	var buttons = jQuery(".removeTable_home");
+	for (var i = 0; i < tables.length; i++) {
+		jQuery(tables[i] ).attr("id"  , "form-table-"+code+"-"+i);
+		jQuery(titles[i] ).attr("id"  , "title-"+code+"-"+i);
+		jQuery(titles[i] ).attr("name", "title-"+code+"-"+i);
+		jQuery(images[i] ).attr("id"  , "image-"+code+"-"+i);
+		jQuery(images[i] ).attr("name", "image-"+code+"-"+i);
+		jQuery(imgurl[i] ).attr("id"  , "content-add_media-"+i);
+		jQuery(legends[i]).attr("id"  , "legend-"+code+"-"+i);
+		jQuery(legends[i]).attr("name", "legend-"+code+"-"+i);
+		jQuery(urls[i]   ).attr("id"  , "url-"+code+"-"+i);
+		jQuery(urls[i]   ).attr("name", "url-"+code+"-"+i);
+		if (i != 0) {
+			jQuery(buttons[i-1]).attr("id", "remove_table-"+(i));
+			jQuery(buttons[i-1]).attr("name", "form-table-"+code+"-"+(i));
+		}
+	}
+}
+
 /***ADD SLIDE***/
-jQuery(".add").click('bind',function(){	
+jQuery(".add").click('bind',function() {
 	var code = jQuery(this).attr('code_pays');
-	//alert (code);
-	var activeCount = jQuery(".table_"+code).length;
+	var activeCount = jQuery(".table-"+code).length;
+	//alert (activeCount);
 	//alert ("#form-table-"+code+"-"+parseInt(activeCount-1));
 	jQuery("#form-table-"+code+"-"+parseInt(activeCount-1)).after(
-		'<table class="table_'+code+'" id="form-table-'+code+'-'+activeCount+'">'+
+		'<table class="table-'+code+'" id="form-table-'+code+'-'+activeCount+'">'+
 			'<tr valign="top">'+
 				'<th scope="row">Titre '+activeCount+' :</th>'+
-				'<td><textarea name="'+code+'_Titre-'+activeCount+'" id="'+code+'_Titre-'+activeCount+'"></textarea></td>'+
+				'<td><input name="title-'+code+'-'+activeCount+'" class="title-'+code+'" id="title-'+code+'-'+activeCount+'"></input></td>'+
 			'</tr>'+
 			'<tr valign="top">'+
           '<th scope="row">Image '+activeCount+' :</th>'+
           '<td>'+
-				'<textarea style="display:none;"name="'+code+'_Image-'+activeCount+'" id="'+code+'_Image-'+activeCount+'"></textarea>'+
-				'<a href="/wp-admin/media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+activeCount+'" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");?><!-- <img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15"> --></a>'+
+				'<textarea style="display:none;"class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'"></textarea>'+
+				'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+activeCount+'" title="Add Media" onclick="return false;">'+
+				'Upload/Insert<!-- <img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15"> --></a>'+
 			'</td>'+
         '</tr>'+
         '<tr valign="top">'+
           '<th scope="row">Légende '+activeCount+' :</th>' +
-          '<td><textarea name="'+code+'_Legend-'+activeCount+'" id="'+code+'_Legend-'+activeCount+'"></textarea></td>'+
+          '<td><input name="legend-'+code+'-'+activeCount+'" class="legend-'+code+'" id="legend-'+code+'-'+activeCount+'"></input></td>'+
         '<tr valign="top">'+
           '<th scope="row">Url '+activeCount+' :</th>'+
-			'<td><textarea name="'+code+'_Url-'+activeCount+'" id="'+code+'_Url-'+activeCount+'"></textarea></td>'+
-		'</tr><tr><th></th><td><span style="background-color:#FF4D1A;float:right;"class="removeTable_home button-primary" name="form-table-'+code+'-'+activeCount+'">Supprimer</span></td></tr>'+
+			'<td><input name="url-'+code+'-'+activeCount+'" class="url-'+code+'" id="url-'+code+'-'+activeCount+'"></input></td>'+
+		'</tr><tr><th></th><td><button type="button" style="border-color:#FF4D1A;background:#FF4D1A;float:right;"id="remove_table-'+activeCount+'" class="removeTable_home button-primary" name="form-table-'+code+'-'+activeCount+'">Supprimer</button></td></tr>'+
 	'</table>'
 	);
 
-	jQuery(".removeTable_home").click('bind', function(){
-		alert("#"+jQuery(this).attr('name'));
+	jQuery("#remove_table-"+activeCount).click(function(){
 		jQuery("#"+jQuery(this).attr('name')).delay('1000').fadeOut('slow').remove();
 		jQuery(this).remove();
+		refresh_order(code);
 	});
 
 	jQuery(".add_media").click(function(){
@@ -94,7 +119,7 @@ jQuery(".add").click('bind',function(){
 });
 
 
-/***SAVE FUNTION*****/
+/***SAVE FUNTION***/
 jQuery("#save_home").click('bind',function(){
 	var tab_pays = new Array();
 	var cpt = new Array();
