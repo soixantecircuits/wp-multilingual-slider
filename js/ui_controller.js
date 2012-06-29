@@ -39,6 +39,8 @@ function refresh_order(code) {
 	var imgurl  = jQuery(".thickbox");
 	var legends = jQuery(".legend-"+code);
 	var urls    = jQuery(".url-"+code);
+	var uplink  = jQuery(".up-"+code);
+	var dwlink  = jQuery(".down-"+code);
 	var buttons = jQuery(".removeTable_home");
 	for (var i = 0; i < tables.length; i++) {
 		jQuery(tables[i] ).attr("id"  , "form-table-"+code+"-"+i);
@@ -51,9 +53,14 @@ function refresh_order(code) {
 		jQuery(legends[i]).attr("name", "legend-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("id"  , "url-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("name", "url-"+code+"-"+i);
+		jQuery(uplink[i] ).attr("id"  , "up-"+code+"-"+i);
+		jQuery(uplink[i] ).attr("count", i);
+		jQuery(dwlink[i] ).attr("id"  , "down-"+code+"-"+i);
+		jQuery(dwlink[i] ).attr("count", i);
 		jQuery(buttons[i]).attr("id"  , "remove_table-"+i);
 		jQuery(buttons[i]).attr("name", "form-table-"+code+"-"+i);
 	}
+	
 }
 
 jQuery(function() {
@@ -102,8 +109,8 @@ jQuery(".add").click('bind',function() {
 			'</tr>'+
 			'<tr>'+
 				'<th>'+
-					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" href="#" onclick="return false;">Monter</a> / '+
-					'<a class="down-'+code+'" id="down-'+code+'-'+activeCount+'" href="#" onclick="return false;">Descendre</a>'+
+					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">Monter</a> / '+
+					'<a class="down-'+code+'" id="down-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">Descendre</a>'+
 				'</th>'+
 				'<td>'+
 					'<button type="button" style="border-color:#FF4D1A;background:#FF4D1A;'+
@@ -120,13 +127,21 @@ jQuery(".add").click('bind',function() {
 		refresh_order(code);
 	});
 
-/*
 	jQuery("#down-"+code+"-"+activeCount).click(function() {
-		var current = $("#form-table-"+code+"-"+(activeCount+1));
-		current.next().after(current);
-		refresh_order(code);
+		if (jQuery(this).attr("count") != jQuery(".table-"+code).length-1) {
+			var current = jQuery("#form-table-"+code+"-"+jQuery(this).attr("count"));
+			current.next().after(current);
+			refresh_order(code);
+		}
 	});
-*/
+
+	jQuery("#up-"+code+"-"+activeCount).click(function() {
+		if (jQuery(this).attr("count") != 0) {
+			var current = jQuery("#form-table-"+code+"-"+(jQuery(this).attr("count")-1));
+			current.next().after(current);
+			refresh_order(code);
+		}
+	});
 
 	jQuery(".add_media").click(function(){
 		formfield_img = jQuery(this).siblings();
@@ -166,7 +181,7 @@ jQuery("#save_home").click('bind',function() {
 	jQuery.each(tab_pays,function (index_pays, value_pays) {
 		jQuery("#home_content_"+value_pays).val('[');
 		cpt[index_pays] = 0;
-		separator[index_pays] = value_pays +'_';
+		separator[index_pays] = value_pays + '_';
 	});
 
 	jQuery(content).each(function(ind, el){
