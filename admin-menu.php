@@ -185,22 +185,20 @@
 
 $lang_codes = array_flip($_lang_codes);
 
-
-add_action('admin_menu', 'home_create_menu');
-
-
 function admin_init() {
 	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
 	wp_enqueue_script( 'accueil_script', $path.'/js/ui_controller.js', array('jquery'), 0.1, TRUE );
-    $myStyleUrl = $path. '/css/style_home.css';
+   $myStyleUrl = $path. '/css/style_home.css';
 	wp_register_style('myStyleSheets', $myStyleUrl);
-    wp_enqueue_style( 'myStyleSheets');
+   wp_enqueue_style( 'myStyleSheets');
+	wp_register_script( 'jquery_ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' );
+	wp_enqueue_script( 'jquery_ui' );
 	if(function_exists("add_thickbox")){
-        add_thickbox();
-    }else{
-        wp_enqueue_script('thickbox');
-    }
-    wp_enqueue_script('media-upload');
+		add_thickbox();
+   }else{
+		wp_enqueue_script('thickbox');
+   }
+   wp_enqueue_script('media-upload');
 }
 
  
@@ -274,8 +272,9 @@ function home_settings_page() {
 		  foreach($sel_lang as $l){?>
     <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
     <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?><?php echo $lang_codes[$l];?></i></p>
-        <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" class="add button-primary"><?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?> </button>
-		<br>
+	 <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" class="add button-primary"><?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?> </button>
+	 <ul id="slide_list">
+		<span id="sentinel" />
 	<?php
 	$home_content = 'home_content_'.$l;
    	$frSlides = json_decode(get_option($home_content));
@@ -310,7 +309,7 @@ function home_settings_page() {
 	}
 	else{
 ?>
-    <table class="table-<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
+    <!--<table class="table-<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
         <tr align="left">
           <th scope="row"><?php _e("Titre");?> :</th>
           <td><input name="title-<?php echo $l;?>-0" class="title-<?php echo $l;?>" id="title-<?php echo $l;?>-0"></input></td>
@@ -330,16 +329,22 @@ function home_settings_page() {
           <th scope="row"><?php _e("Image")?> :</th>
           <td><textarea style="display:none;" name="image-<?php echo $l;?>-0" class="image-<?php echo $l;?>" id="image-<?php echo $l;?>-0"></textarea>
 				<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-0" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");
-				?><!--<img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15">--></a></td>
+				?></a></td>
         </tr>
+		<tr><th></th><td>
+			<button type="button" style="border-color:#FF4D1A;background:#FF4D1A;float:right;"
+				id="remove_table-0" class="removeTable_home button-primary" 
+				name="form-table-<?php echo $l; ?>-0">Supprimer
+			</button>
+		</td></tr>
 
-    </table>
+	</table>-->
 <?php
 		}
 	}
 }
 ?>
-	
+	</ul>
 </form>
 
 

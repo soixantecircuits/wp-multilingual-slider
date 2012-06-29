@@ -51,40 +51,45 @@ function refresh_order(code) {
 		jQuery(legends[i]).attr("name", "legend-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("id"  , "url-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("name", "url-"+code+"-"+i);
-		if (i != 0) {
-			jQuery(buttons[i-1]).attr("id", "remove_table-"+(i));
-			jQuery(buttons[i-1]).attr("name", "form-table-"+code+"-"+(i));
-		}
+		jQuery(buttons[i]).attr("id"  , "remove_table-"+i);
+		jQuery(buttons[i]).attr("name", "form-table-"+code+"-"+i);
 	}
 }
+
+jQuery(function() {
+	jQuery("#slide_list").sortable();
+	jQuery("#slide_list").disableSelection();
+});
 
 /***ADD SLIDE***/
 jQuery(".add").click('bind',function() {
 	var code = jQuery(this).attr('code_pays');
 	var activeCount = jQuery(".table-"+code).length;
-	//alert (activeCount);
-	//alert ("#form-table-"+code+"-"+parseInt(activeCount-1));
-	jQuery("#form-table-"+code+"-"+parseInt(activeCount-1)).after(
+	var last_slide = jQuery("#form-table-"+code+"-"+parseInt(activeCount-1));
+	if (!last_slide.is('*')) {
+		last_slide = jQuery("#sentinel");
+	}
+	last_slide.after(
 		'<table class="table-'+code+'" id="form-table-'+code+'-'+activeCount+'">'+
-			'<tr valign="top">'+
-				'<th scope="row">Titre '+activeCount+' :</th>'+
+			'<tr align="left">'+
+				'<th scope="row">Titre :</th>'+
 				'<td><input name="title-'+code+'-'+activeCount+'" class="title-'+code+'" id="title-'+code+'-'+activeCount+'"></input></td>'+
 			'</tr>'+
-			'<tr valign="top">'+
-          '<th scope="row">Image '+activeCount+' :</th>'+
+        '<tr align="left">'+
+          '<th scope="row">Légende :</th>'+
+          '<td><input name="legend-'+code+'-'+activeCount+'" class="legend-'+code+'" id="legend-'+code+'-'+activeCount+'"></input></td>'+
+		  '</tr>'+
+        '<tr align="left">'+
+          '<th scope="row">Url :</th>'+
+			'<td><input name="url-'+code+'-'+activeCount+'" class="url-'+code+'" id="url-'+code+'-'+activeCount+'"></input></td></tr>'+
+			'<tr align="left">'+
+          '<th scope="row">Image :</th>'+
           '<td>'+
 				'<textarea style="display:none;"class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'"></textarea>'+
 				'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+activeCount+'" title="Add Media" onclick="return false;">'+
 				'Upload/Insert<!-- <img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15"> --></a>'+
-			'</td>'+
-        '</tr>'+
-        '<tr valign="top">'+
-          '<th scope="row">Légende '+activeCount+' :</th>' +
-          '<td><input name="legend-'+code+'-'+activeCount+'" class="legend-'+code+'" id="legend-'+code+'-'+activeCount+'"></input></td>'+
-        '<tr valign="top">'+
-          '<th scope="row">Url '+activeCount+' :</th>'+
-			'<td><input name="url-'+code+'-'+activeCount+'" class="url-'+code+'" id="url-'+code+'-'+activeCount+'"></input></td>'+
-		'</tr><tr><th></th><td><button type="button" style="border-color:#FF4D1A;background:#FF4D1A;float:right;"id="remove_table-'+activeCount+'" class="removeTable_home button-primary" name="form-table-'+code+'-'+activeCount+'">Supprimer</button></td></tr>'+
+			'</td></tr>'+
+		'<tr><th></th><td><button type="button" style="border-color:#FF4D1A;background:#FF4D1A;float:right;"id="remove_table-'+activeCount+'" class="removeTable_home button-primary" name="form-table-'+code+'-'+activeCount+'">Supprimer</button></td></tr>'+
 	'</table>'
 	);
 
