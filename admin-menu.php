@@ -264,82 +264,55 @@ function home_settings_page() {
 
 
 <form id="content_home">
-	<h3>Options du slide </h3>
-	  <?php 
-        if(!empty($sel_lang)){ 
-          $path = WP_PLUGIN_URL .'/wp-multilingual-slider';
-          global $lang_codes;
-		  foreach($sel_lang as $l){?>
-    <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
-    <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?><?php echo $lang_codes[$l];?></i></p>
-	 <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide" class="add button-primary"><?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?> </button>
-	 <ul id="slide_list">
+<h3>Options du slide </h3>
+<?php 
+if(!empty($sel_lang)){ 
+	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';
+	global $lang_codes;
+	foreach($sel_lang as $l) {
+?>
+		<h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
+		<p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?><?php echo $lang_codes[$l];?></i></p>
+		<button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide" class="add button-primary">
+			<?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?>
+		</button>
+		<ul id="slide_list">
 		<span id="sentinel" />
-	<?php
-	$home_content = 'home_content_'.$l;
-   	$frSlides = json_decode(get_option($home_content));
-   	$cpt = 0;
-   	if(count($frSlides)>2){
-   		foreach ($frSlides as $input) {
-		   	if($cpt%3 == 0)
-	 			{echo'<table class="table_'.$l.'" id="form-table-'.$l.'-'. $cpt/3 .'">';}
-			 	//if (strpos($input->{'name'},'title')) {
-			echo'<tr valign="top">'.
+<?php
+		$home_content = 'home_content_'.$l;
+		$frSlides = json_decode(get_option($home_content));
+		$cpt = 0;
+		if(count($frSlides)>2){
+			foreach ($frSlides as $input) {
+				if($cpt%3 == 0) {
+					echo'<table class="table_'.$l.'" id="form-table-'.$l.'-'. $cpt/3 .'">';
+				}
+				//if (strpos($input->{'name'},'title')) {
+				echo '<tr valign="top">'.
 					'<th scope="row">'.$input->{'name'}.'</th>'.
 					'<td><textarea name="'.$input->{'name'}.'" id="'.$input->{'name'}.'">'.$input->{'value'}.'</textarea></td>'.
 				'</tr>';
 
-		$cpt++;
-		   	if($cpt%3 == 0){
-						$val = $cpt/3 - 1;
-						echo '<tr valign="top">
+				$cpt++;
+			   if($cpt%3 == 0) {
+					$val = $cpt/3 - 1;
+					echo '<tr valign="top">
 						<th scope="row">Upload Image</th>
 						<td><input class="upload_image_button" lien="'.$l.'_Image-'.$val .'" name="button'.$val .'" type="button" value="Upload Image" />
 						<br /><label>'; echo _e('Entrer un URL ou charger une image en appyant sur le bouton');
-						echo '</label></td>
+					echo '</label></td>
 						</tr>';
-   				if($cpt/3 == 1)
-   					echo '<tr><th></th><td><span style="background-color:#FF4D1A;float:right;visibility:hidden;"class="removeTable_home button-primary" name="form-table-'.$l.'-'. $cpt/3 .'">Supprimer</span></td></tr>';
+   				if($cpt/3 == 1) {
+   					echo '<tr><th></th><td>'.
+							'<span style="background-color:#FF4D1A;float:right;visibility:hidden;"class="removeTable_home button-primary" name="form-table-'.$l.'-'. $cpt/3 .'">Supprimer</span>'.
+							'</td></tr>';
+					}
    				else
-					echo '<tr><th></th><td><span style="background-color:#FF4D1A;float:right;"class="removeTable_home button-primary" name="form-table-'.$l.'-'. (($cpt/3)-1) .'">Supprimer</span></td></tr>';
+						echo '<tr><th></th><td><span style="background-color:#FF4D1A;float:right;"class="removeTable_home button-primary" name="form-table-'.$l.'-'. (($cpt/3)-1) .'">Supprimer</span></td></tr>';
 				
-				echo '</table>';
+					echo '</table>';
+				}
 			}
-		}
-	}
-	else{
-?>
-    <!--<table class="table-<?php echo $l;?>" id="form-table-<?php echo $l;?>-0">
-        <tr align="left">
-          <th scope="row"><?php _e("Titre");?> :</th>
-          <td><input name="title-<?php echo $l;?>-0" class="title-<?php echo $l;?>" id="title-<?php echo $l;?>-0"></input></td>
-        </tr>
-
-        <tr align="left">
-          <th scope="row"><?php _e("Légende");?> :</th>
-          <td><input name="legend-<?php echo $l;?>-0" class="legend-<?php echo $l;?>" id="legend-<?php echo $l;?>-0"></input></td>
-        </tr>
-
-        <tr align="left">
-	       <th scope="row"><?php _e("Url");?> :</th>
-			 <td><input name="url-<?php echo $l;?>-0" class="url-<?php echo $l;?>" id="url-<?php echo $l;?>-0"></input></td>
-        </tr>
-
-        <tr align="left">
-          <th scope="row"><?php _e("Image")?> :</th>
-          <td><textarea style="display:none;" name="image-<?php echo $l;?>-0" class="image-<?php echo $l;?>" id="image-<?php echo $l;?>-0"></textarea>
-				<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-0" title="Add Media" onclick="return false;"><?php _e("Upload/Insert");
-				?></a></td>
-        </tr>
-		<tr><th></th><td>
-			<button type="button" style="border-color:#FF4D1A;background:#FF4D1A;float:right;"
-				id="remove_table-0" class="removeTable_home button-primary" 
-				name="form-table-<?php echo $l; ?>-0">Supprimer
-			</button>
-		</td></tr>
-
-	</table>-->
-<?php
 		}
 	}
 }
@@ -351,9 +324,6 @@ function home_settings_page() {
 <form id="home_handler">
     <?php settings_fields('home-settings-group'); ?>
     <?php //do_settings_fields( 'home-settings-group' );?>
-
-    
-
 
 	<?php if(!empty($sel_lang)){ 
 		foreach($sel_lang as $l){	
