@@ -57,8 +57,11 @@ function refresh_order(code) {
 }
 
 jQuery(function() {
-	jQuery("#slide_list").sortable();
-	jQuery("#slide_list").disableSelection();
+	jQuery("#slide_list").sortable({
+		update: function(event, ui) {
+			refresh_order(jQuery("#add_slide").attr('code_pays'))
+		}
+	});
 });
 
 /***ADD SLIDE***/

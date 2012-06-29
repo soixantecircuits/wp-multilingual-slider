@@ -272,7 +272,7 @@ function home_settings_page() {
 		  foreach($sel_lang as $l){?>
     <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
     <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?><?php echo $lang_codes[$l];?></i></p>
-	 <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" class="add button-primary"><?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?> </button>
+	 <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide" class="add button-primary"><?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?> </button>
 	 <ul id="slide_list">
 		<span id="sentinel" />
 	<?php
