@@ -185,7 +185,7 @@
 
 $lang_codes = array_flip($_lang_codes);
 
-function admin_init() {
+function my_admin_init() {
 	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
 	wp_enqueue_script( 'accueil_script', $path.'/js/ui_controller.js', array('jquery'), 0.1, TRUE );
    $myStyleUrl = $path. '/css/style_home.css';
@@ -193,16 +193,33 @@ function admin_init() {
    wp_enqueue_style( 'myStyleSheets');
 	wp_register_script( 'jquery_ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' );
 	wp_enqueue_script( 'jquery_ui' );
+	
 	if(function_exists("add_thickbox")){
 		add_thickbox();
    }else{
 		wp_enqueue_script('thickbox');
    }
    wp_enqueue_script('media-upload');
+	register_mysettings();
 }
 
- 
-		
+function register_mysettings() {  
+	//register our settings  
+	register_setting( 'home-settings-group', 'home_content');  
+
+	if(function_exists("icl_get_languages")){
+		$languages = icl_get_languages('skip_missing=0&orderby=code');
+		foreach($languages as $l){
+			$sel_lang[$i] = $l['language_code'];
+			$i++;
+		}
+	}else if(function_exists("qtrans_init")){
+		$sel_lang = qtrans_getSortedLanguages();
+	}
+	else{
+		$sel_lang = Array(0 => get_bloginfo('language'));
+	}
+}
 
 function home_create_menu() {
 
@@ -211,37 +228,7 @@ function home_create_menu() {
 	
 	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', __FILE__, 'home_settings_page', $path.'/accueil.png');
 
-	//call register settings function
-
-    if (isset($_GET['page']) && $_GET['page'] == 'accueil/admin-menu.php') {
-        add_action( 'admin_init', 'register_mysettings' );
-    }
 }
-
-function register_mysettings() {  
-        //register our settings  
-  
-      if(function_exists("icl_get_languages")){
-        $languages = icl_get_languages('skip_missing=0&orderby=code');
-        foreach($languages as $l){
-          $sel_lang[$i] = $l['language_code'];
-          $i++;
-        }
-      }else if(function_exists("qtrans_init")){
-        $sel_lang = qtrans_getSortedLanguages();
-      }
-      else{
-        $sel_lang = Array(0 => get_bloginfo('language'));
-      }
-      if(!empty($sel_lang)){ 
-		  foreach($sel_lang as $l){
-            $home_content = 'home_content_'.$l;
-            //echo $home_content."," ;
-            register_setting( 'home-settings-group', "home_content_fr" );  
-            //register_setting( 'home-settings-group', $home_content );  
-	  }
-	} 
-}  
 
 function home_settings_page() {   
   if(function_exists("icl_get_languages")){ 
@@ -272,47 +259,65 @@ if(!empty($sel_lang)){
 	foreach($sel_lang as $l) {
 ?>
 		<h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
-		<p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?><?php echo $lang_codes[$l];?></i></p>
+		<p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?> <?php echo $lang_codes[$l];?></i></p>
 		<button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide" class="add button-primary">
 			<?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?>
 		</button>
 		<ul id="slide_list">
-		<span id="sentinel" />
+		<span id="sentinel"></span>
 <?php
-		$home_content = 'home_content_'.$l;
-		$frSlides = json_decode(get_option($home_content));
+		$home_content = 'home_content';
+		$slides = (get_option($home_content));
+		$slides = json_decode($slides['fr']);
 		$cpt = 0;
-		if(count($frSlides)>2){
-			foreach ($frSlides as $input) {
-				if($cpt%3 == 0) {
-					echo'<table class="table_'.$l.'" id="form-table-'.$l.'-'. $cpt/3 .'">';
-				}
-				//if (strpos($input->{'name'},'title')) {
-				echo '<tr valign="top">'.
-					'<th scope="row">'.$input->{'name'}.'</th>'.
-					'<td><textarea name="'.$input->{'name'}.'" id="'.$input->{'name'}.'">'.$input->{'value'}.'</textarea></td>'.
-				'</tr>';
+		$l = 'fr';
+		//var_dump ($slides);
+		//echo (count($slides)/4);
+		for ($i = 0; $i < count($slides)/4; $i++) { ?>
+			<table id="_" class="table-<?php echo $l; ?>">
+			 <tr align="left">
+				<th scope="row">Titre :</th>
+				<td>
+				  <input id="_title_" class="title-<?php echo $l; ?>" name="_title_" value="<?php echo $slides[$i*4]->{'value'}; ?>"/>
+				</td>
+			 </tr>
 
-				$cpt++;
-			   if($cpt%3 == 0) {
-					$val = $cpt/3 - 1;
-					echo '<tr valign="top">
-						<th scope="row">Upload Image</th>
-						<td><input class="upload_image_button" lien="'.$l.'_Image-'.$val .'" name="button'.$val .'" type="button" value="Upload Image" />
-						<br /><label>'; echo _e('Entrer un URL ou charger une image en appyant sur le bouton');
-					echo '</label></td>
-						</tr>';
-   				if($cpt/3 == 1) {
-   					echo '<tr><th></th><td>'.
-							'<span style="background-color:#FF4D1A;float:right;visibility:hidden;"class="removeTable_home button-primary" name="form-table-'.$l.'-'. $cpt/3 .'">Supprimer</span>'.
-							'</td></tr>';
-					}
-   				else
-						echo '<tr><th></th><td><span style="background-color:#FF4D1A;float:right;"class="removeTable_home button-primary" name="form-table-'.$l.'-'. (($cpt/3)-1) .'">Supprimer</span></td></tr>';
-				
-					echo '</table>';
-				}
-			}
+			 <tr align="left">
+				<th scope="row">Légende :</th>
+				<td>
+				  <input id="_legend_" class="legend-<?php echo $l; ?>" name="_legend_" value="<?php echo $slides[$i*4+1]->{'value'}; ?>"/>
+				</td>
+			 </tr>
+
+			 <tr align="left">
+				<th scope="row">Url :</th>
+				<td>
+				  <input id="_url_" class="url-<?php echo $l; ?>" name="_url_" value="<?php echo $slides[$i*4+2]->{'value'}; ?>"/>
+				</td>
+			 </tr>
+
+			 <tr align="left">
+				<th scope="row">Image :</th>
+				<td>
+				  <textarea id="_image_" class="image-<?php echo $l; ?>" name="_image_" style="display:none;"></textarea>
+				  <a id="_content-add_media_" class="thickbox add_media" onclick="return false;"
+						title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1">Upload/Insert</a>
+				</td>
+			 </tr>
+
+			 <tr>
+				<th>
+				  <a id="_up_" class="up-<?php echo $l; ?>" onclick="return false;" href="#">Monter</a>
+					/
+				  <a id="_down_" class="down-<?php echo $l; ?>" onclick="return false;" href="#">Descendre</a>
+				</th>
+				<td>
+				  <button id="_remove_table_" class="removeTable_home button-primary" name="_form-table_" 
+						style="border-color:#FF4D1A;background:#FF4D1A;float:right;" type="button">Supprimer</button>
+				</td>
+			 </tr>
+		</table>
+		<?php
 		}
 	}
 }
@@ -320,32 +325,25 @@ if(!empty($sel_lang)){
 	</ul>
 </form>
 
+<form id="home_handler" method="post" action="options.php">
+	<?php settings_fields('home-settings-group'); ?>
 
-<form id="home_handler">
-    <?php settings_fields('home-settings-group'); ?>
-    <?php //do_settings_fields( 'home-settings-group' );?>
-
-	<?php if(!empty($sel_lang)){ 
-		foreach($sel_lang as $l){	
-	?>
-        <input id="home_content_fr" name="home_content_fr" type="text" style="visibility:hidden"/>
-		<!--<input id="home_content_<?php echo $l;?>" name="home_content_<?php echo $l;?>" type="text" style="visibility:hidden"/>-->
-	<?php    
+	<?php 
+	if(!empty($sel_lang)) {
+		foreach($sel_lang as $l) { ?>
+			<input type="hidden" id="home_content[<?php echo $l;?>]" name="home_content[<?php echo $l;?>]" type="text" />
+			<div id="code" code_pays="<?php echo $l;?>"></div>
+		<?php
 		}
 	}
 	?>
-		<?php if(!empty($sel_lang)){ 
-		foreach($sel_lang as $l){	
-	?>
-		<div id="code" code_pays="<?php echo $l;?>"></div>
-	<?php    
-		}
-	}
-	?>
-    <p class="submit">
-    <button type="button" id="save_home" style="background:#33AA22;color:#FFF" class="button-primary"><?php _e('Sauvegarder') ?></button>
-    </p>
+
+	<p class="submit">
+		<!--button style="background:#33AA22;color:#FFF" class="button-primary"><?php _e('Sauvegarder') ?></button-->
+		<button type="button" id="save_home" style="background:#33AA22;color:#FFF" class="button-primary"><?php _e('Sauvegarder') ?></button>
+	</p>
 </form>
+
 </div>
 
 <?php

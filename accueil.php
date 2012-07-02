@@ -17,7 +17,7 @@ function xb_classifieds_init() {
 	// Add permission on role during the plugin activation
 	register_activation_hook ( __FILE__, 'xb_classifieds_build_permissions' );
 	
-	add_action('admin_init', 'admin_init');
+	add_action('admin_init', 'my_admin_init');
 	add_action('admin_menu', 'home_create_menu');
 }
  

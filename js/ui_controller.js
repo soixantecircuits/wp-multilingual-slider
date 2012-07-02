@@ -6,6 +6,18 @@ var formfield_img = "";
 var formfield_title = "";
 var formfield_legend = "";
 
+// Refresh orders of DB slides
+jQuery("div#code").each(function () {
+	var code = jQuery(this).attr("code_pays");
+	refresh_order(code);
+	jQuery(".table-"+code).each( function (index) {	
+		delete_button (index, code);
+		down_button (index, code);
+		up_button (index, code);
+		media_button (index, code);
+	});
+});
+
 jQuery(".add_media").click(function() {
 	formfield_img = jQuery(this).siblings();
 	formfield_title = jQuery(jQuery(this).parents('tr').siblings().get(0)).find('td>textarea')
@@ -63,6 +75,42 @@ function refresh_order(code) {
 	
 }
 
+function delete_button (activeCount, code) {
+	jQuery("#remove_table-"+activeCount).click(function() {
+		jQuery("#"+jQuery(this).attr('name')).delay('1000').fadeOut('slow').remove();
+		jQuery(this).remove();
+		refresh_order(code);
+	});
+}
+
+function down_button (activeCount, code) {
+	jQuery("#down-"+code+"-"+activeCount).click(function() {
+		if (jQuery(this).attr("count") != jQuery(".table-"+code).length-1) {
+			var current = jQuery("#form-table-"+code+"-"+jQuery(this).attr("count"));
+			current.next().after(current);
+			refresh_order(code);
+		}
+	});
+}
+
+function up_button (activeCount, code) {
+	jQuery("#up-"+code+"-"+activeCount).click(function() {
+		if (jQuery(this).attr("count") != 0) {
+			var current = jQuery("#form-table-"+code+"-"+(jQuery(this).attr("count")-1));
+			current.next().after(current);
+			refresh_order(code);
+		}
+	});
+}
+
+function media_button (activeCount, code) {
+	jQuery("#content-add_media-"+code+"-"+activeCount).click(function(){
+		formfield_img = jQuery(this).siblings();
+		formfield_title = jQuery(jQuery(this).parents('tr').siblings().get(0)).find('td>textarea')
+		formfield_legend = jQuery(jQuery(this).parents('tr').siblings().get(1)).find('td>textarea')
+	});
+}
+
 jQuery(function() {
 	jQuery("#slide_list").sortable({
 		update: function(event, ui) {
@@ -103,7 +151,7 @@ jQuery(".add").click('bind',function() {
 				'<th scope="row">Image :</th>'+
 				'<td>'+
 					'<textarea style="display:none;"class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'"></textarea>'+
-					'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+activeCount+'" title="Add Media" onclick="return false;">'+
+					'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+code+'-'+activeCount+'" title="Add Media" onclick="return false;">'+
 					'Upload/Insert<!-- <img src="http://sandbox-wp.dev/wp-admin/images/media-button.png?ver=20111005" width="15" height="15"> --></a>'+
 				'</td>'+
 			'</tr>'+
@@ -121,33 +169,10 @@ jQuery(".add").click('bind',function() {
 	'</table>'
 	);
 
-	jQuery("#remove_table-"+activeCount).click(function() {
-		jQuery("#"+jQuery(this).attr('name')).delay('1000').fadeOut('slow').remove();
-		jQuery(this).remove();
-		refresh_order(code);
-	});
-
-	jQuery("#down-"+code+"-"+activeCount).click(function() {
-		if (jQuery(this).attr("count") != jQuery(".table-"+code).length-1) {
-			var current = jQuery("#form-table-"+code+"-"+jQuery(this).attr("count"));
-			current.next().after(current);
-			refresh_order(code);
-		}
-	});
-
-	jQuery("#up-"+code+"-"+activeCount).click(function() {
-		if (jQuery(this).attr("count") != 0) {
-			var current = jQuery("#form-table-"+code+"-"+(jQuery(this).attr("count")-1));
-			current.next().after(current);
-			refresh_order(code);
-		}
-	});
-
-	jQuery(".add_media").click(function(){
-		formfield_img = jQuery(this).siblings();
-		formfield_title = jQuery(jQuery(this).parents('tr').siblings().get(0)).find('td>textarea')
-		formfield_legend = jQuery(jQuery(this).parents('tr').siblings().get(1)).find('td>textarea')
-	});
+	delete_button (activeCount, code);
+	down_button (activeCount, code);
+	up_button (activeCount, code);
+	media_button (activeCount, code);
 
 	window.send_to_editor = function(html) {
 		imgurl = jQuery('img',html);
@@ -169,15 +194,24 @@ jQuery(".add").click('bind',function() {
 
 /***SAVE FUNTION***/
 jQuery("#save_home").click('bind',function() {
+	var content;
+	jQuery("div#code").each(function (index) {
+		content = JSON.stringify(jQuery("#content_home").serializeArray());
+		jQuery("#home_content\\["+jQuery(this).attr("code_pays")+"\\]").attr("value", content);
+	});
+	jQuery("#home_handler").submit();
+});
+
+});
+/*
 	var tab_pays = new Array();
 	var cpt = new Array();
 	var separator = new Array();
 
 	jQuery("div#code").each(function (index) {
-		//alert (jQuery(this).attr("code_pays"));
 		tab_pays[index] = jQuery(this).attr("code_pays")
 	});
-	content = jQuery("#content_home").serializeArray();
+	var content = jQuery("#content_home").serializeArray();
 	jQuery.each(tab_pays,function (index_pays, value_pays) {
 		jQuery("#home_content_"+value_pays).val('[');
 		cpt[index_pays] = 0;
@@ -207,9 +241,9 @@ jQuery("#save_home").click('bind',function() {
 	});
 	jQuery("#home_handler").append("<div class='message'>Sauvegarde en cours...</div>");
 	jQuery.ajax({
-		type: "POST",
+		type: "post",
 		url: "options.php",
-		data: jQuery("#home_handler").serialize(),
+		data: content,
 		success: function(msg) {
 			jQuery(".message").html("Sauvegardé");
 			jQuery(".message").delay('1000').fadeOut('slow');
@@ -219,7 +253,5 @@ jQuery("#save_home").click('bind',function() {
 			jQuery(".message").delay('1000').fadeOut('slow');
 		}
 	});
+*/
 
-});
-
-});
