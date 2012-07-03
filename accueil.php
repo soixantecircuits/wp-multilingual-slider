@@ -41,63 +41,63 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
-add_filter('the_content','print_home_slider');
-
 function print_home_slider($nbrposts) {
 	$slides = get_option("home_content");
+	$lang = 'fr';
 	if (function_exists('qtrans_getLanguage')) {
-		echo 'qtranslate';
-	} else if (function_exists('ICL_LANGUAGE_CODE')) {
-		echo 'wpml';
+	  	$lang = qtrans_getLanguage();
+	} else if (function_exists('icl_get_languages')) {
+		$lang = icl_get_languages();
 	}
-	if (ICL_LANGUAGE_CODE == 'en') 
-	{ 
-		$slides = json_decode(get_option("home_content[en]"));
-	}
-	else
-	{
-		$slides = json_decode(get_option("home_content[fr]"));
-	}
-	$nbrElems=count($slides);
-	if (count($nbrElems)>0) :
+	$slides = json_decode($slides[$lang]);
+	$nbElems = count($slides);
+	if ($nbElems > 0) {
 ?>
-	 <div class="flexslider">
-        <ul class="slides">
-<?php
-			for ($i=0; $i<$nbrElems && $i<$nbrposts;$i++) :
-			if ($i%3==0) :
-				$the_title= $slides[$i]->value;
-				$the_image_url= $slides[$i+1]->value;
-				$the_url= $slides[$i+2]->value;
-?>         
-			<li>
-			<a href="<?php echo $the_url; ?>">
-			<img src="<?php echo $the_image_url; ?>" class="home-slider-thumbnail" />
-				<div class="flex-caption">
-				     <div class="holder">
-				        <strong><?php echo $the_title; ?></strong>
-				    </div>
+<div id="content">
+<div class="block-gallery">
+	<div class="gallery">
+	<ul>
+	<?php
+		for ($i = 0; $i < $nbElems/5; $i++) {
+			$the_title = $slides[$i*5]->{'value'};
+			$the_sub = $slides[$i*5+1]->{'value'};
+			$the_legend = $slides[$i*5+2]->{'value'};
+			$the_url = $slides[$i*5+3]->{'value'};
+			$the_img = $slides[$i*5+4]->{'value'};
+	?>
+		<li id="slide-<?php echo $i;?>"<?php if ($i == 0) { echo ' class="active"'; } ?>>
+			<div class="area">
+				<img class="png" src="<?php echo $the_img; ?>" alt="image description" width="488" height="306" />
+				<strong><?php echo $the_title; ?></strong>
+			</div>
+			<div class="info-panel">
+				<strong class="location"><?php echo $the_title; ?></strong>
+				<div class="holder">
+					<h2><?php echo $the_sub; ?></h2>
+					<p><?php echo $the_legend; ?></p>
 				</div>
-			</a>
-			</li>
-<?php 
-		endif;
-	endfor;
-?>
-		</ul>
+				<a href="<?php echo $the_url; ?>" class="link">en savoir</a>
+			</div>
+		</li><?php 
+		} 
+		?>
+	</ul>
 	</div>
-
-	<script>
-	acceuil_plugin_flexslider = 
-	{
-			 directionNav: false
-			 ,slideshowSpeed: 4000
-			 ,animationDuration: 700
-	};
-	</script>
+	
+	<?php 
+	if ($nbElems > 0) { ?>
+		<ul class="switcher"><?php
+		for ($i = 0; $i < $nbElems/5; $i++) { ?>
+			<li id="switch-<?php echo $i; ?>"<?php if ($i == 0) { echo ' class="active"'; } ?>><a class="switch" switch="<?php echo $i; ?>" href="#"><?php echo $i+1; ?></a></li><?php
+		} ?>
+		</ul><?php
+	} ?>
+</div>
+</div>
+<script src="<?php echo plugin_dir_url().'/wp-multilingual-slider/js/home_switcher.js'; ?>">
+</script>
 <?php
-endif;
 wp_reset_query();
+	}
 }
-
 ?>
