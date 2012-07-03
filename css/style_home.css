@@ -1,43 +1,83 @@
-.table{
+.table {
   margin-top:10px;
   border-bottom:1px solid #CCC;
   width:500px;
 }
 
-.table th{
+.table th {
   text-align:left;
   padding: 5px 0px;
 }
 
-#content_home input, #content_home textarea{
-/*  overflow-x: scroll;  */
+.content_home input{
   width: 420px;
-/*  height: 23px;*/
   resize: none; 
 }
 
 p.img_home{
-  width: 120px;
-  height: 120px;
+  width: 300px;
+  height: 150px;
   display: block;
-  float: left;
-  overflow: hidden;
 }
 
-#content_home table {
+.content_home table {
 	padding-top: 15px;
 	border: solid 1px;
 }
 
-#slide_list {
+.slide_list {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-#slide_list table {
+.slide_list table {
 	margin: 5px 0 3px 3px;
 	padding: 0.4em;
 	padding-left: 1.5em;
-	background-color: #DDD;
+	background-color: #CCC;
 }
+
+.tab {
+	padding: 10px;
+}
+
+#tabs {
+	width: 650px;
+	border: solid 1px;
+	background-color: #EFE;
+}
+
+.tab_select {
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	height: 25px;
+}
+.tab_select li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	height: 29px;
+	line-height: 29px;
+	border: 1px solid #666;
+	border-left: none;
+	border-top: none;
+	overflow: hidden;
+	position: relative;
+	background: #ddd;
+}
+.tab_select li a {
+	text-decoration: none;
+	color: #333;
+	display: block;
+	font-family: "Trebuchet MS";
+	font-size: 14px;
+	padding: 0 20px;
+}
+.tab_select li a:hover {
+	background: #ccc;
+	color: #666;
+}
+

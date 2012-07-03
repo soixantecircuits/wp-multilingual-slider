@@ -8,7 +8,6 @@ Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
 
-
 require( dirname(__FILE__) . '/admin-menu.php' );
 // Activation de l'extension
 add_action( 'plugins_loaded', 'xb_classifieds_init' );
@@ -42,18 +41,24 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
+add_filter('the_content','print_home_slider');
 
-function home_slider($nbrposts) {
-
+function print_home_slider($nbrposts) {
+	$slides = get_option("home_content");
+	if (function_exists('qtrans_getLanguage')) {
+		echo 'qtranslate';
+	} else if (function_exists('ICL_LANGUAGE_CODE')) {
+		echo 'wpml';
+	}
 	if (ICL_LANGUAGE_CODE == 'en') 
 	{ 
-		$frSlides = json_decode(get_option("home_content_en"));
+		$slides = json_decode(get_option("home_content[en]"));
 	}
 	else
 	{
-		$frSlides = json_decode(get_option("home_content_fr"));
+		$slides = json_decode(get_option("home_content[fr]"));
 	}
-	$nbrElems=count($frSlides);
+	$nbrElems=count($slides);
 	if (count($nbrElems)>0) :
 ?>
 	 <div class="flexslider">
@@ -61,12 +66,12 @@ function home_slider($nbrposts) {
 <?php
 			for ($i=0; $i<$nbrElems && $i<$nbrposts;$i++) :
 			if ($i%3==0) :
-				$the_title= $frSlides[$i]->value;
-				$the_image_url= $frSlides[$i+1]->value;
-				$the_url= $frSlides[$i+2]->value;
+				$the_title= $slides[$i]->value;
+				$the_image_url= $slides[$i+1]->value;
+				$the_url= $slides[$i+2]->value;
 ?>         
 			<li>
-			<a href="<?php echo $the_url; ?>">	
+			<a href="<?php echo $the_url; ?>">
 			<img src="<?php echo $the_image_url; ?>" class="home-slider-thumbnail" />
 				<div class="flex-caption">
 				     <div class="holder">

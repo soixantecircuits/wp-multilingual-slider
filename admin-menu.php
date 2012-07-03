@@ -249,59 +249,87 @@ function home_settings_page() {
 <h2><?php _e("Options de l'accueil");?></h2>
 <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site");?> <?php echo get_bloginfo('name'); ?></p>
 
-
-<form id="content_home">
 <h3>Options du slide </h3>
+<div id="tabs">
+	<ul class="tab_select">
+		<?php
+		if (!empty($sel_lang)) {
+			global $lang_codes;
+			foreach ($sel_lang as $l) { 
+				echo '<li><a href="#tabs-'.$l.'">'.$lang_codes[$l].'</a></li>';
+			}
+		}?>
+	</ul>
 <?php 
 if(!empty($sel_lang)){ 
 	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';
 	global $lang_codes;
+	$home_content = 'home_content';
+	$allSlides = get_option($home_content);
 	foreach($sel_lang as $l) {
 ?>
+		<div id="tabs-<?php echo $l; ?>" class="tab" style="padding-top:<?php echo (intval(count($sel_lang)/5)+1)*30; ?>px;" >
+		<form id="content_home-<?php echo $l; ?>" class="content_home">
 		<h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
 		<p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?> <?php echo $lang_codes[$l];?></i></p>
 		<button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide" class="add button-primary">
 			<?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?>
 		</button>
-		<ul id="slide_list">
-		<span id="sentinel"></span>
+		<ul id="slide_list-<?php echo $l; ?>" class="slide_list">
+		<span id="sentinel-<?php echo $l; ?>"></span>
 <?php
-		$home_content = 'home_content';
-		$slides = (get_option($home_content));
-		$slides = json_decode($slides['fr']);
+/*
+	   if (function_exists('qtrans_getLanguage')) {
+			$l = qtrans_getLanguage();
+	   } else if (function_exists('ICL_LANGUAGE_CODE')) {
+			$l = ICL_LANGUAGE_CODE;
+  		} else {
+			$l = 'fr';
+		}
+*/
+		$slides = json_decode($allSlides[$l]);
 		$cpt = 0;
-		$l = 'fr';
-		//var_dump ($slides);
-		//echo (count($slides)/4);
-		for ($i = 0; $i < count($slides)/4; $i++) { ?>
+		for ($i = 0; $i < count($slides)/5; $i++) { ?>
 			<table id="_" class="table-<?php echo $l; ?>">
 			 <tr align="left">
 				<th scope="row">Titre :</th>
 				<td>
-				  <input id="_title_" class="title-<?php echo $l; ?>" name="_title_" value="<?php echo $slides[$i*4]->{'value'}; ?>"/>
+				  <input id="_title_" class="title-<?php echo $l; ?>" name="_title_" value="<?php echo $slides[$i*5]->{'value'}; ?>" />
+				</td>
+			 </tr>
+
+			 <tr align="left">
+				<th scope="row">Sous-titre :</th>
+				<td>
+				  <input id="_sub_" class="sub-<?php echo $l; ?>" name="_sub_" value="<?php echo $slides[$i*5+1]->{'value'}; ?>" />
 				</td>
 			 </tr>
 
 			 <tr align="left">
 				<th scope="row">Légende :</th>
 				<td>
-				  <input id="_legend_" class="legend-<?php echo $l; ?>" name="_legend_" value="<?php echo $slides[$i*4+1]->{'value'}; ?>"/>
+				  <input id="_legend_" class="legend-<?php echo $l; ?>" name="_legend_" value="<?php echo $slides[$i*5+2]->{'value'}; ?>" />
 				</td>
 			 </tr>
 
 			 <tr align="left">
 				<th scope="row">Url :</th>
 				<td>
-				  <input id="_url_" class="url-<?php echo $l; ?>" name="_url_" value="<?php echo $slides[$i*4+2]->{'value'}; ?>"/>
+				  <input id="_url_" class="url-<?php echo $l; ?>" name="_url_" value="<?php echo $slides[$i*5+3]->{'value'}; ?>" />
 				</td>
 			 </tr>
 
 			 <tr align="left">
 				<th scope="row">Image :</th>
 				<td>
-				  <textarea id="_image_" class="image-<?php echo $l; ?>" name="_image_" style="display:none;"></textarea>
 				  <a id="_content-add_media_" class="thickbox add_media" onclick="return false;"
 						title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1">Upload/Insert</a>
+				  <input id="_image_" class="image-<?php echo $l; ?>" name="_image_" value="<?php echo $slides[$i*5+4]->{'value'}; ?>" type="hidden" />
+				  <?php if ($slides[$i*5+4]->{'value'} != '') { ?>
+					<p class="img_home">
+						<img title="img-<?php echo $i; ?>" src="<?php echo $slides[$i*5+4]->{'value'}; ?>" />
+					</p>
+				  <?php } ?>
 				</td>
 			 </tr>
 
@@ -312,18 +340,18 @@ if(!empty($sel_lang)){
 				  <a id="_down_" class="down-<?php echo $l; ?>" onclick="return false;" href="#">Descendre</a>
 				</th>
 				<td>
-				  <button id="_remove_table_" class="removeTable_home button-primary" name="_form-table_" 
+				  <button id="_remove_table_" class="remove_table-<?php echo $l; ?> button-primary" name="_form-table_" 
 						style="border-color:#FF4D1A;background:#FF4D1A;float:right;" type="button">Supprimer</button>
 				</td>
 			 </tr>
 		</table>
 		<?php
 		}
+	?></ul></form></div><?php
 	}
 }
 ?>
-	</ul>
-</form>
+</div>
 
 <form id="home_handler" method="post" action="options.php">
 	<?php settings_fields('home-settings-group'); ?>
@@ -339,7 +367,6 @@ if(!empty($sel_lang)){
 	?>
 
 	<p class="submit">
-		<!--button style="background:#33AA22;color:#FFF" class="button-primary"><?php _e('Sauvegarder') ?></button-->
 		<button type="button" id="save_home" style="background:#33AA22;color:#FFF" class="button-primary"><?php _e('Sauvegarder') ?></button>
 	</p>
 </form>
