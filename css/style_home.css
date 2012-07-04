@@ -4,10 +4,59 @@
   width:500px;
 }
 
+#tabs .tab_select li.ui-state-default{
+  border:none;
+  border-bottom:1px solid #EEE;
+  background: #fff;
+}
+
+.tab_select li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  height: 29px;
+  line-height: 29px;
+  border: 1px solid #666;
+  border-left: none;
+  border-top: none;
+  overflow: hidden;
+  position: relative;
+  background: #ddd;
+}
+
+#tabs .tab_select li.ui-state-active{
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  color: white;
+  background: #ccc;
+}
+
+#tabs .tab_select li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  font-family: "Trebuchet MS";
+  font-size: 14px;
+  padding: 0 20px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+#tabs .tab_select li a:hover {
+  background: #ccc;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  color: #666;
+}
+
+
+
 #tabs h2{
   display: block;
-  width: 100%;
-  margin-left: 10px;
+  width: 100%; 
+}
+
+#tabs .wrap{
+  padding: 0px 8px;
 }
 
 .table th {
@@ -16,8 +65,13 @@
 }
 
 .content_home input{
-  width: 420px;
+  width: 97%;
   resize: none; 
+}
+
+#columnizer{
+  width: 100%;
+  overflow: auto;
 }
 
 p.img_home{
@@ -39,9 +93,11 @@ p.img_home{
 
 .slide_list table {
 	margin: 5px 0 3px 3px;
-	padding: 0.4em;
-	padding-left: 1.5em;
-	background-color: #CCC;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  background-color: white;
+  width: 99%;
+  border-radius: 4px;
 }
 
 .tab {
@@ -49,16 +105,34 @@ p.img_home{
 }
 
 #tabs {
-	border: solid 1px;
 }
 
 #tabs .column{
   float:left;
   display: block;
-  padding: 0px 10px 0px 0px;
+  padding: 0px 4px 0px 4px;
   background: #EEE;
   border-left: 1px solid #CCC;
   overflow: auto;
+  margin-right: 1px;
+  border-radius: 4px;
+  padding-bottom: 10px;
+}
+
+#tabs .column.column-1{
+  width: 98%;
+}
+
+#tabs .column.column-2{
+  width: 49%;
+}
+
+#tabs .column.column-3{
+  width: 32%;
+}
+
+#tabs .column.column-4{
+  width: 24%;
 }
 
 .tab_select {
@@ -71,39 +145,11 @@ p.img_home{
   width: 100%;
 }
 
+.table_content {
+  width:100%;
+}
+
 ul.tab_select{
   width: 100%;
   margin: 0px 0px 10px 0px;
 }
-
-.tab_select li {
-	float: left;
-	margin: 0;
-	padding: 0;
-	height: 29px;
-	line-height: 29px;
-	border: 1px solid #666;
-	border-left: none;
-	border-top: none;
-	overflow: hidden;
-	position: relative;
-	background: #ddd;
-}
-
-.tab_select li.ui-state-active{
-  background: #fff;
-}
-
-.tab_select li a {
-	text-decoration: none;
-	color: #333;
-	display: block;
-	font-family: "Trebuchet MS";
-	font-size: 14px;
-	padding: 0 20px;
-}
-.tab_select li a:hover {
-	background: #ccc;
-	color: #666;
-}
-

@@ -268,14 +268,17 @@ if(!empty($sel_lang)){
     $path = WP_PLUGIN_URL .'/wp-multilingual-slider';
     global $lang_codes;
     $home_content = 'home_content';
-    $allSlides = get_option($home_content);
+    $allSlides = get_option($home_content);?>
+    <div id="columnizer">
+<?php
     foreach($sel_lang as $l) {
 ?>
-        <div id="column-<?php echo $l; ?>" class="column" style="padding-top:<?php echo (intval(count($sel_lang)/5)+1)*30; ?>px;" >
+
+        <div id="column-<?php echo $l; ?>" class="column column-<?php echo count($sel_lang); ?>">
         <form id="content_home-<?php echo $l; ?>" class="content_home">
         <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
         <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?> <?php echo $lang_codes[$l];?></i></p>
-        <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide" class="add button-primary">
+        <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide-<?php echo $l; ?>" class="add button-primary">
             <?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?>
         </button>
         <ul id="slide_list-<?php echo $l; ?>" class="slide_list">
@@ -285,7 +288,7 @@ if(!empty($sel_lang)){
         $slides = json_decode($allSlides[$l]);
         $cpt = 0;
         for ($i = 0; $i < count($slides)/5; $i++) { ?>
-            <table id="_" class="table-<?php echo $l; ?>">
+            <table id="_" class="table_content table-<?php echo $l; ?>">
              <tr align="left">
                 <th scope="row">Titre :</th>
                 <td>
@@ -346,6 +349,8 @@ if(!empty($sel_lang)){
     }
 }
 ?>
+</div>
+
 <form id="home_handler" method="post" action="options.php">
 	<?php settings_fields('home-settings-group'); ?>
 

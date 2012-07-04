@@ -216,7 +216,8 @@ jQuery("#save_home").click('bind',function() {
 		content = JSON.stringify(jQuery("#content_home-"+code).serializeArray());
 		jQuery("#home_content\\["+code+"\\]").attr("value", content);
 	});
-	jQuery("#home_handler").submit();
+	jQuery("#home_handler").submit(function(data){
+	});
 });
 
 });
