@@ -15,7 +15,6 @@ add_action( 'plugins_loaded', 'xb_classifieds_init' );
 function xb_classifieds_init() {
 	// Add permission on role during the plugin activation
 	register_activation_hook ( __FILE__, 'xb_classifieds_build_permissions' );
-	wp_enqueue_script( 'home_switcher', plugin_dir_url().'/wp-multilingual-slider/js/home_switcher.js', array('jquery'), 0.1, TRUE );
 	
 	add_action('admin_init', 'my_admin_init');
 	add_action('admin_menu', 'home_create_menu');
@@ -42,6 +41,15 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
+function init_themes_slider () {
+	//$themes_name = 'default';
+	$themes_name = 'flexslider';
+	$themes_dir = plugin_dir_url(__FILE__) . "themes/" . $themes_name;
+	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name . "/print.php");
+	//wp_enqueue_script($themes_name, $themes_dir . '/script.js', array('jquery'), 0.1, TRUE);
+	wp_enqueue_script($themes_name, $themes_dir . '/jquery.flexslider.js', array('jquery'), 0.1, TRUE);
+}
+
 function get_current_slides() {
 	$_slides = get_option("home_content");
 	$lang = 'fr';
@@ -51,9 +59,8 @@ function get_current_slides() {
 		$lang = icl_get_languages();
 	}
 	$_slides = json_decode($_slides[$lang]);
-	$nbElems = count($_slides);
 	$slides = null;
-	for ($i = 0; $i < $nbElems/5; $i++) {
+	for ($i = 0; $i < count($_slides)/5; $i++) {
 		$slides[] = array(
 			'title'  => $_slides[$i*5]->{'value'},
 			'sub'    => $_slides[$i*5+1]->{'value'},
@@ -65,56 +72,15 @@ function get_current_slides() {
 	return $slides;
 }
 
-function get_count_slider($slider) {
-	return (count($slider))/5;
-}
-
-function is_empty_slider($slider) {
-	return (get_count_slider($slider) == 0);
-}
-
-function print_home_slider($nbrposts) {
-	$slider = get_current_slides();
-	if (!is_empty_slider($slider)) {
-?>
-<div id="content">
-<div class="block-gallery">
-	<div class="gallery">
-	<ul>
-	<?php
-	for ($i = 0; $i < get_count_slider($slider); $i++) {
-	?>
-		<li id="slide-<?php echo $i;?>"<?php if ($i == 0) { echo ' class="active"'; } ?>>
-			<div class="area">
-				<img class="png" src="<?php echo $slider[$i]['img']; ?>" alt="image description" width="488" height="306" />
-				<strong><?php echo $slider[$i]['title']; ?></strong>
-			</div>
-			<div class="info-panel">
-				<strong class="location"><?php echo $slider[$i]['title']; ?></strong>
-				<div class="holder">
-					<h2><?php echo $slider[$i]['sub']; ?></h2>
-					<p><?php echo $slider[$i]['legend']; ?></p>
-				</div>
-				<a href="<?php echo $slider[$i]['url']; ?>" class="link">en savoir</a>
-			</div>
-		</li><?php 
-		} 
-		?>
-	</ul>
-	</div>
-	
-	<?php 
-	if (get_count_slider($slider) > 0) { ?>
-		<ul class="switcher"><?php
-		for ($i = 0; $i < $nbElems/5; $i++) { ?>
-			<li id="switch-<?php echo $i; ?>"<?php if ($i == 0) { echo ' class="active"'; } ?>><a class="switch" switch="<?php echo $i; ?>" href="#"><?php echo $i+1; ?></a></li><?php
-		} ?>
-		</ul><?php
-	} ?>
-</div>
-</div>
-<?php
-wp_reset_query();
+function print_home_slider() {
+	$slides = get_current_slides();
+	if (count($slides) > 0) { ?>
+		<div id="content">
+			<?php if (function_exists("print_current_slides")) {
+				print_current_slides($slides); 
+			} ?>
+		</div><?php
+		wp_reset_query();
 	}
 }
 ?>

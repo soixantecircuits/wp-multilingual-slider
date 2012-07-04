@@ -6,10 +6,13 @@ accueil_plugin_flexslider =
 	animationDuration: 500
 };
 
+jQuery("#content").find('ul>li:first').addClass("active");
+jQuery(".switcher").find("li:first").addClass("active");
+
 var autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
 var fading = false;
 var nextFade = -1;
-	
+
 jQuery('.switch').each ( function () {
 	jQuery(this).click ( function () {
 		fade_slide(jQuery("ul #switch-"+jQuery(this).attr("switch")), 
