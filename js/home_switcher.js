@@ -1,32 +1,56 @@
-acceuil_plugin_flexslider = 
+accueil_plugin_flexslider = 
 {
-	directionNav: false,
-	slideshowSpeed: 1000,
-	animationDuration: 700
+	// Time between auto slide in milliseconds. Default : 5000
+	slideSpeed: 5000,
+	// Time for the animation in milliseconds. Default : 500 (Recommended [100-1000])
+	animationDuration: 500
 };
+
+var autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
+var fading = false;
+var nextFade = -1;
 	
 jQuery('.switch').each ( function () {
 	jQuery(this).click ( function () {
-		jQuery(".gallery ul li.active").removeClass("active");
-		jQuery(".switcher li.active").removeClass("active");
-		jQuery("#slide-"+jQuery(this).attr("switch")).addClass("active");
-		jQuery("ul #switch-"+jQuery(this).attr("switch")).addClass("active");
+		fade_slide(jQuery("ul #switch-"+jQuery(this).attr("switch")), 
+			jQuery("#slide-"+jQuery(this).attr("switch")));
 	});
 });
 
-setInterval(function () { next_active_slide() }, 4000);
+function fade_slide (next, nextSlide) {
+	var curr = jQuery(".switcher li.active");
+	var currSlide = jQuery(".gallery ul li.active");
+	if (!fading) {
+		if (curr.attr('id') != next.attr('id')) {
+			fading = true;
+			clearInterval(autoSlide);
+			currSlide.fadeOut(accueil_plugin_flexslider.animationDuration, function () {
+				next.addClass("active");
+				nextSlide.addClass("active");
+				curr.removeClass("active");
+				currSlide.removeClass("active");
+				nextSlide.hide().fadeIn(accueil_plugin_flexslider.animationDuration, function () {
+						autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
+						fading = false;
+						if (nextFade != -1) {
+							fade_slide(jQuery("ul #switch-"+nextFade), 
+								jQuery("#slide-"+nextFade))
+							nextFade = -1;
+						}
+				});
+			});
+		}
+	} else {
+		nextFade = next.children().attr('switch');
+	}
+}
 
 function next_active_slide () {
-	var current = jQuery(".switcher li.active a").attr("switch");
-	var max = jQuery(".switch").length;
-	var curr = jQuery(".switcher li.active");
-	var next = curr.next();
+	var next = jQuery(".switcher li.active").next();
 	if (next.length == 0) {
 		next = jQuery(".switcher li#switch-0");
 	}
-	curr.removeClass("active");
-	next.addClass("active");
-	jQuery(".gallery ul li.active").removeClass("active");
-	jQuery("#slide-"+jQuery(".switcher li.active a").attr("switch")).addClass("active");
-	
+	var nextSlide = jQuery("#slide-"+next.children().attr("switch"));
+
+	fade_slide(next, nextSlide);
 }
