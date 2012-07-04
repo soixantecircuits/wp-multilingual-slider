@@ -3,7 +3,7 @@
 Plugin Name: Image accueil
 Plugin URI: http://www.soixantecircuits.fr/
 Description: Permet de gérer les images en fonction des langues afin de les utiliser dans un slider par example
-Author: Soixante circuit
+Author: Soixante Circuits
 Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
@@ -42,42 +42,60 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
-function print_home_slider($nbrposts) {
-	$slides = get_option("home_content");
+function get_current_slides() {
+	$_slides = get_option("home_content");
 	$lang = 'fr';
 	if (function_exists('qtrans_getLanguage')) {
 	  	$lang = qtrans_getLanguage();
 	} else if (function_exists('icl_get_languages')) {
 		$lang = icl_get_languages();
 	}
-	$slides = json_decode($slides[$lang]);
-	$nbElems = count($slides);
-	if ($nbElems > 0) {
+	$_slides = json_decode($_slides[$lang]);
+	$nbElems = count($_slides);
+	$slides = null;
+	for ($i = 0; $i < $nbElems/5; $i++) {
+		$slides[] = array(
+			'title'  => $_slides[$i*5]->{'value'},
+			'sub'    => $_slides[$i*5+1]->{'value'},
+			'legend' => $_slides[$i*5+2]->{'value'},
+			'url'    => $_slides[$i*5+3]->{'value'},
+			'img'    => $_slides[$i*5+4]->{'value'}
+		);
+	}
+	return $slides;
+}
+
+function get_count_slider($slider) {
+	return (count($slider))/5;
+}
+
+function is_empty_slider($slider) {
+	return (get_count_slider($slider) == 0);
+}
+
+function print_home_slider($nbrposts) {
+	$slider = get_current_slides();
+	if (!is_empty_slider($slider)) {
 ?>
 <div id="content">
 <div class="block-gallery">
 	<div class="gallery">
 	<ul>
 	<?php
-		for ($i = 0; $i < $nbElems/5; $i++) {
-			$the_title = $slides[$i*5]->{'value'};
-			$the_sub = $slides[$i*5+1]->{'value'};
-			$the_legend = $slides[$i*5+2]->{'value'};
-			$the_url = $slides[$i*5+3]->{'value'};
-			$the_img = $slides[$i*5+4]->{'value'};
+	for ($i = 0; $i < get_count_slider($slider); $i++) {
 	?>
 		<li id="slide-<?php echo $i;?>"<?php if ($i == 0) { echo ' class="active"'; } ?>>
 			<div class="area">
-				<img class="png" src="<?php echo $the_img; ?>" alt="image description" width="488" height="306" />
-				<strong><?php echo $the_title; ?></strong>
+				<img class="png" src="<?php echo $slider[$i]['img']; ?>" alt="image description" width="488" height="306" />
+				<strong><?php echo $slider[$i]['title']; ?></strong>
 			</div>
 			<div class="info-panel">
-				<strong class="location"><?php echo $the_title; ?></strong>
+				<strong class="location"><?php echo $slider[$i]['title']; ?></strong>
 				<div class="holder">
-					<h2><?php echo $the_sub; ?></h2>
-					<p><?php echo $the_legend; ?></p>
+					<h2><?php echo $slider[$i]['sub']; ?></h2>
+					<p><?php echo $slider[$i]['legend']; ?></p>
 				</div>
-				<a href="<?php echo $the_url; ?>" class="link">en savoir</a>
+				<a href="<?php echo $slider[$i]['url']; ?>" class="link">en savoir</a>
 			</div>
 		</li><?php 
 		} 
@@ -86,7 +104,7 @@ function print_home_slider($nbrposts) {
 	</div>
 	
 	<?php 
-	if ($nbElems > 0) { ?>
+	if (get_count_slider($slider) > 0) { ?>
 		<ul class="switcher"><?php
 		for ($i = 0; $i < $nbElems/5; $i++) { ?>
 			<li id="switch-<?php echo $i; ?>"<?php if ($i == 0) { echo ' class="active"'; } ?>><a class="switch" switch="<?php echo $i; ?>" href="#"><?php echo $i+1; ?></a></li><?php
