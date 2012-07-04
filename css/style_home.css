@@ -4,6 +4,12 @@
   width:500px;
 }
 
+#tabs h2{
+  display: block;
+  width: 100%;
+  margin-left: 10px;
+}
+
 .table th {
   text-align:left;
   padding: 5px 0px;
@@ -15,9 +21,9 @@
 }
 
 p.img_home{
-  width: 300px;
   height: 150px;
   display: block;
+  overflow: hidden;
 }
 
 .content_home table {
@@ -43,9 +49,16 @@ p.img_home{
 }
 
 #tabs {
-	width: 650px;
 	border: solid 1px;
-	background-color: #EFE;
+}
+
+#tabs .column{
+  float:left;
+  display: block;
+  padding: 0px 10px 0px 0px;
+  background: #EEE;
+  border-left: 1px solid #CCC;
+  overflow: auto;
 }
 
 .tab_select {
@@ -54,7 +67,15 @@ p.img_home{
 	float: left;
 	list-style: none;
 	height: 25px;
+  display: block;
+  width: 100%;
 }
+
+ul.tab_select{
+  width: 100%;
+  margin: 0px 0px 10px 0px;
+}
+
 .tab_select li {
 	float: left;
 	margin: 0;
@@ -68,6 +89,11 @@ p.img_home{
 	position: relative;
 	background: #ddd;
 }
+
+.tab_select li.ui-state-active{
+  background: #fff;
+}
+
 .tab_select li a {
 	text-decoration: none;
 	color: #333;

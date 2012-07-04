@@ -41,12 +41,12 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
-add_filter('the_content','print_home_slider');
+//add_filter('the_content','print_home_slider');
 
 function print_home_slider($nbrposts) {
 	$slides = get_option("home_content");
 	if (function_exists('qtrans_getLanguage')) {
-		echo 'qtranslate';
+		//echo 'qtranslate';
 	} else if (function_exists('ICL_LANGUAGE_CODE')) {
 		echo 'wpml';
 	}
