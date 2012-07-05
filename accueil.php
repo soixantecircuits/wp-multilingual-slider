@@ -41,7 +41,7 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
-function init_themes_slider () {
+function init_themes_slider() {
 	$themes_name = get_option("home_themes");
 	$themes_dir = "/wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name . "/";
 	require (ABSPATH . $themes_dir . "inc_style.php");
@@ -72,13 +72,13 @@ function get_current_slides() {
 }
 
 function print_home_slider() {
+	init_themes_slider();
 	$slides = get_current_slides();
 	if (count($slides) > 0) { ?>
-		<div id="content">
 			<?php if (function_exists("print_current_slides")) {
 				print_current_slides($slides); 
 			} ?>
-		</div><?php
+	<?php
 		wp_reset_query();
 	}
 }

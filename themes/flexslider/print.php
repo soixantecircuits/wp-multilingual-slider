@@ -1,5 +1,4 @@
-<?
-
+<?php
 function print_current_slides($slides) { ?>
 	<div>
 		<div class="flexslider">

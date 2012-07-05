@@ -76,6 +76,12 @@ p.img_home{
   height: 150px;
   display: block;
   overflow: hidden;
+  width: 100%;
+}
+
+p.img_home img{
+  width: 100%;
+  height: auto;
 }
 
 .content_home table {

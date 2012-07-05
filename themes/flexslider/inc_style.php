@@ -1,11 +1,11 @@
 <?php 
-
-add_style("flexslider.css");
-
-function add_style($style_src) {
-	?>
-	<script type="text/javascript">
-		jQuery('head').append('<link rel="stylesheet" href="<?php echo plugins_url( $style_src, __FILE__ ); ?>" type="text/css" />');
-	</script>
-	<?php
+add_style("flexslider.css", "flexslider");
+function add_style($style_src, $style_name) {
+	wp_register_style(
+        $style_name,
+        plugins_url( "/css/".$style_src, __FILE__ ),
+        false,
+        0.1
+    );
+  wp_enqueue_style( $style_name );
 }
