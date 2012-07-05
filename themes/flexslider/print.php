@@ -18,12 +18,4 @@ function print_current_slides($slides) { ?>
 		</div>
 	</div><?php
 } 
-
 ?>
-<script type="text/javascript" charset="utf-8">
-jQuery(window).load(function() {
-	if(jQuery('.flexslider').length > 0 ){
-		jQuery('.flexslider').flexslider();
-	}
-});
-</script>

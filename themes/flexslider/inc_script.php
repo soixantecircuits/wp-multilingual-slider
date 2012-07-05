@@ -1,7 +1,7 @@
 <?php 
 
 add_script('flexslider-min', 'jquery.flexslider-min.js');
-add_script('loreal-js', 'main.js');
+add_script('flex-main-js', 'main.js');
 
 function add_script($script_name, $script_src, $require_script = array('jquery')) {
   wp_deregister_script($script_name);
