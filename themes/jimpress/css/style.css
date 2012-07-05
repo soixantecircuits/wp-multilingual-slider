@@ -66,11 +66,19 @@
 }
 .step h3{
 	color: #fff;
-	font-size: 52px;
+	font-size: 62px;
 	font-weight: bold;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 	margin: 0;
 	padding: 60px 0 10px 0;
+}
+.step h4{
+	color: #fff;
+	font-size: 32px;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+	margin: 0;
+	padding: 20px 0 10px 0;
 }
 .step p {
 	color: #fff;
@@ -212,4 +220,8 @@ a.jms-link{
 .jms-wrapper.not-supported .step:not(.active) a.jms-link{
 	opacity: 1;
 	margin-top: 40px;
+}
+
+.jms-content {
+	line-height: 30px;
 }
