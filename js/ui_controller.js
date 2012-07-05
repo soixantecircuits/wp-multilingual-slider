@@ -210,14 +210,41 @@ jQuery(".add").click('bind',function() {
 
 /***SAVE FUNTION***/
 jQuery("#save_home").click('bind',function() {
-	var content;
+	var content = "";
+	var i = 0;
 	jQuery("div#code").each(function (index) {
 		var code = jQuery(this).attr("code_pays");
-		content = JSON.stringify(jQuery("#content_home-"+code).serializeArray());
-		jQuery("#home_content\\["+code+"\\]").attr("value", content);
+		jQuery("#home_content\\["+code+"\\]").attr("value", 
+			JSON.stringify(jQuery("#content_home-"+code).serializeArray())
+		);
 	});
-	jQuery("#home_handler").submit(function(data){
+	jQuery("#home_handler input").each(function (index) {
+		if (i != 0) {
+			content += "&";
+		}
+		content += jQuery(this).attr("name");
+		content += "=";
+		content += jQuery(this).attr("value");
+		i++;
 	});
+	jQuery("#home_handler").append("<div class='message'>Sauvegarde en cours...</div>");
+	jQuery.ajax({
+		type: "post",
+		url: "options.php",
+		data: content,
+		success: function(msg) {
+			jQuery(".message").html("Sauvegardé");
+			jQuery(".message").delay('1000').fadeOut('slow');
+		},
+		error: function(msg){
+			jQuery(".message").html("Oups, une erreur s'est produite :( ...");
+			jQuery(".message").delay('1000').fadeOut('slow');
+		}
+	});
+});
+
+jQuery("#save_themes").click("bind", function() {
+	
 });
 
 });

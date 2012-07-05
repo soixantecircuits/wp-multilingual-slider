@@ -206,6 +206,7 @@ function my_admin_init() {
 function register_mysettings() {  
 	//register our settings  
 	register_setting( 'home-settings-group', 'home_content');  
+	register_setting( 'home-settings-select', 'home_themes');  
 
 	if(function_exists("icl_get_languages")){
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
@@ -225,7 +226,7 @@ function home_create_menu() {
 
 	//create new top-level menu
 	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__); //get_bloginfo('template_url');
-	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/accueil.png');
+	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
 
 }
 
@@ -253,14 +254,21 @@ function home_settings_page() {
 
 <div id="tabs-options">
     <h2><?php _e("Options de l'accueil");?></h2>
+	<form id="home_themes" method="post" action="options.php">
+		<?php settings_fields('home-settings-select'); ?>
+		<select name="themes">
+			<option value="default">default</option>
+			<option value="flexslider">flexslider</option>
+		</select>
+		<br />
+		<button type="button" id="save_themes" class="button-primary"><?php _e("Sauvegarder", "wp-multilingual-slider"); ?></button>
+	</form>
 </div>
 
 <div id="tabs-slides">
     <div class="wrap">
     <h2><?php _e("Contenu des slides");?> </h2>
     <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site");?>&nbsp;<?php echo get_bloginfo('name'); ?></p>
-
-
     
 <?php 
 if(!empty($sel_lang)){ 

@@ -8,7 +8,7 @@ Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
 
-require( dirname(__FILE__) . '/admin-menu.php' );
+require( dirname(__FILE__) . '/admin/admin-menu.php' );
 // Activation de l'extension
 add_action( 'plugins_loaded', 'xb_classifieds_init' );
 
@@ -45,10 +45,9 @@ function init_themes_slider () {
 	//$themes_name = 'default';
 	$themes_name = 'flexslider';
 	$themes_dir = plugin_dir_url(__FILE__) . "themes/" . $themes_name;
-	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name . "/print.php");
 	//wp_enqueue_script($themes_name, $themes_dir . '/script.js', array('jquery'), 0.1, TRUE);
-	//WATCH OUT always deregister script before include an other.
-	//wp_enqueue_script($themes_name, $themes_dir . '/jquery.flexslider.js', array('jquery'), 0.1, TRUE);
+	wp_enqueue_script($themes_name, $themes_dir . '/jquery.flexslider.js', array('jquery'), 0.1, TRUE);
+	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name . "/print.php");
 }
 
 function get_current_slides() {
