@@ -223,11 +223,9 @@ function register_mysettings() {
 }
 
 function home_create_menu() {
-
 	//create new top-level menu
 	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__); //get_bloginfo('template_url');
 	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
-
 }
 
 function home_settings_page() {   
@@ -243,6 +241,22 @@ function home_settings_page() {
   }else{
     $sel_lang = Array(0 => get_bloginfo('language'));
   }
+
+function get_all_themes() {
+	$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
+   // Open a known directory, and proceed to read its js content
+	if ($handle = opendir($themes_dir)) {
+		$selected = get_option("home_themes");
+		while (false !== ($entry = readdir($handle))) {
+			if ($entry != "." && $entry != "..") {
+				echo "<option ".
+						($entry == $selected ? "selected='selected'" : "").
+						(file_exists($themes_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
+						"value=$entry>$entry</option>";
+			}
+		}
+	}
+}
 ?>
 
 <div class="wrap">
@@ -256,9 +270,8 @@ function home_settings_page() {
     <h2><?php _e("Options de l'accueil");?></h2>
 	<form id="home_themes" method="post" action="options.php">
 		<?php settings_fields('home-settings-select'); ?>
-		<select name="themes">
-			<option value="default">default</option>
-			<option value="flexslider">flexslider</option>
+		<select id="select_themes" name="home_themes">
+			<?php get_all_themes(); ?>
 		</select>
 		<br />
 		<button type="button" id="save_themes" class="button-primary"><?php _e("Sauvegarder", "wp-multilingual-slider"); ?></button>

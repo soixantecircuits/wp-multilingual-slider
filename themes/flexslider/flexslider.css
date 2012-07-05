@@ -72,3 +72,28 @@ html[xmlns] .slides {display: block;}
   .flex-direction-nav .flex-prev {opacity: 1; left: 0;}
   .flex-direction-nav .flex-next {opacity: 1; right: 0;}
 }
+
+.stronk {
+	position: absolute;
+	top: 225px;
+	left: 17px;
+	color: #0AA4E4;
+	font-weight: bold;
+	font-size: 35px;
+	line-height: 38px;
+	text-transform: uppercase;
+	text-shadow:2px 2px 1px #000000;
+}
+
+.flex_caption {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	text-shadow:1px 1px 1px #000000;
+	color: #fff;
+}
+
+.flex_caption h2 {
+	font-weight: bold;
+	font-size: 16px;
+}

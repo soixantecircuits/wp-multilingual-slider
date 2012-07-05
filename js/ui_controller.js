@@ -114,6 +114,24 @@ if(jQuery('form.content_home').length > 0) {
 	}
 }
 
+jQuery("#select_themes").change(function update_preview() {
+	var current = jQuery('#select_themes option:selected').val();
+	var screenshot = "";
+	jQuery("#current-theme").remove();
+	if (jQuery("#select_themes option:selected").attr("screenshot") == "true") {
+		screenshot = '<img id="theme_preview" src="../wp-content/plugins/wp-multilingual-slider/themes/'+current+'/screenshot.png" />';
+	}
+	jQuery("#select_themes").after(
+		'<div id="current-theme" class="has-screenshot">'+
+			screenshot+
+			'<h3>Selected theme</h3>'+
+			'<h4>'+current+'</h4>'+
+		'</div>'
+	);
+});
+
+jQuery("#select_themes").change();
+
 jQuery(function() {
 	jQuery(".add").each ( function () {
 		var code = jQuery(this).attr('code_pays');
@@ -244,7 +262,37 @@ jQuery("#save_home").click('bind',function() {
 });
 
 jQuery("#save_themes").click("bind", function() {
-	
+	var content = "";
+	var i = 0;
+	jQuery("#home_themes input").each(function (index) {
+		if (i != 0) {
+			content += "&";
+		}
+		content += jQuery(this).attr("name");
+		content += "=";
+		content += jQuery(this).attr("value");
+		i++;
+	});
+	jQuery("#home_themes select").each(function () {
+		content += "&";
+		content += jQuery(this).attr("name");
+		content += "=";
+		content += jQuery(this).attr("value");
+	});
+	jQuery("#home_themes").append("<div class='message'>Sauvegarde en cours...</div>");
+	jQuery.ajax({
+		type: "post",
+		url: "options.php",
+		data: content,
+		success: function(msg) {
+			jQuery(".message").html("Sauvegardé");
+			jQuery(".message").delay('1000').fadeOut('slow');
+		},
+		error: function(msg){
+			jQuery(".message").html("Oups, une erreur s'est produite :( ...");
+			jQuery(".message").delay('1000').fadeOut('slow');
+		}
+	});
 });
 
 });
