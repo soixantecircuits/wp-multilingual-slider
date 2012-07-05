@@ -9,6 +9,7 @@ accueil_plugin_flexslider =
 jQuery("#content").find('ul>li:first').addClass("active");
 jQuery(".switcher").find("li:first").addClass("active");
 
+var neverAuto = false;
 var autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
 var fading = false;
 var nextFade = -1;
@@ -17,6 +18,7 @@ jQuery('.switch').each ( function () {
 	jQuery(this).click ( function () {
 		fade_slide(jQuery("ul #switch-"+jQuery(this).attr("switch")), 
 			jQuery("#slide-"+jQuery(this).attr("switch")));
+		neverAuto = true;
 	});
 });
 
@@ -33,7 +35,9 @@ function fade_slide (next, nextSlide) {
 				curr.removeClass("active");
 				currSlide.removeClass("active");
 				nextSlide.hide().fadeIn(accueil_plugin_flexslider.animationDuration, function () {
-						autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
+						if (!neverAuto) {
+							autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
+						}
 						fading = false;
 						if (nextFade != -1) {
 							fade_slide(jQuery("ul #switch-"+nextFade), 
