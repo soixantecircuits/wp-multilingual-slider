@@ -23,6 +23,8 @@ function print_current_slides($slides) { ?>
 ?>
 <script type="text/javascript" charset="utf-8">
 jQuery(window).load(function() {
-	jQuery('.flexslider').flexslider();
-  });
+	if(jQuery('.flexslider').length > 0 ){
+		jQuery('.flexslider').flexslider();
+	}
+});
 </script>
