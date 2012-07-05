@@ -35,7 +35,7 @@ function print_current_slides($slides) { ?>
 		// Initialize Slides
 		jQuery('#slides').slides({
 			preload: true,
-			preloadImage: 'img/loading.gif',
+			preloadImage: 'wp-content/plugins/wp-multilingual-slider/themes/linking/img/loading.gif',
 			generatePagination: true,
 			play: 5000,
 			pause: 2500,
