@@ -8,34 +8,17 @@ Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
 
+// XXX For debug
+//=============================
 ini_set('display_errors',1); 
 error_reporting(E_ALL);
+//=============================
 
 require( dirname(__FILE__) . '/admin/admin-menu.php' );
+require( dirname(__FILE__) . '/admin/config.php');
+
 // Activation de l'extension
 add_action( 'plugins_loaded', 'xb_classifieds_init' );
-
-function xb_classifieds_init() {
-	// Add permission on role during the plugin activation
-	register_activation_hook ( __FILE__, 'xb_classifieds_build_permissions' );
-	
-	add_action('admin_init', 'my_admin_init');
-	add_action('admin_menu', 'home_create_menu');
-}
- 
-function xb_classifieds_build_permissions() {
-	if ( function_exists( 'get_role' ) ) {
-		$role = get_role( 'administrator' );
-		if ( $role != null && !$role->has_cap( 'use_accueil' ) ) {
-			$role->add_cap( 'use_accueil' );
-		}
-		if ( $role != null && !$role->has_cap( 'admin_accueil' ) ) {
-			$role->add_cap( 'admin_accueil' );
-		}
-		
-		unset($role);
-	}
-}
 
 function init_themes_slider() {
 	$themes_name = get_option("home_themes");
