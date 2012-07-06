@@ -17,12 +17,6 @@ function print_current_slides($slides) { ?>
 	?>
 	</section>
 	<?php 
-} ?>
-<script type="text/javascript">
-jQuery(function() {
-	jQuery( '#jms-slideshow' ).jmslideshow({
-		autoplay : true,
-		interval : 5000
-	});
-});
-</script>
+}
+
+?>

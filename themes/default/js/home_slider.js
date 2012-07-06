@@ -6,7 +6,7 @@ accueil_plugin_flexslider =
 	animationDuration: 500
 };
 
-jQuery("#content").find('ul>li:first').addClass("active");
+jQuery(".block-gallery").find('ul>li:first').addClass("active");
 jQuery(".switcher").find("li:first").addClass("active");
 
 var neverAuto = false;
