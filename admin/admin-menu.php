@@ -340,7 +340,7 @@ if(!empty($sel_lang)){
              <tr align="left">
                 <th scope="row">Image :</th>
                 <td>
-                  <a id="_content-add_media_" class="thickbox add_media" onclick="return false;"
+                  <a id="_content-add_media_" class="thickbox add_media-<?php echo $l; ?>" onclick="return false;"
                         title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1">Upload/Insert</a>
                   <input id="_image_" class="image-<?php echo $l; ?>" name="_image_" value="<?php echo $slides[$i*5+4]->{'value'}; ?>" type="hidden" />
                   <?php if ($slides[$i*5+4]->{'value'} != '') { ?>

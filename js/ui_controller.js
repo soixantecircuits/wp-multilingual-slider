@@ -27,7 +27,7 @@ function refresh_order(code) {
 	var legends = jQuery(".legend-"+code);
 	var urls    = jQuery(".url-"+code);
 	var images  = jQuery(".image-"+code);
-	var imgurl  = jQuery(".thickbox");
+	var imgurl  = jQuery(".add_media-"+code);
 	var uplink  = jQuery(".up-"+code);
 	var dwlink  = jQuery(".down-"+code);
 	var buttons = jQuery(".remove_table-"+code);
@@ -39,7 +39,7 @@ function refresh_order(code) {
 		jQuery(subs[i]   ).attr("name", "sub-"+code+"-"+i);
 		jQuery(images[i] ).attr("id"  , "image-"+code+"-"+i);
 		jQuery(images[i] ).attr("name", "image-"+code+"-"+i);
-		jQuery(imgurl[i] ).attr("id"  , "content-add_media-"+i);
+		jQuery(imgurl[i] ).attr("id"  , "content-add_media-"+code+"-"+i);
 		jQuery(legends[i]).attr("id"  , "legend-"+code+"-"+i);
 		jQuery(legends[i]).attr("name", "legend-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("id"  , "url-"+code+"-"+i);
@@ -83,7 +83,7 @@ function up_button (activeCount, code) {
 
 function upload_button (activeCount, code) {
 	jQuery("#content-add_media-"+code+"-"+activeCount).click(function() {
-		formfield_img    = jQuery(this).siblings();
+		formfield_img    = jQuery(this).next();
 		formfield_title  = jQuery(jQuery(this).parents('tr').siblings().get(0)).find('td>input');
 		formfield_sub    = jQuery(jQuery(this).parents('tr').siblings().get(1)).find('td>input');
 		formfield_legend = jQuery(jQuery(this).parents('tr').siblings().get(2)).find('td>input');
@@ -95,6 +95,7 @@ if(jQuery('form.content_home').length > 0) {
 	window.send_to_editor = function(html) {
 		imgurl = jQuery('img',html);
 		if(formfield_img !== ""){
+			formfield_img.siblings("p").remove();
 			formfield_img.val(imgurl.attr('src'));
 			var p = jQuery(formfield_img.after(jQuery('<p>',{class:"img_home"}))).next();
 			p.append(imgurl);  
@@ -207,23 +208,6 @@ jQuery(".add").click('bind',function() {
 	up_button (activeCount, code);
 	upload_button (activeCount, code);
 
-/*
-	window.send_to_editor = function(html) {
-		imgurl = jQuery('img',html);
-		if (formfield_img !== "") {
-			formfield_img.val(imgurl.attr('src'));
-			var p = jQuery(formfield_img.before(jQuery('<p>',{class:"img_home"}))).prev();
-			p.append(imgurl);  
-		}
-		if (formfield_title !== "") {
-			formfield_title.val(imgurl.attr('title'));
-		}
-		if (formfield_legend !== "") {
-			var str = html.match(/<\/a>(.+)\[\/caption\]/)[1];
-			formfield_legend.val(str);
-		}
-		tb_remove();
-	}*/
 });
 
 /***SAVE FUNTION***/

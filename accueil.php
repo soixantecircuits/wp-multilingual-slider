@@ -31,13 +31,6 @@ function xb_classifieds_build_permissions() {
 		}
 		
 		unset($role);
-		
-		/*$role = get_role( 'editor' );
-		if ($role != null && !$role->has_cap( 'use_accueil' ) ) {
-			$role->add_cap( 'use_accueil ' );
-		}
-		
-		unset($role);*/
 	}
 }
 
