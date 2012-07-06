@@ -87,7 +87,6 @@ function upload_button (activeCount, code) {
 		formfield_title  = jQuery(jQuery(this).parents('tr').siblings().get(0)).find('td>input');
 		formfield_sub    = jQuery(jQuery(this).parents('tr').siblings().get(1)).find('td>input');
 		formfield_legend = jQuery(jQuery(this).parents('tr').siblings().get(2)).find('td>input');
-		//tb_show('', 'media-upload.php?type=image&amp;TB_iframe=true');
 	});
 }
 
@@ -153,51 +152,52 @@ jQuery(".add").click('bind',function() {
 	var code = jQuery(this).attr('code_pays');
 	var activeCount = jQuery(".table-"+code).length;
 	var last_slide = jQuery("#form-table-"+code+"-"+parseInt(activeCount-1));
+	var translater = jQuery("#translater");
 	if (!last_slide.is('*')) {
 		last_slide = jQuery("#sentinel-"+code);
 	}
 	last_slide.after(
 		'<table class="table-'+code+'" id="form-table-'+code+'-'+activeCount+'">'+
 			'<tr align="left">'+
-				'<th scope="row">Titre :</th>'+
+				'<th scope="row">'+translater.attr("title")+' :</th>'+
 				'<td>'+
 					'<input name="title-'+code+'-'+activeCount+'" class="title-'+code+'" id="title-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'<tr align="left">'+
-				'<th scope="row">Sous-titre :</th>'+
+				'<th scope="row">'+translater.attr("sub")+' :</th>'+
 				'<td>'+
 					'<input name="sub-'+code+'-'+activeCount+'" class="sub-'+code+'" id="sub-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">Légende :</th>'+
+				'<th scope="row">'+translater.attr("leg")+' :</th>'+
 				'<td>'+
 					'<input name="legend-'+code+'-'+activeCount+'" class="legend-'+code+'" id="legend-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">Url :</th>'+
+				'<th scope="row">'+translater.attr("url")+' :</th>'+
 				'<td>'+
 					'<input name="url-'+code+'-'+activeCount+'" class="url-'+code+'" id="url-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">Image :</th>'+
+				'<th scope="row">'+translater.attr("img")+' :</th>'+
 				'<td>'+
 					'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+code+'-'+activeCount+'" title="Add Media" onclick="return false;">'+
-					'Upload/Insert</a>'+
+					translater.attr("upld")+'</a>'+
 					'<input class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'" type="hidden" ></textarea>'+
 				'</td>'+
 			'</tr>'+
 			'<tr>'+
 				'<th>'+
-					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">Monter</a> / '+
-					'<a class="down-'+code+'" id="down-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">Descendre</a>'+
+					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+translater.attr("up")+'</a> / '+
+					'<a class="down-'+code+'" id="down-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+translater.attr("down")+'</a>'+
 				'</th>'+
 				'<td>'+
 					'<button type="button" style="border-color:#FF4D1A;background:#FF4D1A;'+
 					'float:right;"id="remove_table-'+code+'-'+activeCount+'"'+
-					'class="remove_table-'+code+' button-primary" name="form-table-'+code+'-'+activeCount+'">Supprimer</button>'+
+					'class="remove_table-'+code+' button-primary" name="form-table-'+code+'-'+activeCount+'">'+translater.attr("del")+'</button>'+
 				'</td>'+
 			'</tr>'+
 	'</table>'
@@ -212,6 +212,7 @@ jQuery(".add").click('bind',function() {
 
 /***SAVE FUNTION***/
 jQuery("#save_home").click('bind',function() {
+	var translater = jQuery("#translater");
 	var content = "";
 	var i = 0;
 	jQuery("div#code").each(function (index) {
@@ -229,23 +230,24 @@ jQuery("#save_home").click('bind',function() {
 		content += jQuery(this).attr("value");
 		i++;
 	});
-	jQuery("#home_handler").append("<div class='message'>Sauvegarde en cours...</div>");
+	jQuery("#home_handler").append("<div class='message'>"+translater.attr("save")+"...</div>");
 	jQuery.ajax({
 		type: "post",
 		url: "options.php",
 		data: content,
 		success: function(msg) {
-			jQuery(".message").html("Sauvegardé");
+			jQuery(".message").html(translater.attr("saved"));
 			jQuery(".message").delay('1000').fadeOut('slow');
 		},
 		error: function(msg){
-			jQuery(".message").html("Oups, une erreur s'est produite :( ...");
+			jQuery(".message").html(translater.attr("saverr"));
 			jQuery(".message").delay('1000').fadeOut('slow');
 		}
 	});
 });
 
 jQuery("#save_themes").click("bind", function() {
+	var translater = jQuery("#translater");
 	var content = "";
 	var i = 0;
 	jQuery("#home_themes input").each(function (index) {
@@ -263,72 +265,21 @@ jQuery("#save_themes").click("bind", function() {
 		content += "=";
 		content += jQuery(this).attr("value");
 	});
-	jQuery("#home_themes").append("<div class='message'>Sauvegarde en cours...</div>");
+	jQuery("#home_themes").append("<div class='message'>"+translater.attr("save")+"...</div>");
 	jQuery.ajax({
 		type: "post",
 		url: "options.php",
 		data: content,
 		success: function(msg) {
-			jQuery(".message").html("Sauvegardé");
+			jQuery(".message").html(translater.attr("saved"));
 			jQuery(".message").delay('1000').fadeOut('slow');
 		},
 		error: function(msg){
-			jQuery(".message").html("Oups, une erreur s'est produite :( ...");
+			jQuery(".message").html(translater.attr("saverr"));
 			jQuery(".message").delay('1000').fadeOut('slow');
 		}
 	});
 });
 
 });
-/*
-	var tab_pays = new Array();
-	var cpt = new Array();
-	var separator = new Array();
-
-	jQuery("div#code").each(function (index) {
-		tab_pays[index] = jQuery(this).attr("code_pays")
-	});
-	var content = jQuery("#content_home").serializeArray();
-	jQuery.each(tab_pays,function (index_pays, value_pays) {
-		jQuery("#home_content_"+value_pays).val('[');
-		cpt[index_pays] = 0;
-		separator[index_pays] = value_pays + '_';
-	});
-
-	jQuery(content).each(function(ind, el){
-		jQuery.each(tab_pays,function (index_pays, value_pays)
-		{
-			//alert("index="+ind + "; el="+JSON.stringify(el));
-			if(el.name.match(separator[index_pays])){
-				//alert("index="+ind + "; el="+JSON.stringify(el));
-				if(cpt[index_pays] == 0){
-					jQuery("#home_content_"+value_pays).val(jQuery("#home_content_"+value_pays).val()+JSON.stringify(el));
-					cpt[index_pays]++;
-				}
-				else{
-					jQuery("#home_content_"+value_pays).val(jQuery("#home_content_"+value_pays).val() +","+JSON.stringify(el));
-					cpt[index_pays]++;
-				}
-			}
-		});
-	});
-
-	jQuery.each(tab_pays,function (index_pays, value_pays) {
-		jQuery("#home_content_"+value_pays).val(jQuery("#home_content_"+value_pays).val() +']');
-	});
-	jQuery("#home_handler").append("<div class='message'>Sauvegarde en cours...</div>");
-	jQuery.ajax({
-		type: "post",
-		url: "options.php",
-		data: content,
-		success: function(msg) {
-			jQuery(".message").html("Sauvegardé");
-			jQuery(".message").delay('1000').fadeOut('slow');
-		},
-		error: function(msg){
-			jQuery(".message").html("Oups, une erreur s'est produite :( ...");
-			jQuery(".message").delay('1000').fadeOut('slow');
-		}
-	});
-*/
 

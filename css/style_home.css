@@ -97,11 +97,11 @@ p.img_home img{
 
 .slide_list table {
 	margin: 5px 0 3px 3px;
-  padding: 0.4em;
-  padding-left: 1.5em;
-  background-color: white;
-  width: 99%;
-  border-radius: 4px;
+	padding: 0.4em;
+/*	padding-left: 1.5em;*/
+	background-color: white;
+	width: 99%;
+	border-radius: 4px;
 }
 
 .tab {
@@ -149,11 +149,8 @@ p.img_home img{
   width: 100%;
 }
 
-.table_content {
-  width:100%;
-}
-
 ul.tab_select{
   width: 100%;
   margin: 0px 0px 10px 0px;
 }
+

@@ -6,6 +6,7 @@ function xb_classifieds_init() {
 	
 	add_action('admin_init', 'my_admin_init');
 	add_action('admin_menu', 'home_create_menu');
+	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/lang/');
 }
  
 function xb_classifieds_build_permissions() {

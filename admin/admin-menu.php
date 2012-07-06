@@ -262,12 +262,12 @@ function get_all_themes() {
 <div class="wrap">
 <div id="tabs">
     <ul class="tab_select">
-      <li><a href="#tabs-slides">Contenus</a></li>
-      <li><a href="#tabs-options">Options</a></li>
+      <li><a href="#tabs-slides"><?php _e('Contenus', 'wp-multilingual-slider'); ?></a></li>
+      <li><a href="#tabs-options"><?php _e('Options', 'wp-multilingual-slider'); ?></a></li>
     </ul>
 
 <div id="tabs-options">
-    <h2><?php _e("Options de l'accueil");?></h2>
+    <h2><?php _e("Options de l'accueil", 'wp-multilingual-slider');?></h2>
 	<form id="home_themes" method="post" action="options.php">
 		<?php settings_fields('home-settings-select'); ?>
 		<select id="select_themes" name="home_themes">
@@ -280,8 +280,8 @@ function get_all_themes() {
 
 <div id="tabs-slides">
     <div class="wrap">
-    <h2><?php _e("Contenu des slides");?> </h2>
-    <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site");?>&nbsp;<?php echo get_bloginfo('name'); ?></p>
+    <h2><?php _e("Contenu des slides", 'wp-multilingual-slider');?> </h2>
+    <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?></p>
     
 <?php 
 if(!empty($sel_lang)){ 
@@ -289,11 +289,23 @@ if(!empty($sel_lang)){
     global $lang_codes;
     $home_content = 'home_content';
     $allSlides = get_option($home_content);?>
+	 <span id="translater" type="hidden" 
+		title="<?php  _e('Titre', 'wp-multilingual-slider'); ?>"
+		sub="<?php    _e('Sous-titre', 'wp-multilingual-slider'); ?>"
+		leg="<?php    _e('Légende', 'wp-multilingual-slider'); ?>"
+		url="<?php    _e('Lien', 'wp-multilingual-slider'); ?>"
+		img="<?php    _e('Image', 'wp-multilingual-slider'); ?>"
+		upld="<?php   _e('Inserer une image', 'wp-multilingual-slider'); ?>"
+		up="<?php     _e('Monter', 'wp-multilingual-slider'); ?>"
+		down="<?php   _e('Descendre', 'wp-multilingual-slider'); ?>"
+		del="<?php    _e('Supprimer', 'wp-multilingual-slider'); ?>"
+		save="<?php   _e('Sauvegarde en cours', 'wp-multilingual-slider'); ?>"
+		saverr='<?php _e("Oups, une erreur s'est produite :( ...", 'wp-multilingual-slider'); ?>'
+		saved="<?php  _e('Sauvegardé', 'wp-multilingual-slider'); ?>">
+	 </span>
     <div id="columnizer">
 <?php
-    foreach($sel_lang as $l) {
-?>
-
+    foreach($sel_lang as $l) { ?>
         <div id="column-<?php echo $l; ?>" class="column column-<?php echo count($sel_lang); ?>">
         <form id="content_home-<?php echo $l; ?>" class="content_home">
         <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
@@ -308,40 +320,40 @@ if(!empty($sel_lang)){
         $slides = json_decode($allSlides[$l]);
         $cpt = 0;
         for ($i = 0; $i < count($slides)/5; $i++) { ?>
-            <table id="_" class="table_content table-<?php echo $l; ?>">
+            <table id="_" class="table-<?php echo $l; ?>">
              <tr align="left">
-                <th scope="row">Titre :</th>
+                <th scope="row"><?php _e('Titre', 'wp-multilingual-slider'); ?> :</th>
                 <td>
                   <input id="_title_" class="title-<?php echo $l; ?>" name="_title_" value="<?php echo $slides[$i*5]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
-                <th scope="row">Sous-titre :</th>
+                <th scope="row"><?php _e('Sous-titre', 'wp-multilingual-slider'); ?> :</th>
                 <td>
                   <input id="_sub_" class="sub-<?php echo $l; ?>" name="_sub_" value="<?php echo $slides[$i*5+1]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
-                <th scope="row">Légende :</th>
+                <th scope="row"><?php _e('Légende', 'wp-multilingual-slider'); ?> :</th>
                 <td>
                   <input id="_legend_" class="legend-<?php echo $l; ?>" name="_legend_" value="<?php echo $slides[$i*5+2]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
-                <th scope="row">Url :</th>
+                <th scope="row"><?php _e('Lien', 'wp-multilingual-slider'); ?> :</th>
                 <td>
                   <input id="_url_" class="url-<?php echo $l; ?>" name="_url_" value="<?php echo $slides[$i*5+3]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
-                <th scope="row">Image :</th>
+                <th scope="row"><?php _e('Image', 'wp-multilingual-slider'); ?> :</th>
                 <td>
                   <a id="_content-add_media_" class="thickbox add_media-<?php echo $l; ?>" onclick="return false;"
-                        title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1">Upload/Insert</a>
+                        title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1"><?php  _e('Inserer une image', 'wp-multilingual-slider'); ?></a>
                   <input id="_image_" class="image-<?php echo $l; ?>" name="_image_" value="<?php echo $slides[$i*5+4]->{'value'}; ?>" type="hidden" />
                   <?php if ($slides[$i*5+4]->{'value'} != '') { ?>
                     <p class="img_home">
@@ -353,13 +365,13 @@ if(!empty($sel_lang)){
 
              <tr>
                 <th>
-                  <a id="_up_" class="up-<?php echo $l; ?>" onclick="return false;" href="#">Monter</a>
+                  <a id="_up_" class="up-<?php echo $l; ?>" onclick="return false;" href="#"><?php _e('Monter', 'wp-multilingual-slider'); ?></a>
                     /
-                  <a id="_down_" class="down-<?php echo $l; ?>" onclick="return false;" href="#">Descendre</a>
+                  <a id="_down_" class="down-<?php echo $l; ?>" onclick="return false;" href="#"><?php _e('Descendre', 'wp-multilingual-slider'); ?></a>
                 </th>
                 <td>
                   <button id="_remove_table_" class="remove_table-<?php echo $l; ?> button-primary" name="_form-table_" 
-                        style="border-color:#FF4D1A;background:#FF4D1A;float:right;" type="button">Supprimer</button>
+                        style="border-color:#FF4D1A;background:#FF4D1A;float:right;" type="button"><?php _e('Supprimer', 'wp-multilingual-slider'); ?></button>
                 </td>
              </tr>
         </table>
