@@ -1,0 +1,21 @@
+.photo-wrap {
+	display:block;
+	margin: 0px;
+	padding: 0px;
+	width:550px;
+	height:350px;
+	overflow:hidden;
+}
+
+.rs-caption h3 {
+	font-size: 30px;
+	position:relative;
+	top:-5px;
+	left:-10px;
+}
+
+.rs-caption p {
+	position:relative;
+	top:5px;
+	left:-9px;
+}

@@ -66,9 +66,9 @@ html[xmlns] .slides {display: block;}
 }
 
 .stronk {
-	position: absolute;
-	top: 225px;
-	left: 17px;
+	position: relative;
+	bottom: 40px;
+	left: 25px;
 	color: #0AA4E4;
 	font-weight: bold;
 	font-size: 35px;

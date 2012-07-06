@@ -8,6 +8,9 @@ Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
 
+ini_set('display_errors',1); 
+error_reporting(E_ALL);
+
 require( dirname(__FILE__) . '/admin/admin-menu.php' );
 // Activation de l'extension
 add_action( 'plugins_loaded', 'xb_classifieds_init' );

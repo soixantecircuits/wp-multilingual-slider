@@ -144,3 +144,13 @@
 	margin-top:10px;
 	font-weight:800;
 }
+
+.caption h1 {
+	text-transform: uppercase;
+}
+
+.caption p {
+	font-size:75%;
+	text-shadow: 1px 1px 1px black;
+	color: white
+}
