@@ -270,6 +270,7 @@ function get_all_themes() {
     <h2><?php _e("Options de l'accueil", 'wp-multilingual-slider');?></h2>
 	<form id="home_themes" method="post" action="options.php">
 		<?php settings_fields('home-settings-select'); ?>
+		<button type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></button>
 		<select id="select_themes" name="home_themes">
 			<?php get_all_themes(); ?>
 		</select>
@@ -281,8 +282,10 @@ function get_all_themes() {
 <div id="tabs-slides">
     <div class="wrap">
     <h2><?php _e("Contenu des slides", 'wp-multilingual-slider');?> </h2>
-    <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?></p>
-    
+    <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?>
+		<button type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></button>
+	 </p>   
+
 <?php 
 if(!empty($sel_lang)){ 
     $path = WP_PLUGIN_URL .'/wp-multilingual-slider';
