@@ -52,7 +52,7 @@ function get_current_slides() {
 }
 
 function print_home_slider() {
-	//init_themes_slider();
+	init_themes_slider();
 	$slides = get_current_slides();
 	if (count($slides) > 0) {
 		if (function_exists("print_current_slides")) {
