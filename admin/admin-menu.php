@@ -187,6 +187,9 @@ $lang_codes = array_flip($_lang_codes);
 
 function my_admin_init() {
 	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
+	wp_deregister_script('showdown');
+	wp_register_script('showdown', $path.'/js/showdown.js');
+	wp_enqueue_script('showdown');
 	wp_enqueue_script( 'accueil_script', $path.'/js/ui_controller.js', array('jquery'), 0.1, TRUE );
    $myStyleUrl = $path. '/css/style_home.css';
 	wp_register_style('myStyleSheets', $myStyleUrl);
@@ -270,12 +273,10 @@ function get_all_themes() {
     <h2><?php _e("Options de l'accueil", 'wp-multilingual-slider');?></h2>
 	<form id="home_themes" method="post" action="options.php">
 		<?php settings_fields('home-settings-select'); ?>
-		<button type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></button>
+		<a href="<?php echo site_url(); ?>" type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></a>
 		<select id="select_themes" name="home_themes">
 			<?php get_all_themes(); ?>
 		</select>
-		<br />
-		<button type="button" id="save_themes" class="button-primary"><?php _e("Sauvegarder", "wp-multilingual-slider"); ?></button>
 	</form>
 </div>
 
@@ -283,7 +284,7 @@ function get_all_themes() {
     <div class="wrap">
     <h2><?php _e("Contenu des slides", 'wp-multilingual-slider');?> </h2>
     <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?>
-		<button type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></button>
+		<a href="<?php echo site_url(); ?>" type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></a>
 	 </p>   
 
 <?php 
@@ -302,6 +303,7 @@ if(!empty($sel_lang)){
 		up="<?php     _e('Monter', 'wp-multilingual-slider'); ?>"
 		down="<?php   _e('Descendre', 'wp-multilingual-slider'); ?>"
 		del="<?php    _e('Supprimer', 'wp-multilingual-slider'); ?>"
+		savbut="<?php _e('Sauvegarder', 'wp-multilingual-slider'); ?>"
 		save="<?php   _e('Sauvegarde en cours', 'wp-multilingual-slider'); ?>"
 		saverr='<?php _e("Oups, une erreur s'est produite :( ...", 'wp-multilingual-slider'); ?>'
 		saved="<?php  _e('Sauvegardé', 'wp-multilingual-slider'); ?>">

@@ -115,8 +115,27 @@ if(jQuery('form.content_home').length > 0) {
 }
 
 jQuery("#select_themes").change(function update_preview() {
+	var translater = jQuery("#translater");
 	var current = jQuery('#select_themes option:selected').val();
 	var screenshot = "";
+	
+	var allText = "";
+	var txtFile = new XMLHttpRequest();
+	txtFile.open("GET", "../wp-content/plugins/wp-multilingual-slider/themes/"+current+"/README.mdown", true);
+	txtFile.onreadystatechange = function() {
+  		if (txtFile.readyState === 4) {
+    		if (txtFile.status === 200) {
+      		allText = txtFile.responseText; 
+				var converter = new Showdown.converter();
+				var html = converter.makeHtml(allText);
+				jQuery("#current-theme").append(
+					'<div style="float: right;width: 50%;height: 500px;border: solid 1px;overflow-y: scroll;overflow-x: auto;position: absolute;top: 50px;right: 0px;background: #EEE;">'+html+'</div>'
+				);
+    		}
+  		}
+	}
+	txtFile.send(null);
+
 	jQuery("#current-theme").remove();
 	if (jQuery("#select_themes option:selected").attr("screenshot") == "true") {
 		screenshot = '<img id="theme_preview" src="../wp-content/plugins/wp-multilingual-slider/themes/'+current+'/screenshot.png" />';
@@ -126,8 +145,10 @@ jQuery("#select_themes").change(function update_preview() {
 			screenshot+
 			'<h3>Selected theme</h3>'+
 			'<h4>'+current+'</h4>'+
+			'<button type="button" id="save_themes" class="button-primary">'+translater.attr("savbut")+'</button>'+
 		'</div>'
 	);
+	update_save_themes_button();
 });
 
 jQuery("#select_themes").change();
@@ -246,40 +267,42 @@ jQuery("#save_home").click('bind',function() {
 	});
 });
 
-jQuery("#save_themes").click("bind", function() {
-	var translater = jQuery("#translater");
-	var content = "";
-	var i = 0;
-	jQuery("#home_themes input").each(function (index) {
-		if (i != 0) {
+function update_save_themes_button () {
+	jQuery("#save_themes").click("bind", function() {
+		var translater = jQuery("#translater");
+		var content = "";
+		var i = 0;
+		jQuery("#home_themes input").each(function (index) {
+			if (i != 0) {
+				content += "&";
+			}
+			content += jQuery(this).attr("name");
+			content += "=";
+			content += jQuery(this).attr("value");
+			i++;
+		});
+		jQuery("#home_themes select").each(function () {
 			content += "&";
-		}
-		content += jQuery(this).attr("name");
-		content += "=";
-		content += jQuery(this).attr("value");
-		i++;
+			content += jQuery(this).attr("name");
+			content += "=";
+			content += jQuery(this).attr("value");
+		});
+		jQuery("#home_themes").append("<div class='message'>"+translater.attr("save")+"...</div>");
+		jQuery.ajax({
+			type: "post",
+			url: "options.php",
+			data: content,
+			success: function(msg) {
+				jQuery(".message").html(translater.attr("saved"));
+				jQuery(".message").delay('1000').fadeOut('slow');
+			},
+			error: function(msg){
+				jQuery(".message").html(translater.attr("saverr"));
+				jQuery(".message").delay('1000').fadeOut('slow');
+			}
+		});
 	});
-	jQuery("#home_themes select").each(function () {
-		content += "&";
-		content += jQuery(this).attr("name");
-		content += "=";
-		content += jQuery(this).attr("value");
-	});
-	jQuery("#home_themes").append("<div class='message'>"+translater.attr("save")+"...</div>");
-	jQuery.ajax({
-		type: "post",
-		url: "options.php",
-		data: content,
-		success: function(msg) {
-			jQuery(".message").html(translater.attr("saved"));
-			jQuery(".message").delay('1000').fadeOut('slow');
-		},
-		error: function(msg){
-			jQuery(".message").html(translater.attr("saverr"));
-			jQuery(".message").delay('1000').fadeOut('slow');
-		}
-	});
-});
+}
 
 });
 
