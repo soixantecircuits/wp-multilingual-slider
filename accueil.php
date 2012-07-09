@@ -10,8 +10,8 @@ Author URI: http://www.soixantecircuits.fr/
 
 // XXX For debug
 //=============================
-ini_set('display_errors',1); 
-error_reporting(E_ALL);
+//ini_set('display_errors',1); 
+//error_reporting(E_ALL);
 //=============================
 
 require( dirname(__FILE__) . '/admin/admin-menu.php' );
@@ -57,7 +57,19 @@ function init_themes_slider()
 	require (ABSPATH . $themes_dir . "show.php");
 	$myFile = file_get_contents($themes_dir . 'theme.conf');
 	if ($myFile == null) {
-		//load_conf(array());
+		load_conf(
+			array("conf" => 
+				array("script" => 
+					array(
+						$themes_name => $themes_name . ".js",
+						"main" => "main.js",
+					),
+					array(
+						$themes_name => $themes_name . ".css",
+					),
+				),
+			)
+		);
 	} else {
 		$myDataArr = json_decode(prepareJSON($myFile), true);
 		load_conf($myDataArr);
