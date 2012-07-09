@@ -22,14 +22,4 @@ function add_style($style_src, $style_name) {
 	wp_enqueue_style( $style_name );
 }
 
-function add_custom_style($style_src, $style_name) {
-	wp_register_style(
-		$style_name,
-		$style_src, 
-		false,
-		0.1
-	);
-	wp_enqueue_style( $style_name );
-}
-
 ?>

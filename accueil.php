@@ -36,7 +36,17 @@ function prepareJSON($input)
 
 function load_conf($config)
 {
-	
+	if (isset($config['conf']['script']) && $config['conf']['script'] !== null) {
+		foreach ($config['conf']['script'] as $key => $value) {
+			add_script($value, $key);
+		}
+	}
+
+	if (isset($config['conf']['css']) && $config['conf']['css'] !== null) {
+		foreach ($config['conf']['css'] as $key => $value) {
+			add_style($value, $key);
+		}
+	}
 }
 
 function init_themes_slider()
@@ -46,7 +56,12 @@ function init_themes_slider()
 	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/includes/functions.php");
 	require (ABSPATH . $themes_dir . "show.php");
 	$myFile = file_get_contents($themes_dir . 'theme.conf');
-	$myDataArr = json_decode(prepareJSON($myFile), true);
+	if ($myFile == null) {
+		//load_conf(array());
+	} else {
+		$myDataArr = json_decode(prepareJSON($myFile), true);
+		load_conf($myDataArr);
+	}
 }
 
 function get_current_slides()
