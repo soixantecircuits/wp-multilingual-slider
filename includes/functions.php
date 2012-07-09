@@ -1,6 +1,23 @@
 <?php
 
-function add_script($script_src, $script_name, $require_script = array('jquery')) {
+function add_select ($name, $opt)
+{
+	echo "<tr><td><label for='$name' >$name : </label></td>";
+	echo "<td><select name='$name'>";
+	foreach ($opt as $o) {
+		echo "<option value='$o'>$o</option>";
+	}
+	echo "</select></td></tr>";
+}
+
+function add_field ($name, $opt = 0)
+{
+	echo "<tr><td><label for='$name' >$name : </label></td>";
+	echo "<td><input name='$name' value='$opt' /></td></tr>";
+}
+
+function add_script($script_src, $script_name, $require_script = array('jquery'))
+{
 	wp_deregister_script($script_name);
 	wp_register_script(
 		$script_name, 
@@ -12,7 +29,8 @@ function add_script($script_src, $script_name, $require_script = array('jquery')
 	wp_enqueue_script($script_name); 
 }
 
-function add_style($style_src, $style_name) {
+function add_style($style_src, $style_name)
+{
 	wp_register_style(
 		$style_name,
 		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/css/".$style_src, 
@@ -20,6 +38,17 @@ function add_style($style_src, $style_name) {
 		0.1
 	);
 	wp_enqueue_style( $style_name );
+}
+
+function init_print_options ()
+{
+	echo '<form id="the;me_options" method="post" action="options.php"><table>';
+	settings_fields("home-settings-config");
+	print_options();
+	echo '</table>';
+	echo '<button type="button" class="button-primary">' . 
+		__("Sauvegarder", "wp-multilingual-slider") . '</button>';
+	echo '</form>';
 }
 
 ?>

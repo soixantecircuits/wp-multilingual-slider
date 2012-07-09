@@ -10,8 +10,8 @@ Author URI: http://www.soixantecircuits.fr/
 
 // XXX For debug
 //=============================
-//ini_set('display_errors',1); 
-//error_reporting(E_ALL);
+ini_set('display_errors',1); 
+error_reporting(E_ALL);
 //=============================
 
 require( dirname(__FILE__) . '/admin/admin-menu.php' );
@@ -53,7 +53,6 @@ function init_themes_slider()
 {
 	$themes_name = get_option("home_themes");
 	$themes_dir = "wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name ."/";
-	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/includes/functions.php");
 	require (ABSPATH . $themes_dir . "show.php");
 	$myFile = file_get_contents($themes_dir . 'theme.conf');
 	if ($myFile == null) {
@@ -87,13 +86,14 @@ function get_current_slides()
 	}
 	$_slides = json_decode($_slides[$lang]);
 	$slides = null;
-	for ($i = 0; $i < count($_slides)/5; $i++) {
+	for ($i = 0; $i < count($_slides)/6; $i++) {
 		$slides[] = array(
-			'title'  => $_slides[$i*5]->{'value'},
-			'sub'    => $_slides[$i*5+1]->{'value'},
-			'legend' => $_slides[$i*5+2]->{'value'},
-			'url'    => $_slides[$i*5+3]->{'value'},
-			'img'    => $_slides[$i*5+4]->{'value'}
+			'title'  => $_slides[$i*6  ]->{'value'},
+			'sub'    => $_slides[$i*6+1]->{'value'},
+			'legend' => $_slides[$i*6+2]->{'value'},
+			'url'    => $_slides[$i*6+3]->{'value'},
+			'img'    => $_slides[$i*6+4]->{'value'},
+			'ext'		=> $_slides[$i*6+5]->{'value'}
 		);
 	}
 	return $slides;
