@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-multilingual-slider\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-06 18:10+0100\n"
-"PO-Revision-Date: 2012-07-06 18:11+0100\n"
+"POT-Creation-Date: 2012-07-09 10:06+0100\n"
+"PO-Revision-Date: 2012-07-09 10:06+0100\n"
 "Last-Translator: \n"
 "Language-Team: Soixante Circuits\n"
 "Language: \n"
@@ -38,85 +38,90 @@ msgstr "Options"
 msgid "Options de l'accueil"
 msgstr "Home options"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:277
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:400
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:273
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:286
+msgid "Voir la page"
+msgstr "View home page"
+
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:278
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:403
 msgid "Sauvegarder"
 msgstr "Save"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:283
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:284
 msgid "Contenu des slides"
 msgstr "Slides content"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:284
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:285
 msgid "Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site"
 msgstr "This page allow you to add images and links to site's home page"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:293
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:325
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:296
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:328
 msgid "Titre"
 msgstr "Title"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:294
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:332
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:297
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:335
 msgid "Sous-titre"
 msgstr "Subtitle"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:295
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:339
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:298
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:342
 msgid "Légende"
 msgstr "Legend"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:296
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:346
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:299
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:349
 msgid "Lien"
 msgstr "Link"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:297
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:353
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:300
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:356
 msgid "Image"
 msgstr "Image"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:298
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:356
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:301
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:359
 msgid "Inserer une image"
 msgstr "Upload/Insert"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:299
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:368
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:302
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:371
 msgid "Monter"
 msgstr "Move up"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:300
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:370
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:303
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:373
 msgid "Descendre"
 msgstr "Move down"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:301
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:374
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:304
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:377
 msgid "Supprimer"
 msgstr "Delete"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:302
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:305
 msgid "Sauvegarde en cours"
 msgstr "Saving"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:303
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:306
 msgid "Oups, une erreur s'est produite :( ..."
 msgstr "Oups, an error has occur :( ..."
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:304
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:307
 msgid "Sauvegardé"
 msgstr "Saved"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:312
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:315
 msgid "Pour ajouter une diapositive en"
 msgstr "To add a slide in"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:312
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:315
 msgid "cliquez sur <i>Ajouter un slide"
 msgstr "click on <i>Add a slide"
 
-#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:314
+#: /var/www/bel/wp-content/plugins/wp-multilingual-slider/admin/admin-menu.php:317
 msgid "Ajouter un slide"
 msgstr "Add a slide"
 

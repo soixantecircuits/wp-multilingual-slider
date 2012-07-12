@@ -187,6 +187,9 @@ $lang_codes = array_flip($_lang_codes);
 
 function my_admin_init() {
 	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
+	wp_deregister_script('showdown');
+	wp_register_script('showdown', $path.'/js/showdown.js');
+	wp_enqueue_script('showdown');
 	wp_enqueue_script( 'accueil_script', $path.'/js/ui_controller.js', array('jquery'), 0.1, TRUE );
    $myStyleUrl = $path. '/css/style_home.css';
 	wp_register_style('myStyleSheets', $myStyleUrl);
@@ -207,6 +210,9 @@ function register_mysettings() {
 	//register our settings  
 	register_setting( 'home-settings-group', 'home_content');  
 	register_setting( 'home-settings-select', 'home_themes');  
+	register_setting( 'home-settings-config', 'theme_options');  
+
+	//require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/themes/" . get_option("home_themes") . "/config.php");
 
 	if(function_exists("icl_get_languages")){
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
@@ -228,35 +234,35 @@ function home_create_menu() {
 	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
 }
 
-function home_settings_page() {   
-  if(function_exists("icl_get_languages")){ 
-    $languages = icl_get_languages('skip_missing=0&orderby=code');
-    foreach($languages as $l){
-      $sel_lang[$i] = $l['language_code'];
-      $i++;
-    }
-  }
-  else if(function_exists("qtrans_init")){
-    $sel_lang = qtrans_getSortedLanguages();
-  }else{
-    $sel_lang = Array(0 => get_bloginfo('language'));
-  }
+function home_settings_page()
+{
+	if(function_exists("icl_get_languages")) {
+		$languages = icl_get_languages('skip_missing=0&orderby=code');
+		foreach($languages as $l){
+			$sel_lang[$i] = $l['language_code'];
+			$i++;
+		}
+	} else if(function_exists("qtrans_init")) {
+		$sel_lang = qtrans_getSortedLanguages();
+	} else {
+		$sel_lang = Array(0 => get_bloginfo('language'));
+	}
 
-function get_all_themes() {
-	$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
-   // Open a known directory, and proceed to read its js content
-	if ($handle = opendir($themes_dir)) {
-		$selected = get_option("home_themes");
-		while (false !== ($entry = readdir($handle))) {
-			if ($entry != "." && $entry != "..") {
-				echo "<option ".
+	function get_all_themes() {
+		$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
+		// Open a known directory, and proceed to read its js content
+		if ($handle = opendir($themes_dir)) {
+			$selected = get_option("home_themes");
+			while (false !== ($entry = readdir($handle))) {
+				if ($entry != "." && $entry != "..") {
+					echo "<option ".
 						($entry == $selected ? "selected='selected'" : "").
 						(file_exists($themes_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
 						"value=$entry>$entry</option>";
+				}
 			}
 		}
 	}
-}
 ?>
 
 <div class="wrap">
@@ -270,26 +276,31 @@ function get_all_themes() {
     <h2><?php _e("Options de l'accueil", 'wp-multilingual-slider');?></h2>
 	<form id="home_themes" method="post" action="options.php">
 		<?php settings_fields('home-settings-select'); ?>
+		<a href="<?php echo site_url(); ?>" type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></a>
 		<select id="select_themes" name="home_themes">
 			<?php get_all_themes(); ?>
 		</select>
-		<br />
-		<button type="button" id="save_themes" class="button-primary"><?php _e("Sauvegarder", "wp-multilingual-slider"); ?></button>
 	</form>
+	<?php
+	if (function_exists("print_options")) {
+		init_print_options();
+	} ?>
 </div>
 
 <div id="tabs-slides">
     <div class="wrap">
     <h2><?php _e("Contenu des slides", 'wp-multilingual-slider');?> </h2>
-    <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?></p>
-    
+    <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?>
+		<a href="<?php echo site_url(); ?>" type="button" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></a>
+	 </p>   
+
 <?php 
 if(!empty($sel_lang)){ 
-    $path = WP_PLUGIN_URL .'/wp-multilingual-slider';
-    global $lang_codes;
-    $home_content = 'home_content';
-    $allSlides = get_option($home_content);?>
-	 <span id="translater" type="hidden" 
+	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';
+	global $lang_codes;
+	$home_content = 'home_content';
+	$allSlides = get_option($home_content);?>
+	<span id="translater" type="hidden" 
 		title="<?php  _e('Titre', 'wp-multilingual-slider'); ?>"
 		sub="<?php    _e('Sous-titre', 'wp-multilingual-slider'); ?>"
 		leg="<?php    _e('Légende', 'wp-multilingual-slider'); ?>"
@@ -299,11 +310,13 @@ if(!empty($sel_lang)){
 		up="<?php     _e('Monter', 'wp-multilingual-slider'); ?>"
 		down="<?php   _e('Descendre', 'wp-multilingual-slider'); ?>"
 		del="<?php    _e('Supprimer', 'wp-multilingual-slider'); ?>"
+		savbut="<?php _e('Sauvegarder', 'wp-multilingual-slider'); ?>"
 		save="<?php   _e('Sauvegarde en cours', 'wp-multilingual-slider'); ?>"
 		saverr='<?php _e("Oups, une erreur s'est produite :( ...", 'wp-multilingual-slider'); ?>'
-		saved="<?php  _e('Sauvegardé', 'wp-multilingual-slider'); ?>">
-	 </span>
-    <div id="columnizer">
+		saved="<?php  _e('Sauvegardé', 'wp-multilingual-slider'); ?>"
+		ext="<?php    _e('Contenu externe', 'wp-multilingual-slider'); ?>">
+	</span>
+	<div id="columnizer">
 <?php
     foreach($sel_lang as $l) { ?>
         <div id="column-<?php echo $l; ?>" class="column column-<?php echo count($sel_lang); ?>">
@@ -317,35 +330,36 @@ if(!empty($sel_lang)){
         <span id="sentinel-<?php echo $l; ?>"></span>
 <?php
 
-        $slides = json_decode($allSlides[$l]);
+		  if ($allSlides != null) {
+        		$slides = json_decode($allSlides[$l]);
         $cpt = 0;
-        for ($i = 0; $i < count($slides)/5; $i++) { ?>
+        for ($i = 0; $i < count($slides)/6; $i++) { ?>
             <table id="_" class="table-<?php echo $l; ?>">
              <tr align="left">
                 <th scope="row"><?php _e('Titre', 'wp-multilingual-slider'); ?> :</th>
                 <td>
-                  <input id="_title_" class="title-<?php echo $l; ?>" name="_title_" value="<?php echo $slides[$i*5]->{'value'}; ?>" />
+                  <input id="_title_" class="title-<?php echo $l; ?>" name="_title_" value="<?php echo $slides[$i*6]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
                 <th scope="row"><?php _e('Sous-titre', 'wp-multilingual-slider'); ?> :</th>
                 <td>
-                  <input id="_sub_" class="sub-<?php echo $l; ?>" name="_sub_" value="<?php echo $slides[$i*5+1]->{'value'}; ?>" />
+                  <input id="_sub_" class="sub-<?php echo $l; ?>" name="_sub_" value="<?php echo $slides[$i*6+1]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
                 <th scope="row"><?php _e('Légende', 'wp-multilingual-slider'); ?> :</th>
                 <td>
-                  <input id="_legend_" class="legend-<?php echo $l; ?>" name="_legend_" value="<?php echo $slides[$i*5+2]->{'value'}; ?>" />
+                  <input id="_legend_" class="legend-<?php echo $l; ?>" name="_legend_" value="<?php echo $slides[$i*6+2]->{'value'}; ?>" />
                 </td>
              </tr>
 
              <tr align="left">
                 <th scope="row"><?php _e('Lien', 'wp-multilingual-slider'); ?> :</th>
                 <td>
-                  <input id="_url_" class="url-<?php echo $l; ?>" name="_url_" value="<?php echo $slides[$i*5+3]->{'value'}; ?>" />
+                  <input id="_url_" class="url-<?php echo $l; ?>" name="_url_" value="<?php echo $slides[$i*6+3]->{'value'}; ?>" />
                 </td>
              </tr>
 
@@ -354,12 +368,19 @@ if(!empty($sel_lang)){
                 <td>
                   <a id="_content-add_media_" class="thickbox add_media-<?php echo $l; ?>" onclick="return false;"
                         title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1"><?php  _e('Inserer une image', 'wp-multilingual-slider'); ?></a>
-                  <input id="_image_" class="image-<?php echo $l; ?>" name="_image_" value="<?php echo $slides[$i*5+4]->{'value'}; ?>" type="hidden" />
-                  <?php if ($slides[$i*5+4]->{'value'} != '') { ?>
+                  <input id="_image_" class="image-<?php echo $l; ?>" name="_image_" value="<?php echo $slides[$i*6+4]->{'value'}; ?>" type="hidden" />
+                  <?php if ($slides[$i*6+4]->{'value'} != '') { ?>
                     <p class="img_home">
-                        <img title="img-<?php echo $i; ?>" src="<?php echo $slides[$i*5+4]->{'value'}; ?>" />
+                        <img title="img-<?php echo $i; ?>" src="<?php echo $slides[$i*6+4]->{'value'}; ?>" />
                     </p>
                   <?php } ?>
+                </td>
+             </tr>
+
+             <tr align="left">
+                <th scope="row"><?php _e('Contenu externe', 'wp-multilingual-slider'); ?> :</th>
+                <td>
+                  <input id="_ext_" class="ext-<?php echo $l; ?>" name="_ext_" value="<?php echo $slides[$i*6+5]->{'value'}; ?>" />
                 </td>
              </tr>
 
@@ -377,6 +398,7 @@ if(!empty($sel_lang)){
         </table>
         <?php
         }
+		  }
     ?></ul></form></div><?php
     }
 }

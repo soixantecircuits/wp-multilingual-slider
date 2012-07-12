@@ -17,6 +17,10 @@ jQuery("div#code").each(function () {
 		down_button (index, code);
 		up_button (index, code);
 		upload_button (index, code);
+		update_iframe (index, code);
+	});
+	jQuery(".ext-"+code).each(function() {
+		jQuery(this).trigger('keyup');
 	});
 });
 
@@ -28,6 +32,7 @@ function refresh_order(code) {
 	var urls    = jQuery(".url-"+code);
 	var images  = jQuery(".image-"+code);
 	var imgurl  = jQuery(".add_media-"+code);
+	var extcnt  = jQuery(".ext-"+code);
 	var uplink  = jQuery(".up-"+code);
 	var dwlink  = jQuery(".down-"+code);
 	var buttons = jQuery(".remove_table-"+code);
@@ -44,6 +49,8 @@ function refresh_order(code) {
 		jQuery(legends[i]).attr("name", "legend-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("id"  , "url-"+code+"-"+i);
 		jQuery(urls[i]   ).attr("name", "url-"+code+"-"+i);
+		jQuery(extcnt[i] ).attr("id"  , "ext-"+code+"-"+i);
+		jQuery(extcnt[i] ).attr("name", "ext-"+code+"-"+i);
 		jQuery(uplink[i] ).attr("id"  , "up-"+code+"-"+i);
 		jQuery(uplink[i] ).attr("count", i);
 		jQuery(dwlink[i] ).attr("id"  , "down-"+code+"-"+i);
@@ -90,6 +97,30 @@ function upload_button (activeCount, code) {
 	});
 }
 
+function test_iframe (activeCount, code) {
+
+}
+
+function update_iframe (activeCount, code) {
+	jQuery("#ext-"+code+"-"+activeCount).keyup(function() {
+		if (jQuery(this).val() != "") {
+			//jQuery("#title-"+code+"-"+activeCount).prop("disabled", true);
+			//jQuery("#sub-"+code+"-"+activeCount).prop("disabled", true);
+			//jQuery("#legend-"+code+"-"+activeCount).prop("disabled", true);
+			jQuery("#form-table-"+code+"-"+activeCount).find("p.img_home").css("background-color","#000");
+			jQuery("#form-table-"+code+"-"+activeCount).find("p>img").css("opacity","0.5");
+		} else {
+			//jQuery("#title-"+code+"-"+activeCount).prop("disabled", false);
+			//jQuery("#sub-"+code+"-"+activeCount).prop("disabled", false);
+			//jQuery("#legend-"+code+"-"+activeCount).prop("disabled", false);
+			jQuery("#form-table-"+code+"-"+activeCount).find("p.img_home").css("background-color","#fff");
+			jQuery("#form-table-"+code+"-"+activeCount).find("p>img").css("opacity","1");
+		}
+	});
+}
+
+jQuery
+
 if(jQuery('form.content_home').length > 0) {
 	window.send_to_editor = function(html) {
 		imgurl = jQuery('img',html);
@@ -115,8 +146,27 @@ if(jQuery('form.content_home').length > 0) {
 }
 
 jQuery("#select_themes").change(function update_preview() {
+	var translater = jQuery("#translater");
 	var current = jQuery('#select_themes option:selected').val();
 	var screenshot = "";
+	
+	var allText = "";
+	var txtFile = new XMLHttpRequest();
+	txtFile.open("GET", "../wp-content/plugins/wp-multilingual-slider/themes/"+current+"/README.mdown", true);
+	txtFile.onreadystatechange = function() {
+  		if (txtFile.readyState === 4) {
+    		if (txtFile.status === 200) {
+      		allText = txtFile.responseText; 
+				var converter = new Showdown.converter();
+				var html = converter.makeHtml(allText);
+				jQuery("#current-theme").append(
+					'<div style="float: right;width: 50%;height: 270px;border: solid 1px;overflow-y: scroll;overflow-x: auto;position: absolute;top: 50px;right: 0px;background: #EEE;">'+html+'</div>'
+				);
+    		}
+  		}
+	}
+	txtFile.send(null);
+
 	jQuery("#current-theme").remove();
 	if (jQuery("#select_themes option:selected").attr("screenshot") == "true") {
 		screenshot = '<img id="theme_preview" src="../wp-content/plugins/wp-multilingual-slider/themes/'+current+'/screenshot.png" />';
@@ -126,8 +176,10 @@ jQuery("#select_themes").change(function update_preview() {
 			screenshot+
 			'<h3>Selected theme</h3>'+
 			'<h4>'+current+'</h4>'+
+			'<button type="button" id="save_themes" class="button-primary">'+translater.attr("savbut")+'</button>'+
 		'</div>'
 	);
+	update_save_themes_button();
 });
 
 jQuery("#select_themes").change();
@@ -189,6 +241,12 @@ jQuery(".add").click('bind',function() {
 					'<input class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'" type="hidden" ></textarea>'+
 				'</td>'+
 			'</tr>'+
+			'<tr align="left">'+
+				'<th scope="row">'+translater.attr("ext")+' :</th>'+
+				'<td>'+
+					'<input name="ext-'+code+'-'+activeCount+'" class="ext-'+code+'" id="ext-'+code+'-'+activeCount+'"></input>'+
+				'</td>'+
+			'</tr>'+
 			'<tr>'+
 				'<th>'+
 					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+translater.attr("up")+'</a> / '+
@@ -207,7 +265,6 @@ jQuery(".add").click('bind',function() {
 	down_button (activeCount, code);
 	up_button (activeCount, code);
 	upload_button (activeCount, code);
-
 });
 
 /***SAVE FUNTION***/
@@ -217,6 +274,10 @@ jQuery("#save_home").click('bind',function() {
 	var i = 0;
 	jQuery("div#code").each(function (index) {
 		var code = jQuery(this).attr("code_pays");
+		jQuery(".ext-"+code).each(function() {
+			var str = jQuery(this).val().replace(/"/g, "'");
+			jQuery(this).val(str);
+		});
 		jQuery("#home_content\\["+code+"\\]").attr("value", 
 			JSON.stringify(jQuery("#content_home-"+code).serializeArray())
 		);
@@ -246,40 +307,42 @@ jQuery("#save_home").click('bind',function() {
 	});
 });
 
-jQuery("#save_themes").click("bind", function() {
-	var translater = jQuery("#translater");
-	var content = "";
-	var i = 0;
-	jQuery("#home_themes input").each(function (index) {
-		if (i != 0) {
+function update_save_themes_button () {
+	jQuery("#save_themes").click("bind", function() {
+		var translater = jQuery("#translater");
+		var content = "";
+		var i = 0;
+		jQuery("#home_themes input").each(function (index) {
+			if (i != 0) {
+				content += "&";
+			}
+			content += jQuery(this).attr("name");
+			content += "=";
+			content += jQuery(this).attr("value");
+			i++;
+		});
+		jQuery("#home_themes select").each(function () {
 			content += "&";
-		}
-		content += jQuery(this).attr("name");
-		content += "=";
-		content += jQuery(this).attr("value");
-		i++;
+			content += jQuery(this).attr("name");
+			content += "=";
+			content += jQuery(this).attr("value");
+		});
+		jQuery("#current-theme").append("<div class='message'>"+translater.attr("save")+"...</div>");
+		jQuery.ajax({
+			type: "post",
+			url: "options.php",
+			data: content,
+			success: function(msg) {
+				jQuery(".message").html(translater.attr("saved"));
+				jQuery(".message").delay('1000').fadeOut('slow');
+			},
+			error: function(msg){
+				jQuery(".message").html(translater.attr("saverr"));
+				jQuery(".message").delay('1000').fadeOut('slow');
+			}
+		});
 	});
-	jQuery("#home_themes select").each(function () {
-		content += "&";
-		content += jQuery(this).attr("name");
-		content += "=";
-		content += jQuery(this).attr("value");
-	});
-	jQuery("#home_themes").append("<div class='message'>"+translater.attr("save")+"...</div>");
-	jQuery.ajax({
-		type: "post",
-		url: "options.php",
-		data: content,
-		success: function(msg) {
-			jQuery(".message").html(translater.attr("saved"));
-			jQuery(".message").delay('1000').fadeOut('slow');
-		},
-		error: function(msg){
-			jQuery(".message").html(translater.attr("saverr"));
-			jQuery(".message").delay('1000').fadeOut('slow');
-		}
-	});
-});
+}
 
 });
 
