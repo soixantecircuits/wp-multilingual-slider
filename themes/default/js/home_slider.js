@@ -20,6 +20,7 @@ jQuery(function(){
 	
 	jQuery('.switch').each ( function () {
 		jQuery(".elipsis").dotdotdot();
+		jQuery(".location").dotdotdot()
 		jQuery(this).click ( function () {
 			fade_slide(jQuery("ul #switch-"+jQuery(this).attr("switch")), 
 				jQuery("#slide-"+jQuery(this).attr("switch")));
@@ -45,6 +46,7 @@ function fade_slide (next, nextSlide) {
 				/*Display back the next slide*/
 				nextSlide.hide().fadeIn(accueil_plugin_flexslider.animationDuration, function () {
 						jQuery(".elipsis").dotdotdot();
+						jQuery(".location").dotdotdot()
 						if (!accueil_plugin_flexslider.neverAuto) {
 							autoSlide = setInterval(function () { next_active_slide() }, accueil_plugin_flexslider.slideSpeed);
 						}
