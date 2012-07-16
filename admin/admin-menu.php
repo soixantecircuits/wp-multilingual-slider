@@ -270,6 +270,7 @@ function home_settings_page()
     <ul class="tab_select">
       <li><a href="#tabs-slides"><?php _e('Contenus', 'wp-multilingual-slider'); ?></a></li>
       <li><a href="#tabs-options"><?php _e('Options', 'wp-multilingual-slider'); ?></a></li>
+      <li><a href="#tabs-import"><?php _e('Importer/Exporter', 'wp-multilingual-slider'); ?></a></li>
     </ul>
 
 <div id="tabs-options">
@@ -285,6 +286,11 @@ function home_settings_page()
 	if (function_exists("print_options")) {
 		init_print_options();
 	} ?>
+</div>
+
+<div id="tabs-import">
+	<h2><?php _e("Importer ou exporter les slides au format Json", 'wp-multilingual-slider');?></h2>
+	<textarea name="json_slides" id="json_slides"></textarea>
 </div>
 
 <div id="tabs-slides">

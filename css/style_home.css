@@ -157,3 +157,8 @@ ul.tab_select{
 #save_themes {
 	margin-bottom: 100px;
 }
+
+.json_slides {
+	width: 450px;
+	height: 200px;
+}

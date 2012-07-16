@@ -3,6 +3,12 @@ function print_current_slides($slides) { ?>
 	<div class="block-gallery">
 		<div class="gallery">
 		<ul>
+		<div style="position: absolute; left:-1px; top:-1px; z-index:9001;">
+			<img src="<?php echo '/wp-content/plugins/wp-multilingual-slider/themes/default/images/border_left.png'; ?>" />
+		</div>
+		<div style="position: absolute; right:2px; top:-1px; z-index:9001;">
+			<img src="<?php echo '/wp-content/plugins/wp-multilingual-slider/themes/default/images/border_right.png'; ?>" />
+		</div>
 		<?php
 		for ($i = 0; $i < count($slides); $i++) { ?>
 			<li id="slide-<?php echo $i;?>" class="">

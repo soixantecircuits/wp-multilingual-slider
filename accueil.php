@@ -12,6 +12,7 @@ Author URI: http://www.soixantecircuits.fr/
 //=============================
 //ini_set('display_errors',1); 
 //error_reporting(E_ALL);
+//define("WP-DEBUG", true);
 //=============================
 
 require( dirname(__FILE__) . '/admin/admin-menu.php' );
