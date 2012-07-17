@@ -319,22 +319,6 @@ if(!empty($sel_lang)){
 	global $lang_codes;
 	$home_content = 'home_content';
 	$allSlides = get_option($home_content);?>
-	<span id="translater" type="hidden" 
-		title="<?php  _e('Titre', 'wp-multilingual-slider'); ?>"
-		sub="<?php    _e('Sous-titre', 'wp-multilingual-slider'); ?>"
-		leg="<?php    _e('Légende', 'wp-multilingual-slider'); ?>"
-		url="<?php    _e('Lien', 'wp-multilingual-slider'); ?>"
-		img="<?php    _e('Image', 'wp-multilingual-slider'); ?>"
-		upld="<?php   _e('Inserer une image', 'wp-multilingual-slider'); ?>"
-		up="<?php     _e('Monter', 'wp-multilingual-slider'); ?>"
-		down="<?php   _e('Descendre', 'wp-multilingual-slider'); ?>"
-		del="<?php    _e('Supprimer', 'wp-multilingual-slider'); ?>"
-		savbut="<?php _e('Sauvegarder', 'wp-multilingual-slider'); ?>"
-		save="<?php   _e('Sauvegarde en cours', 'wp-multilingual-slider'); ?>"
-		saverr='<?php _e("Oups, une erreur s'est produite :( ...", 'wp-multilingual-slider'); ?>'
-		saved="<?php  _e('Sauvegardé', 'wp-multilingual-slider'); ?>"
-		ext="<?php    _e('Contenu externe', 'wp-multilingual-slider'); ?>">
-	</span>
 	<div id="columnizer">
 <?php
     foreach($sel_lang as $l) { ?>
@@ -445,6 +429,28 @@ if(!empty($sel_lang)){
 </div>
 </div>
 </div>
+
+<?php
+$js_array = array (
+	"title"	=> __('Titre', 'wp-multilingual-slider'),
+	"sub" 	=> __('Sous-titre', 'wp-multilingual-slider'),
+	"leg"		=> __('Légende', 'wp-multilingual-slider'),
+	"url"		=> __('Lien', 'wp-multilingual-slider'),
+	"img"		=> __('Image', 'wp-multilingual-slider'),
+	"upld"	=> __('Inserer une image', 'wp-multilingual-slider'),
+	"up"		=> __('Monter', 'wp-multilingual-slider'),
+	"down"	=> __('Descendre', 'wp-multilingual-slider'),
+	"del"		=> __('Supprimer', 'wp-multilingual-slider'),
+	"savbut"	=> __('Sauvegarder', 'wp-multilingual-slider'),
+	"save"	=> __('Sauvegarde en cours', 'wp-multilingual-slider'),
+	"saverr"	=> __("Oups, une erreur s'est produite :( ...", 'wp-multilingual-slider'),
+	"saved"	=> __('Sauvegardé', 'wp-multilingual-slider'),
+	"ext"		=> __('Contenu externe', 'wp-multilingual-slider'),
+	"empty"	=> __('Veuillez inserer un slide au format JSON', 'wp-multilingual-slider'),
+); ?>
+<script type="text/javascript">
+	var loc = <?php echo json_encode($js_array); ?>;
+</script>
 
 <?php
 } ?>

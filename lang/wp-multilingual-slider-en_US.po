@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-multilingual-slider\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-17 12:49+0100\n"
-"PO-Revision-Date: 2012-07-17 12:50+0100\n"
+"POT-Creation-Date: 2012-07-17 15:02+0100\n"
+"PO-Revision-Date: 2012-07-17 15:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: Soixante Circuits\n"
 "Language: \n"
@@ -21,10 +21,6 @@ msgstr ""
 #: ../admin/admin-menu.php:232
 msgid "Paramètre accueil"
 msgstr "Home settings"
-
-#: ../admin/admin-menu.php:232
-msgid "Accueil"
-msgstr "Home"
 
 #: ../admin/admin-menu.php:269
 msgid "Contenus"
@@ -67,87 +63,93 @@ msgstr "Slides content"
 msgid "Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site"
 msgstr "This page allow you to add images and links to site's home page"
 
-#: ../admin/admin-menu.php:323
-#: ../admin/admin-menu.php:358
+#: ../admin/admin-menu.php:327
+msgid "Page d'accueil en"
+msgstr "Home page in"
+
+#: ../admin/admin-menu.php:328
+msgid "Pour ajouter une diapositive en"
+msgstr "To add a slide in"
+
+#: ../admin/admin-menu.php:328
+msgid "cliquez sur <i>Ajouter un slide"
+msgstr "click on <i>Add a slide"
+
+#: ../admin/admin-menu.php:330
+msgid "Ajouter un slide"
+msgstr "Add a slide"
+
+#: ../admin/admin-menu.php:342
+#: ../admin/admin-menu.php:435
 msgid "Titre"
 msgstr "Title"
 
-#: ../admin/admin-menu.php:324
-#: ../admin/admin-menu.php:365
+#: ../admin/admin-menu.php:349
+#: ../admin/admin-menu.php:436
 msgid "Sous-titre"
 msgstr "Subtitle"
 
-#: ../admin/admin-menu.php:325
-#: ../admin/admin-menu.php:372
+#: ../admin/admin-menu.php:356
+#: ../admin/admin-menu.php:437
 msgid "Légende"
 msgstr "Legend"
 
-#: ../admin/admin-menu.php:326
-#: ../admin/admin-menu.php:379
+#: ../admin/admin-menu.php:363
+#: ../admin/admin-menu.php:438
 msgid "Lien"
 msgstr "Link"
 
-#: ../admin/admin-menu.php:327
-#: ../admin/admin-menu.php:386
+#: ../admin/admin-menu.php:370
+#: ../admin/admin-menu.php:439
 msgid "Image"
 msgstr "Image"
 
-#: ../admin/admin-menu.php:328
-#: ../admin/admin-menu.php:389
+#: ../admin/admin-menu.php:373
+#: ../admin/admin-menu.php:440
 msgid "Inserer une image"
 msgstr "Upload/Insert"
 
-#: ../admin/admin-menu.php:329
-#: ../admin/admin-menu.php:408
+#: ../admin/admin-menu.php:384
+#: ../admin/admin-menu.php:448
+msgid "Contenu externe"
+msgstr "Embed content"
+
+#: ../admin/admin-menu.php:392
+#: ../admin/admin-menu.php:441
 msgid "Monter"
 msgstr "Move up"
 
-#: ../admin/admin-menu.php:330
-#: ../admin/admin-menu.php:410
+#: ../admin/admin-menu.php:394
+#: ../admin/admin-menu.php:442
 msgid "Descendre"
 msgstr "Move down"
 
-#: ../admin/admin-menu.php:331
-#: ../admin/admin-menu.php:414
+#: ../admin/admin-menu.php:398
+#: ../admin/admin-menu.php:443
 msgid "Supprimer"
 msgstr "Delete"
 
-#: ../admin/admin-menu.php:332
-#: ../admin/admin-menu.php:441
+#: ../admin/admin-menu.php:425
+#: ../admin/admin-menu.php:444
 #: ../includes/functions.php:50
 msgid "Sauvegarder"
 msgstr "Save"
 
-#: ../admin/admin-menu.php:333
+#: ../admin/admin-menu.php:445
 msgid "Sauvegarde en cours"
 msgstr "Saving"
 
-#: ../admin/admin-menu.php:334
+#: ../admin/admin-menu.php:446
 msgid "Oups, une erreur s'est produite :( ..."
 msgstr "Oups, an error has occur :( ..."
 
-#: ../admin/admin-menu.php:335
+#: ../admin/admin-menu.php:447
 msgid "Sauvegardé"
 msgstr "Saved"
 
-#: ../admin/admin-menu.php:336
-#: ../admin/admin-menu.php:400
-msgid "Contenu externe"
-msgstr "Embed content"
+#: ../admin/admin-menu.php:449
+msgid "Veuillez inserer un slide au format JSON"
+msgstr "Empty input"
 
-#: ../admin/admin-menu.php:343
-msgid "Page d'accueil en"
-msgstr "Home page in"
-
-#: ../admin/admin-menu.php:344
-msgid "Pour ajouter une diapositive en"
-msgstr "To add a slide in"
-
-#: ../admin/admin-menu.php:344
-msgid "cliquez sur <i>Ajouter un slide"
-msgstr "click on <i>Add a slide"
-
-#: ../admin/admin-menu.php:346
-msgid "Ajouter un slide"
-msgstr "Add a slide"
-
+#~ msgid "Accueil"
+#~ msgstr "Home"

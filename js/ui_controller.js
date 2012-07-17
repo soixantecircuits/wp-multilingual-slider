@@ -146,7 +146,6 @@ if(jQuery('form.content_home').length > 0) {
 }
 
 jQuery("#select_themes").change(function update_preview() {
-	var translater = jQuery("#translater");
 	var current = jQuery('#select_themes option:selected').val();
 	var screenshot = "";
 	
@@ -176,7 +175,7 @@ jQuery("#select_themes").change(function update_preview() {
 			screenshot+
 			'<h3>Selected theme</h3>'+
 			'<h4>'+current+'</h4>'+
-			'<button type="button" id="save_themes" class="button-primary">'+translater.attr("savbut")+'</button>'+
+			'<button type="button" id="save_themes" class="button-primary">'+loc.savbut+'</button>'+
 		'</div>'
 	);
 	update_save_themes_button();
@@ -204,58 +203,57 @@ jQuery(".add").click('bind',function() {
 	var code = jQuery(this).attr('code_pays');
 	var activeCount = jQuery(".table-"+code).length;
 	var last_slide = jQuery("#form-table-"+code+"-"+parseInt(activeCount-1));
-	var translater = jQuery("#translater");
 	if (!last_slide.is('*')) {
 		last_slide = jQuery("#sentinel-"+code);
 	}
 	last_slide.after(
 		'<table class="table-'+code+'" id="form-table-'+code+'-'+activeCount+'">'+
 			'<tr align="left">'+
-				'<th scope="row">'+translater.attr("title")+' :</th>'+
+				'<th scope="row">'+loc.title+' :</th>'+
 				'<td>'+
 					'<input name="title-'+code+'-'+activeCount+'" class="title-'+code+'" id="title-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'<tr align="left">'+
-				'<th scope="row">'+translater.attr("sub")+' :</th>'+
+				'<th scope="row">'+loc.sub+' :</th>'+
 				'<td>'+
 					'<input name="sub-'+code+'-'+activeCount+'" class="sub-'+code+'" id="sub-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">'+translater.attr("leg")+' :</th>'+
+				'<th scope="row">'+loc.leg+' :</th>'+
 				'<td>'+
 					'<input name="legend-'+code+'-'+activeCount+'" class="legend-'+code+'" id="legend-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">'+translater.attr("url")+' :</th>'+
+				'<th scope="row">'+loc.url+' :</th>'+
 				'<td>'+
 					'<input name="url-'+code+'-'+activeCount+'" class="url-'+code+'" id="url-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">'+translater.attr("img")+' :</th>'+
+				'<th scope="row">'+loc.img+' :</th>'+
 				'<td>'+
 					'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+code+'-'+activeCount+'" title="Add Media" onclick="return false;">'+
-					translater.attr("upld")+'</a>'+
+					loc.upld+'</a>'+
 					'<input class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'" type="hidden" ></textarea>'+
 				'</td>'+
 			'</tr>'+
 			'<tr align="left">'+
-				'<th scope="row">'+translater.attr("ext")+' :</th>'+
+				'<th scope="row">'+loc.ext+' :</th>'+
 				'<td>'+
 					'<input name="ext-'+code+'-'+activeCount+'" class="ext-'+code+'" id="ext-'+code+'-'+activeCount+'"></input>'+
 				'</td>'+
 			'</tr>'+
 			'<tr>'+
 				'<th>'+
-					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+translater.attr("up")+'</a> / '+
-					'<a class="down-'+code+'" id="down-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+translater.attr("down")+'</a>'+
+					'<a class="up-'+code+'" id="up-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+loc.up+'</a> / '+
+					'<a class="down-'+code+'" id="down-'+code+'-'+activeCount+'" count='+activeCount+' href="#" onclick="return false;">'+loc.down+'</a>'+
 				'</th>'+
 				'<td>'+
 					'<button type="button" style="border-color:#FF4D1A;background:#FF4D1A;'+
 					'float:right;"id="remove_table-'+code+'-'+activeCount+'"'+
-					'class="remove_table-'+code+' button-primary" name="form-table-'+code+'-'+activeCount+'">'+translater.attr("del")+'</button>'+
+					'class="remove_table-'+code+' button-primary" name="form-table-'+code+'-'+activeCount+'">'+loc.del+'</button>'+
 				'</td>'+
 			'</tr>'+
 	'</table>'
@@ -269,7 +267,6 @@ jQuery(".add").click('bind',function() {
 
 /***SAVE FUNTION***/
 jQuery("#save_home").click('bind',function() {
-	var translater = jQuery("#translater");
 	var content = "";
 	var i = 0;
 	jQuery("div#code").each(function (index) {
@@ -291,17 +288,17 @@ jQuery("#save_home").click('bind',function() {
 		content += jQuery(this).attr("value");
 		i++;
 	});
-	jQuery("#home_handler").append("<div class='message'>"+translater.attr("save")+"...</div>");
+	jQuery("#home_handler").append("<div class='message'>"+loc.save+"...</div>");
 	jQuery.ajax({
 		type: "post",
 		url: "options.php",
 		data: content,
 		success: function(msg) {
-			jQuery(".message").html(translater.attr("saved"));
+			jQuery(".message").html(loc.saved);
 			jQuery(".message").delay('1000').fadeOut('slow');
 		},
 		error: function(msg){
-			jQuery(".message").html(translater.attr("saverr"));
+			jQuery(".message").html(loc.saverr);
 			jQuery(".message").delay('1000').fadeOut('slow');
 		}
 	});
@@ -309,7 +306,6 @@ jQuery("#save_home").click('bind',function() {
 
 function update_save_themes_button () {
 	jQuery("#save_themes").click("bind", function() {
-		var translater = jQuery("#translater");
 		var content = "";
 		var i = 0;
 		jQuery("#home_themes input").each(function (index) {
@@ -327,17 +323,17 @@ function update_save_themes_button () {
 			content += "=";
 			content += jQuery(this).attr("value");
 		});
-		jQuery("#current-theme").append("<div class='message'>"+translater.attr("save")+"...</div>");
+		jQuery("#current-theme").append("<div class='message'>"+loc.save+"...</div>");
 		jQuery.ajax({
 			type: "post",
 			url: "options.php",
 			data: content,
 			success: function(msg) {
-				jQuery(".message").html(translater.attr("saved"));
+				jQuery(".message").html(loc.saved);
 				jQuery(".message").delay('1000').fadeOut('slow');
 			},
 			error: function(msg){
-				jQuery(".message").html(translater.attr("saverr"));
+				jQuery(".message").html(loc.saverr);
 				jQuery(".message").delay('1000').fadeOut('slow');
 			}
 		});
@@ -373,8 +369,7 @@ jQuery("#load_json").click(function () {
 		});
 		jQuery("#json_handler").submit();
 	} else {
-		// TODO Translate
-		alert("Empty input");
+		alert(loc.empty);
 	}
 });
 
