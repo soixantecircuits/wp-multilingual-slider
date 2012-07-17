@@ -229,7 +229,7 @@ function register_mysettings() {
 function home_create_menu() {
 	//create new top-level menu
 	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__); //get_bloginfo('template_url');
-	add_menu_page( __('Paramètre accueil'),  __('Accueil'), 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
+	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
 }
 
 function home_settings_page()
