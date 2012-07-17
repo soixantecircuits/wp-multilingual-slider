@@ -158,7 +158,11 @@ ul.tab_select{
 	margin-bottom: 100px;
 }
 
-.json_slides {
+#data_json {
 	width: 450px;
 	height: 200px;
+}
+
+.io_button {
+	padding: 20px;
 }

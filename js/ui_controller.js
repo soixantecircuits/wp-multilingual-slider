@@ -344,5 +344,40 @@ function update_save_themes_button () {
 	});
 }
 
+jQuery("#save_json").click(function () {
+	var content = new Array();
+	jQuery("div#code").each(function (index) {
+		var code = jQuery(this).attr("code_pays");
+		jQuery(".ext-"+code).each(function() {
+			var str = jQuery(this).val().replace(/"/g, "'");
+			jQuery(this).val(str);
+		});
+		content.push(code, (jQuery("#content_home-"+code).serializeArray()));
+	});
+	var uriContent = "data:application/octet-stream," + encodeURIComponent(JSON.stringify(content));
+	var newWindow = window.open(uriContent, 'slides_export.json');
+});
+
+jQuery("#load_json").click(function () {
+	var content = jQuery("#data_json").attr("value");
+
+	if (content != "") {
+		var obj = JSON.parse(content);
+		jQuery("div#code").each(function (index) {
+			var code = jQuery(this).attr("code_pays");
+			for (var i = 0; i < obj.length; i+=2) {
+				if (obj[i] == code) {
+					jQuery("#json_content\\["+code+"\\]").attr("value", JSON.stringify(obj[i+1]));
+				}
+			}
+		});
+		jQuery("#json_handler").submit();
+	} else {
+		// TODO Translate
+		alert("Empty input");
+	}
+});
+
+
 });
 

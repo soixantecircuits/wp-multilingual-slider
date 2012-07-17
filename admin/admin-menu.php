@@ -212,8 +212,6 @@ function register_mysettings() {
 	register_setting( 'home-settings-select', 'home_themes');  
 	register_setting( 'home-settings-config', 'theme_options');  
 
-	//require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/themes/" . get_option("home_themes") . "/config.php");
-
 	if(function_exists("icl_get_languages")){
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
 		foreach($languages as $l){
@@ -289,8 +287,23 @@ function home_settings_page()
 </div>
 
 <div id="tabs-import">
-	<h2><?php _e("Importer ou exporter les slides au format Json", 'wp-multilingual-slider');?></h2>
-	<textarea name="json_slides" id="json_slides"></textarea>
+	<h2><?php _e("Importer ou exporter des slides", 'wp-multilingual-slider');?></h2>
+	<form id="json_handler" method="post" action="options.php">
+		<?php settings_fields('home-settings-group'); ?>
+
+		<?php 
+		if(!empty($sel_lang)) {
+			foreach($sel_lang as $l) { ?>
+				<input type="hidden" id="json_content[<?php echo $l;?>]" name="home_content[<?php echo $l;?>]" type="text" /><?php
+			}
+		} ?>
+
+		<textarea id="data_json"></textarea>
+		<br />
+		<button type="button" class="io_button" id="load_json"><?php _e("Importer les slides au format JSON", "wp-multilingual-slider"); ?></button>
+	</form>
+	<hr />
+	<button type="button" class="io_button" id="save_json"><?php _e("Exporter les slides au format JSON", "wp-multilingual-slider"); ?></button>
 </div>
 
 <div id="tabs-slides">
@@ -327,7 +340,7 @@ if(!empty($sel_lang)){
     foreach($sel_lang as $l) { ?>
         <div id="column-<?php echo $l; ?>" class="column column-<?php echo count($sel_lang); ?>">
         <form id="content_home-<?php echo $l; ?>" class="content_home">
-        <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> Page d'accueil en <?php echo $lang_codes[$l];?> :</h3>
+        <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> <?php _e("Page d'accueil en", "wp-multilingual-slider"); ?> <?php echo $lang_codes[$l];?> :</h3>
         <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?> <?php echo $lang_codes[$l];?></i></p>
         <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide-<?php echo $l; ?>" class="add button-primary">
             <?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?>
