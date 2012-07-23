@@ -83,7 +83,7 @@ function get_current_slides()
 	if (function_exists('qtrans_getLanguage')) {
 	  	$lang = qtrans_getLanguage();
 	} else if (function_exists('icl_get_languages')) {
-		$lang = icl_get_languages();
+		$lang = ICL_LANGUAGE_CODE;
 	}
 	$_slides = json_decode($_slides[$lang]);
 	$slides = null;
