@@ -13,12 +13,16 @@
 
 /* FlexSlider Necessary Styles
 *********************************/ 
+/*
 .flexslider {margin: 0; padding: 0;}
 .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+
+/*
 .flexslider .slides img {width: 100%; display: block;}
 .flex-pauseplay span {text-transform: capitalize;}
-
+*/
 /* Clearfix for the .slides element */
+/*
 .slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
 html[xmlns] .slides {display: block;} 
 * html .slides {height: 1%;}
@@ -26,21 +30,113 @@ html[xmlns] .slides {display: block;}
 /* No JavaScript Fallback */
 /* If you are not using another script, such as Modernizr, make sure you
  * include js that eliminates this class on page load */
+/*
 .no-js .slides > li:first-child {display: block;}
 
 
 /* FlexSlider Default Theme
 *********************************/
-.flexslider {margin: 0 0 60px; background: #fff; border: 4px solid #fff; position: relative; -webkit-border-radius: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2); zoom: 1;}
+/*
+.flexslider {margin: 0; background: #fff; position: relative; -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.2); zoom: 1;}
 .flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
 .loading .flex-viewport {max-height: 300px;}
 .flexslider .slides {zoom: 1;}
 
 .carousel li {margin-right: 5px}
+/* slider */
+.flexslider{
+	float:left;
+	width:680px;
+	position:relative;
+}
+
+.flexslider a{
+	text-decoration: none;
+	color: inherit;
+}
+
+/* slides */
+.slides{
+	margin:0;
+	padding:0;
+	list-style:none;
+	overflow:hidden;
+	width:680px;
+	height:335px;
+	position:relative;
+}
+.slides li{
+	position:absolute;
+	top:0;
+	left:0;
+	overflow:hidden;
+	width:680px;
+	height:335px;
+}
+/*slides img */
+.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.flexslider .slides img {max-width: 100%; display: block; height:auto;}
+.slides img{vertical-align:top;width: 100%;}
+/* Clearfix for the .slides element */
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
+* html .slides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .slides > li:first-child {display: block;}
+/* slider-text */
+.flex-caption{
+	position:absolute;
+	left:0;
+	bottom:41px;
+	width:100%;
+	color:#fff;
+}
+.flex-caption .holder{
+	overflow:hidden;
+	padding:24px 21px 20px;
+	height:1%;
+	background:url(../images/bg-slider-text.png);
+}
+.flex-caption strong{
+	display:block;
+	font-size:22px;
+	line-height:24px;
+	font-weight:bold;
+	position:relative;
+}
+
+/* switcher */
+.flex-control-nav{
+	margin:0;
+	padding:0;
+	list-style:none;
+	position:absolute;
+	right:12px;
+	bottom:10px;
+}
+.flex-control-nav li{
+	float:left;
+	padding:0 1px 1px 4px;
+}
+.flex-control-nav a{
+	display:block;
+	overflow:hidden;
+	text-indent:-9999px;
+	background: url(../images/sprite-content.png) -23px -39px no-repeat;
+	width:17px;
+	height:16px;
+	cursor:pointer;
+	position:relative;
+}
+.flex-control-nav li a:hover {background:url(../images/sprite-content.png) -63px -39px no-repeat;}
+.flex-control-nav li a.flex-active {background:url(../images/sprite-content.png) -63px -39px no-repeat;}
 
 
 /* Direction Nav */
-.flex-direction-nav a {width: 36px; height: 39px; margin: -20px 0 0; display: block; background: url(../images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
+.flex-direction-nav a {width: 36px; height: 39px; margin: -20px 0 0; display: block; background: url(../../images/bg_direction_nav.png) no-repeat 0 0; position: absolute; top: 50%; cursor: pointer; text-indent: -9999px; opacity: 0; -webkit-transition: all .3s ease;}
 .flex-direction-nav .flex-next {background-position: 0 -39px; right: -36px;}
 .flex-direction-nav .flex-prev {left: -36px;}
 .flexslider:hover .flex-next {opacity: 1; right: 0;}
@@ -48,11 +144,12 @@ html[xmlns] .slides {display: block;}
 .flex-direction-nav .disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
 
 /* Control Nav */
-.flex-control-nav {width: 100%; position: absolute; bottom: -40px; text-align: center;}
-.flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline;}
+/*
+.flex-control-nav {width: 100%; position: absolute; bottom: 20px; text-align: center;}
+.flex-control-nav li {margin: 0 6px; display: inline-block; zoom: 1; *display: inline; float:right;}
 .flex-control-paging li a {width: 11px; height: 11px; display: block; background: #fff; cursor: pointer; text-indent: -9999px; -webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; box-shadow: inset 0 0 3px rgba(0,0,0,0.3);}
 .flex-control-paging li a:hover {background: #c8e0f3;}
-.flex-control-paging li a.flex-active {background: #285678; cursor: default;  box-shadow: 0 0 2px rgba(0,0,0,0.2), inset 0 0 3px rgba(255,255,255,0.2); border: 1px solid #1c3f59; top: 1px; position: relative; }
+.flex-control-paging li a.flex-active {background: #285678; cursor: default;  box-shadow: 0 0 2px rgba(0,0,0,0.2), inset 0 0 3px rgba(255,255,255,0.2); border: 1px solid #1c3f59; top: -1px; position: relative; }
 
 .flex-control-thumbs {margin: 5px 0 0; position: static; overflow: hidden;}
 .flex-control-thumbs li {width: 25%; float: left; margin: 0;}
@@ -65,27 +162,27 @@ html[xmlns] .slides {display: block;}
   .flex-direction-nav .flex-next {opacity: 1; right: 0;}
 }
 
+/*
 .stronk {
-	position: relative;
-	bottom: 40px;
-	left: 25px;
-	color: #0AA4E4;
+	color: #fff;
 	font-weight: bold;
-	font-size: 35px;
-	line-height: 38px;
-	text-transform: uppercase;
-	text-shadow:2px 2px 1px #000000;
+	font-size: 22px;
+	line-height: 24px;
+	text-shadow:2px 2px 1px #000;
 }
 
 .flex_caption {
 	position: absolute;
-	bottom: 5px;
-	left: 5px;
+	bottom: 55px;
+	left: 20px;
 	text-shadow:1px 1px 1px #000000;
 	color: #fff;
+	width: 600px;
+	overflow: hidden;
+	padding: 24px 21px 20px;
 }
 
 .flex_caption h2 {
 	font-weight: bold;
 	font-size: 16px;
-}
+}*/
