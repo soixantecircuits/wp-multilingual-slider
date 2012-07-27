@@ -125,14 +125,14 @@ html[xmlns] .slides {display: block;}
 	display:block;
 	overflow:hidden;
 	text-indent:-9999px;
-	background: url(../images/sprite-content.png) -23px -39px no-repeat;
+	background: url(../images/nav.png) 0px 0px no-repeat;
 	width:17px;
 	height:16px;
 	cursor:pointer;
 	position:relative;
 }
-.flex-control-nav li a:hover {background:url(../images/sprite-content.png) -63px -39px no-repeat;}
-.flex-control-nav li a.flex-active {background:url(../images/sprite-content.png) -63px -39px no-repeat;}
+.flex-control-nav li a:hover,
+.flex-control-nav li a.flex-active {background:url(../images/nav.png) -40px 0px no-repeat;}
 
 
 /* Direction Nav */
