@@ -79,7 +79,7 @@ function init_themes_slider()
 function get_current_slides()
 {
 	$_slides = get_option("home_content");
-	$lang = 'fr';
+	$lang = 'en-US';
 	if (function_exists('qtrans_getLanguage')) {
 	  	$lang = qtrans_getLanguage();
 	} else if (function_exists('icl_get_languages')) {
