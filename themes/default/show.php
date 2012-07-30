@@ -13,9 +13,13 @@ function print_current_slides($slides) { ?>
 		for ($i = 0; $i < count($slides); $i++) { ?>
 			<li id="slide-<?php echo $i;?>" class="">
 				<div class="area">
+				<?php if ($slides[$i]['ext'] == "") { ?>
 					<img class="png" src="<?php echo $slides[$i]['img']; ?>" alt="image description" width="488" height="306" />
 					<div class='elipsis'><strong><?php echo $slides[$i]['title']; ?></strong></div>
-				</div>
+				<? } else {
+					echo $slides[$i]['ext'];
+				} ?>
+				 </div>
 				<div class="info-panel">
 					<strong class="location"><?php echo $slides[$i]['title']; ?></strong>
 					<div class="holder">
