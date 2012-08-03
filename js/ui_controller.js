@@ -287,7 +287,6 @@ jQuery("#save_home").click('bind',function() {
 		i++;
 	});
 	content = content.replace(/\\"/g, "'");
-	alert(content);
 	jQuery("#home_handler").append("<div class='message'>"+loc.save+"...</div>");
 	jQuery.ajax({
 		type: "post",
