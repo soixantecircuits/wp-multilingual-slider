@@ -119,8 +119,6 @@ function update_iframe (activeCount, code) {
 	});
 }
 
-jQuery
-
 if(jQuery('form.content_home').length > 0) {
 	window.send_to_editor = function(html) {
 		imgurl = jQuery('img',html);
@@ -272,7 +270,7 @@ jQuery("#save_home").click('bind',function() {
 	jQuery("div#code").each(function (index) {
 		var code = jQuery(this).attr("code_pays");
 		jQuery(".ext-"+code).each(function() {
-			var str = jQuery(this).val().replace(/"/g, "'");
+			var str = jQuery(this).val().replace('"', "'");
 			jQuery(this).val(str);
 		});
 		jQuery("#home_content\\["+code+"\\]").attr("value", 
@@ -288,6 +286,8 @@ jQuery("#save_home").click('bind',function() {
 		content += jQuery(this).attr("value");
 		i++;
 	});
+	content = content.replace(/\\"/g, "'");
+	alert(content);
 	jQuery("#home_handler").append("<div class='message'>"+loc.save+"...</div>");
 	jQuery.ajax({
 		type: "post",
@@ -348,7 +348,7 @@ jQuery("#save_json").click(function () {
 			var str = jQuery(this).val().replace(/"/g, "'");
 			jQuery(this).val(str);
 		});
-		content.push(code, (jQuery("#content_home-"+code).serializeArray()));
+		content.push(code, (jQuery("#content_home-"+code).replace(/"/g, "'").serializeArray()));
 	});
 	var uriContent = "data:application/octet-stream," + encodeURIComponent(JSON.stringify(content));
 	var newWindow = window.open(uriContent, 'slides_export.json');
