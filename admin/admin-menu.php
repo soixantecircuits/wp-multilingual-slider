@@ -32,9 +32,10 @@ function home_settings_page()
 	} else {
 		$sel_lang = Array(0 => get_bloginfo('language'));
 	}
-
+	do_action('wpms_before_admin_display', $sel_lang);
 
 require_once("display.php");
+do_action('wpms_after_admin_display');
 require_once("js-translation.php");
 
 } ?>

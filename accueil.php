@@ -23,7 +23,6 @@ add_action( 'plugins_loaded', 'xb_classifieds_init' );
 
 function prepareJSON($input)
 {
-    
     //This will convert ASCII/ISO-8859-1 to UTF-8.
     //Be careful with the third parameter (encoding detect list), because
     //if set wrong, some input encodings will get garbled (including UTF-8!)
@@ -109,7 +108,9 @@ function print_home_slider()
 	$slides = get_current_slides();
 	if (count($slides) > 0) {
 		if (function_exists("print_current_slides")) {
-			print_current_slides($slides); 
+			do_action('wpms_before_slider', $slides);
+			print_current_slides($slides);
+			do_action('wpms_after_slider', $slides);
 		}
 		wp_reset_query();
 	}

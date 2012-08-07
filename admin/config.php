@@ -8,10 +8,12 @@ function xb_classifieds_init() {
 	add_action('admin_menu', 'home_create_menu');
 	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/lang/');
 	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/includes/functions.php");
+	do_action("wpms_init");
 }
  
 function xb_classifieds_build_permissions() {
 	// FIXME add permission to editor & author
+	do_action("wpms_build_premissions");
 	if (function_exists('get_role')) {
 		$role = array(get_role('administrator'), get_role('editor'), get_role('author'));
 		foreach ($role as $r) {
@@ -23,12 +25,12 @@ function xb_classifieds_build_permissions() {
 			}
 			unset($r);
 		}
-		
 	}
 }
 
 function home_create_menu() {
 	//Create new top-level menu
+	do_action("wpms_create_top_menu");
 	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';
 	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
 }
