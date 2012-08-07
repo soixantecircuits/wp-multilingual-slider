@@ -104,15 +104,9 @@ function test_iframe (activeCount, code) {
 function update_iframe (activeCount, code) {
 	jQuery("#ext-"+code+"-"+activeCount).keyup(function() {
 		if (jQuery(this).val() != "") {
-			//jQuery("#title-"+code+"-"+activeCount).prop("disabled", true);
-			//jQuery("#sub-"+code+"-"+activeCount).prop("disabled", true);
-			//jQuery("#legend-"+code+"-"+activeCount).prop("disabled", true);
 			jQuery("#form-table-"+code+"-"+activeCount).find("p.img_home").css("background-color","#000");
 			jQuery("#form-table-"+code+"-"+activeCount).find("p>img").css("opacity","0.5");
 		} else {
-			//jQuery("#title-"+code+"-"+activeCount).prop("disabled", false);
-			//jQuery("#sub-"+code+"-"+activeCount).prop("disabled", false);
-			//jQuery("#legend-"+code+"-"+activeCount).prop("disabled", false);
 			jQuery("#form-table-"+code+"-"+activeCount).find("p.img_home").css("background-color","#fff");
 			jQuery("#form-table-"+code+"-"+activeCount).find("p>img").css("opacity","1");
 		}
@@ -270,7 +264,7 @@ jQuery("#save_home").click('bind',function() {
 	jQuery("div#code").each(function (index) {
 		var code = jQuery(this).attr("code_pays");
 		jQuery(".ext-"+code).each(function() {
-			var str = jQuery(this).val().replace('"', "'");
+			var str = jQuery(this).val().replace(/\"/g, "\'");
 			jQuery(this).val(str);
 		});
 		jQuery("#home_content\\["+code+"\\]").attr("value", 

@@ -1,11 +1,20 @@
 <?php
+require_once("config.php");
+require_once("admin_menu.php");
 
-function my_admin_init() {
+function wpms_admin_init() {
+	//if (is_admin()) {
+		wpms_classifieds_init();
+	//}
+	do_action("wpms_init");
+}
+
+function wpms_register() {
 	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
 	wp_deregister_script('showdown');
-	wp_register_script('showdown', $path.'/js/showdown.js');
+	wp_register_script('showdown', $path.'/inc/ressources/javascript/showdown.js');
 	wp_enqueue_script('showdown');
-	wp_enqueue_script( 'accueil_script', $path.'/js/ui_controller.js', array('jquery'), 0.1, TRUE );
+	wp_enqueue_script( 'accueil_script', $path.'/javascript/ui_controller.js', array('jquery'), 0.1, TRUE );
    $myStyleUrl = $path. '/css/style_home.css';
 	wp_register_style('myStyleSheets', $myStyleUrl);
    wp_enqueue_style( 'myStyleSheets');
@@ -18,10 +27,10 @@ function my_admin_init() {
 		wp_enqueue_script('thickbox');
    }
    wp_enqueue_script('media-upload');
-	register_mysettings();
+	wpms_register_mysettings();
 }
 
-function register_mysettings() {  
+function wpms_register_mysettings() {  
 	//register our settings  
 	register_setting( 'home-settings-group', 'home_content');  
 	register_setting( 'home-settings-select', 'home_themes');  

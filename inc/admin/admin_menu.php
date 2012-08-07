@@ -1,9 +1,10 @@
 <?php
 
 require_once("lang_codes.php");
-require_once("init.php");
+require_once("display.php");
+require_once("js_translation.php");
 
-function get_all_themes() {
+function wpms_get_all_themes() {
 	$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
 	// Open a known directory, and proceed to read its js content
 	if ($handle = opendir($themes_dir)) {
@@ -33,9 +34,8 @@ function home_settings_page()
 		$sel_lang = Array(0 => get_bloginfo('language'));
 	}
 	do_action('wpms_before_admin_display', $sel_lang);
-
-require_once("display.php");
-do_action('wpms_after_admin_display');
-require_once("js-translation.php");
+	wpms_display($sel_lang);
+	do_action('wpms_after_admin_display');
+	wpms_js_translation();
 
 } ?>

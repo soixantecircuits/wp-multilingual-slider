@@ -1,3 +1,6 @@
+<?php
+
+function wpms_display($sel_lang) { ?>
 
 <div class="wrap">
 <div id="tabs">
@@ -13,7 +16,7 @@
 		<?php settings_fields('home-settings-select'); ?>
 		<a href="<?php echo site_url(); ?>" type="button" target="_blank" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></a>
 		<select id="select_themes" name="home_themes">
-			<?php get_all_themes(); ?>
+			<?php wpms_get_all_themes(); ?>
 		</select>
 	</form>
 	<?php
@@ -165,4 +168,5 @@ if(!empty($sel_lang)){
 </div>
 </div>
 </div>
-
+<?php
+} ?>

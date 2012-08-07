@@ -1,17 +1,15 @@
 <?php
 
-function xb_classifieds_init() {
+function wpms_classifieds_init() {
 	// Add permission on role during the plugin activation
-	register_activation_hook ( __FILE__, 'xb_classifieds_build_permissions' );
+	register_activation_hook ( __FILE__, 'wpms_classifieds_build_permissions' );
 	
-	add_action('admin_init', 'my_admin_init');
-	add_action('admin_menu', 'home_create_menu');
-	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/lang/');
-	require (ABSPATH . "wp-content/plugins/wp-multilingual-slider/includes/functions.php");
-	do_action("wpms_init");
+	add_action('admin_init', 'wpms_register');
+	add_action('admin_menu', 'wpms_home_create_menu');
+	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/languages/');
 }
  
-function xb_classifieds_build_permissions() {
+function wpms_classifieds_build_permissions() {
 	// FIXME add permission to editor & author
 	do_action("wpms_build_premissions");
 	if (function_exists('get_role')) {
@@ -28,7 +26,7 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
-function home_create_menu() {
+function wpms_home_create_menu() {
 	//Create new top-level menu
 	do_action("wpms_create_top_menu");
 	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';
