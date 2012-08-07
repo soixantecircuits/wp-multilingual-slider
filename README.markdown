@@ -1,8 +1,8 @@
 To display the slider, paste this code in a theme template :
 
    `if (function_exists('print_home_slider')) {
-      print_home_slider();
-   }`
+       print_home_slider();
+    }`
 
 ## Custom developpement
 
@@ -24,4 +24,4 @@ Some hooks are available with an arguments to easily modify the behaviour of the
 - wpms\_after\_admin\_display (Called after displaying the admin page)
 
 Git repo by gabrielstuff
-Automatically generated on Jeu 28 jui 2012 16:10:22 CEST
+ Automatically generated on Jeu 28 jui 2012 16:10:22 CEST
