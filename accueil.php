@@ -53,6 +53,9 @@ function load_conf($config)
 function init_themes_slider()
 {
 	$themes_name = get_option("home_themes");
+	if ($themes_name == null) {
+		$themes_name = 'flexslider';
+	}
 	$themes_dir = "wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name ."/";
 	require (ABSPATH . $themes_dir . "show.php");
 	$myFile = file_get_contents($themes_dir . 'theme.conf');

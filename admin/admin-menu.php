@@ -3,10 +3,20 @@
 require_once("lang_codes.php");
 require_once("init.php");
 
-function home_create_menu() {
-	//create new top-level menu
-	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__); //get_bloginfo('template_url');
-	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
+function get_all_themes() {
+	$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
+	// Open a known directory, and proceed to read its js content
+	if ($handle = opendir($themes_dir)) {
+		$selected = get_option("home_themes");
+		while (false !== ($entry = readdir($handle))) {
+			if ($entry != "." && $entry != "..") {
+				echo "<option ".
+					($entry == $selected ? "selected='selected'" : "").
+					(file_exists($themes_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
+					"value=$entry>$entry</option>";
+			}
+		}
+	}
 }
 
 function home_settings_page()
@@ -23,21 +33,6 @@ function home_settings_page()
 		$sel_lang = Array(0 => get_bloginfo('language'));
 	}
 
-	function get_all_themes() {
-		$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
-		// Open a known directory, and proceed to read its js content
-		if ($handle = opendir($themes_dir)) {
-			$selected = get_option("home_themes");
-			while (false !== ($entry = readdir($handle))) {
-				if ($entry != "." && $entry != "..") {
-					echo "<option ".
-						($entry == $selected ? "selected='selected'" : "").
-						(file_exists($themes_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
-						"value=$entry>$entry</option>";
-				}
-			}
-		}
-	}
 
 require_once("display.php");
 require_once("js-translation.php");

@@ -27,4 +27,10 @@ function xb_classifieds_build_permissions() {
 	}
 }
 
+function home_create_menu() {
+	//Create new top-level menu
+	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';
+	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
+}
+
 ?>
