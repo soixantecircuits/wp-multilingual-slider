@@ -20,8 +20,8 @@ Or paste this code in a theme template :
 
 ```Php
 if (function_exists('print_home_slider')) {
-      print_home_slider();
-   }
+	print_home_slider();
+}
 ```
 
 ## Custom developpement
