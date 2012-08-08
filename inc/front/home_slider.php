@@ -38,8 +38,21 @@ function get_current_slides()
 	return $slides;
 }
 
+function wpms_add_admin_bar($wp_admin_bar) {
+	if (is_admin_bar_showing()) {
+		$wp_admin_bar->add_menu(
+			array(
+				'id' => 'wp-multilingual-slider',
+				'title' => 'Coco Slider',
+				'href' => admin_url('admin.php?page=settings_page_wp-multilingual-slider')
+			)
+		);
+	}
+}
+
 function print_home_slider()
 {
+	add_action( 'admin_bar_menu', 'wpms_add_admin_bar', 70 );
 	$slides = get_current_slides();
 	if (count($slides) > 0) {
 		if (function_exists("print_current_slides")) {
