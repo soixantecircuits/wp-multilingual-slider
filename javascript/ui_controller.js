@@ -141,22 +141,24 @@ jQuery("#select_themes").change(function update_preview() {
 	var current = jQuery('#select_themes option:selected').val();
 	var screenshot = "";
 	
-	var allText = "";
-	var txtFile = new XMLHttpRequest();
-	txtFile.open("GET", "../wp-content/plugins/wp-multilingual-slider/themes/"+current+"/README.mdown", true);
-	txtFile.onreadystatechange = function() {
-  		if (txtFile.readyState === 4) {
-    		if (txtFile.status === 200) {
-      		allText = txtFile.responseText; 
-				var converter = new Showdown.converter();
-				var html = converter.makeHtml(allText);
-				jQuery("#current-theme").append(
-					'<div style="float: right;width: 50%;height: 270px;border: solid 1px;overflow-y: scroll;overflow-x: auto;position: absolute;top: 50px;right: 0px;background: #EEE;">'+html+'</div>'
-				);
-    		}
-  		}
+	if (current !== 'none') {
+		var allText = "";
+		var txtFile = new XMLHttpRequest();
+		txtFile.open("GET", "../wp-content/plugins/wp-multilingual-slider/themes/"+current+"/README.mdown", true);
+		txtFile.onreadystatechange = function() {
+  			if (txtFile.readyState === 4) {
+    			if (txtFile.status === 200) {
+      			allText = txtFile.responseText; 
+					var converter = new Showdown.converter();
+					var html = converter.makeHtml(allText);
+					jQuery("#current-theme").append(
+						'<div style="float: right;width: 50%;height: 270px;border: solid 1px;overflow-y: scroll;overflow-x: auto;position: absolute;top: 50px;right: 0px;background: #EEE;">'+html+'</div>'
+					);
+    			}
+  			}
+		}
+		txtFile.send(null);
 	}
-	txtFile.send(null);
 
 	jQuery("#current-theme").remove();
 	if (jQuery("#select_themes option:selected").attr("screenshot") == "true") {
@@ -192,6 +194,10 @@ jQuery(function() {
 
 /***ADD SLIDE***/
 jQuery(".add").click('bind',function() {
+	if (jQuery("#select_themes option:selected").val() == 'none') {
+		alert("Please choose a theme slider before");
+		return;
+	}
 	var code = jQuery(this).attr('code_pays');
 	var activeCount = jQuery(".table-"+code).length;
 	var last_slide = jQuery("#form-table-"+code+"-"+parseInt(activeCount-1));

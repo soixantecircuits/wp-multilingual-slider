@@ -6,6 +6,15 @@
  * Base styles
  */
 
+.rs-wrap {
+	height: 404px;
+	padding-bottom: 100px;
+}
+
+.rs-slide-bg ul {
+	margin: 0;
+}
+
 .rs-wrap:after,
 .rs-slider:after,
 .rs-thumbwrap:after,

@@ -1,6 +1,7 @@
 <?
 
-function print_current_slides($slides) { ?>
+function print_current_slides($slides) {
+	$themes_dir = plugin_dir_url(__FILE__); ?>
 	<div id="example">
 		<div id="slides">
 			<div class="slides_container">
@@ -18,10 +19,10 @@ function print_current_slides($slides) { ?>
 				<?php
 				} ?>
 			</div>
-			<a href="#" class="prev"><img src="wp-content/plugins/wp-multilingual-slider/themes/slides/img/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
-			<a href="#" class="next"><img src="wp-content/plugins/wp-multilingual-slider/themes/slides/img/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
+			<a href="#" class="prev"><img src="<?php echo $themes_dir; ?>/img/arrow-prev.png" width="24" height="43" alt="Arrow Prev"></a>
+			<a href="#" class="next"><img src="<?php echo $themes_dir; ?>/img/arrow-next.png" width="24" height="43" alt="Arrow Next"></a>
 		</div>
-		<img src="wp-content/plugins/wp-multilingual-slider/themes/slides/img/example-frame.png" width="739" height="341" alt="Example Frame" id="frame">
+		<img src="<?php echo $themes_dir; ?>/img/example-frame.png" width="739" height="341" alt="Example Frame" id="frame">
 	</div>
 <?php
 }
