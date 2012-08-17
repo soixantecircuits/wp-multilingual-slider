@@ -9,6 +9,9 @@ function wpms_get_all_themes() {
 	// Open a known directory, and proceed to read its js content
 	if ($handle = opendir($themes_dir)) {
 		$selected = get_option("home_themes");
+		echo "<option value=".
+			__("none", "wp-multilingual-slider").">".
+			__("none", "wp-multilingual-slider")."</option>";
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				echo "<option ".

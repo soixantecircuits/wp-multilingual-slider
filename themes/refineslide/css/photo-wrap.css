@@ -1,9 +1,13 @@
+.photo-wrap img {
+	height: 100% !important;
+}
+
 .photo-wrap {
 	display:block;
 	margin: 0px;
 	padding: 0px;
-	width:550px;
-	height:350px;
+	width:100%;
+	height:100%;
 	overflow:hidden;
 }
 
