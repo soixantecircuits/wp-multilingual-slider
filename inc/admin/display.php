@@ -109,7 +109,7 @@ if(!empty($sel_lang)){
                 <th scope="row"><?php _e('Image', 'wp-multilingual-slider'); ?> :</th>
                 <td>
                   <a id="_content-add_media_" class="thickbox add_media-<?php echo $l; ?>" onclick="return false;"
-                        title="Add Media" href="media-upload.php?post_id=1&TB_iframe=1"><?php  _e('Inserer une image', 'wp-multilingual-slider'); ?></a>
+                        title="Add Media" href="media-upload.php?post_id=0&TB_iframe=1"><?php  _e('Inserer une image', 'wp-multilingual-slider'); ?></a>
                   <input id="_image_" class="image-<?php echo $l; ?>" name="_image_" value="<?php echo $slides[$i*6+4]->{'value'}; ?>" type="hidden" />
                   <?php if ($slides[$i*6+4]->{'value'} != '') { ?>
                     <p class="img_home">

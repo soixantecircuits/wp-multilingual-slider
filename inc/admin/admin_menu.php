@@ -27,9 +27,9 @@ function home_settings_page()
 {
 	if(function_exists("icl_get_languages")) {
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
-		foreach($languages as $l){
-			$sel_lang[$i] = $l['language_code'];
-			$i++;
+		$sel_lang = Array();
+		foreach($languages as $l => $k){
+			array_push($sel_lang, $l);
 		}
 	} else if(function_exists("qtrans_init")) {
 		$sel_lang = qtrans_getSortedLanguages();

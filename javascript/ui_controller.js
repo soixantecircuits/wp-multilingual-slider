@@ -232,7 +232,7 @@ jQuery(".add").click('bind',function() {
 			'<tr align="left">'+
 				'<th scope="row">'+loc.img+' :</th>'+
 				'<td>'+
-					'<a href="media-upload.php?post_id=1&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+code+'-'+activeCount+'" title="Add Media" onclick="return false;">'+
+					'<a href="media-upload.php?post_id=0&amp;TB_iframe=1" class="thickbox add_media" id="content-add_media-'+code+'-'+activeCount+'" title="Add Media" onclick="return false;">'+
 					loc.upld+'</a>'+
 					'<input class="image-'+code+'" name="image-'+code+'-'+activeCount+'" id="image-'+code+'-'+activeCount+'" type="hidden" ></textarea>'+
 				'</td>'+
