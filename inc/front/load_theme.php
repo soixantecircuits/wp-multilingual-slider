@@ -3,7 +3,7 @@ function wpms_init_themes_slider()
 {
 	$themes_name = get_option("home_themes");
 	if ($themes_name == null) {
-		$themes_name = 'flexslider';
+		return;
 	}
 	$themes_dir = "wp-content/plugins/wp-multilingual-slider/themes/" . $themes_name ."/";
 	require (ABSPATH . $themes_dir . "show.php");
