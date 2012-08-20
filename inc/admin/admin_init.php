@@ -8,13 +8,11 @@ function wpms_admin_init() {
 }
 
 function wpms_register() {
-	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';//dirname(__FILE__);//get_bloginfo('template_url');
 	wp_deregister_script('showdown');
-	wp_register_script('showdown', $path.'/inc/ressources/javascript/showdown.js');
+	wp_register_script('showdown', WPMS_DIR.'/inc/admin/resources/javascript/showdown.js');
 	wp_enqueue_script('showdown');
-	wp_enqueue_script( 'accueil_script', $path.'/javascript/ui_controller.js', array('jquery'), 0.1, TRUE );
-  	$myStyleUrl = $path. '/css/style_home.css';
-	wp_register_style('myStyleSheets', $myStyleUrl);
+	wp_enqueue_script( 'accueil_script', WPMS_DIR.'/inc/admin/resources/javascript/ui_controller.js', array('jquery'), 0.1, TRUE );
+	wp_register_style('myStyleSheets', WPMS_DIR.'/inc/admin/resources/css/style_home.css');
   	wp_enqueue_style( 'myStyleSheets');
 	wp_register_script( 'jquery_ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' );
 	wp_enqueue_script( 'jquery_ui' );

@@ -29,8 +29,7 @@ function wpms_classifieds_build_permissions() {
 function wpms_home_create_menu() {
 	//Create new top-level menu
 	do_action("wpms_create_top_menu");
-	$path =  WP_PLUGIN_URL .'/wp-multilingual-slider';
-	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', $path.'/images/accueil.png');
+	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', WPMS_DIR.'/inc/admin/resources/images/accueil.png');
 }
 
 ?>

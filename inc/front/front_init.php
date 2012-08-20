@@ -2,7 +2,7 @@
 
 require_once('load_theme.php');
 require_once('home_slider.php');
-require_once(dirname(__FILE__)."/../functions.php");
+require_once("functions.php");
 
 function wpms_front_init() {
 	if (!is_admin()) {

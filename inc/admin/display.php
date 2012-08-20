@@ -54,7 +54,6 @@ function wpms_display($sel_lang) { ?>
 
 <?php 
 if(!empty($sel_lang)){ 
-	$path = WP_PLUGIN_URL .'/wp-multilingual-slider';
 	global $lang_codes;
 	$home_content = 'home_content';
 	$allSlides = get_option($home_content);?>
@@ -63,7 +62,7 @@ if(!empty($sel_lang)){
     foreach($sel_lang as $l) { ?>
         <div id="column-<?php echo $l; ?>" class="column column-<?php echo count($sel_lang); ?>">
         <form id="content_home-<?php echo $l; ?>" class="content_home">
-        <h3><img src="../wp-content/plugins/wp-multilingual-slider/images/<?php echo $l ?>.png"/> <?php _e("Page d'accueil en", "wp-multilingual-slider"); ?> <?php echo $lang_codes[$l];?> :</h3>
+        <h3><img src="<?php echo WPMS_DIR; ?>/inc/admin/resources/images/<?php echo $l ?>.png"/> <?php _e("Page d'accueil en", "wp-multilingual-slider"); ?> <?php echo $lang_codes[$l];?> :</h3>
         <p><?php _e('Pour ajouter une diapositive en', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('cliquez sur <i>Ajouter un slide', 'wp-multilingual-slider');?> <?php echo $lang_codes[$l];?></i></p>
         <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide-<?php echo $l; ?>" class="add button-primary">
             <?php echo (__("Ajouter un slide", 'wp-multilingual-slider')." ".$l); ?>

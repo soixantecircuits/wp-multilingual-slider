@@ -7,6 +7,8 @@ Author: Soixante Circuits
 Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
+define('WPMS_FILE_NAME', basename(dirname(__FILE__)));
+define('WPMS_DIR', WP_PLUGIN_URL.'/'.WPMS_FILE_NAME);
 
 require( dirname(__FILE__) . '/inc/admin/admin_init.php');
 require( dirname(__FILE__) . '/inc/front/front_init.php');
