@@ -7,6 +7,8 @@ Author: Soixante Circuits
 Version: 1.1
 Author URI: http://www.soixantecircuits.fr/
 */
+ini_set('display_errors',1);
+error_reporting(E_ALL);
 
 require( dirname(__FILE__) . '/inc/admin/admin_init.php');
 require( dirname(__FILE__) . '/inc/front/front_init.php');
