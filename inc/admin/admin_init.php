@@ -33,19 +33,6 @@ function wpms_register_mysettings() {
 	register_setting( 'home-settings-group', 'home_content');  
 	register_setting( 'home-settings-select', 'home_themes');  
 	register_setting( 'home-settings-config', 'theme_options');  
-
-	if(function_exists("icl_get_languages")){
-		$languages = icl_get_languages('skip_missing=0&orderby=code');
-		foreach($languages as $l){
-			$sel_lang[$i] = $l['language_code'];
-			$i++;
-		}
-	}else if(function_exists("qtrans_init")){
-		$sel_lang = qtrans_getSortedLanguages();
-	}
-	else{
-		$sel_lang = Array(0 => get_bloginfo('language'));
-	}
 }
 
 ?>

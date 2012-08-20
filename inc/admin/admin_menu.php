@@ -9,6 +9,9 @@ function wpms_get_all_themes() {
 	// Open a known directory, and proceed to read its js content
 	if ($handle = opendir($themes_dir)) {
 		$selected = get_option("home_themes");
+		echo "<option value=".
+			__("none", "wp-multilingual-slider").">".
+			__("none", "wp-multilingual-slider")."</option>";
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				echo "<option ".
@@ -24,9 +27,9 @@ function home_settings_page()
 {
 	if(function_exists("icl_get_languages")) {
 		$languages = icl_get_languages('skip_missing=0&orderby=code');
-		foreach($languages as $l){
-			$sel_lang[$i] = $l['language_code'];
-			$i++;
+		$sel_lang = Array();
+		foreach($languages as $l => $k){
+			array_push($sel_lang, $l);
 		}
 	} else if(function_exists("qtrans_init")) {
 		$sel_lang = qtrans_getSortedLanguages();

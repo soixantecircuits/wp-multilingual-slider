@@ -1,7 +1,7 @@
 jQuery(function(){
 	jQuery('#slides').slides({
 		preload: true,
-		preloadImage: 'wp-content/plugins/wp-multilingual-slider/themes/slides/img/loading.gif',
+		preloadImage: 'wp-content/plugins/wp-multilingual-slider/themes/slidesjs/img/loading.gif',
 		play: 5000,
 		pause: 2500,
 		hoverPause: true,
