@@ -29,7 +29,7 @@ function wpms_display($sel_lang) { ?>
 	<form id="json_handler" method="post" action="options.php">
 		<?php settings_fields('home-settings-group'); ?>
 
-		<?php 
+		<?php
 		if(!empty($sel_lang)) {
 			foreach($sel_lang as $l) { ?>
 				<input type="hidden" id="json_content[<?php echo $l;?>]" name="home_content[<?php echo $l;?>]" type="text" /><?php
@@ -49,10 +49,10 @@ function wpms_display($sel_lang) { ?>
     <h2><?php _e("Contenu des slides", 'wp-multilingual-slider');?> </h2>
     <p> <?php _e("Cette page vous permet d'ajouter des images et des liens à la page d'accueil du site", 'wp-multilingual-slider');?>&nbsp;<?php echo get_bloginfo('name'); ?>
 		<a href="<?php echo site_url(); ?>" type="button" target="_blank" class="button-secondary"><?php _e("Voir la page", "wp-multilingual-slider"); ?></a>
-	 </p>   
+	 </p>
 
-<?php 
-if(!empty($sel_lang)){ 
+<?php
+if(!empty($sel_lang)){
 	global $lang_codes;
 	$home_content = 'home_content';
 	$allSlides = get_option($home_content);?>
@@ -71,7 +71,7 @@ if(!empty($sel_lang)){
 <?php
 
 		  if ($allSlides != null) {
-        		$slides = json_decode($allSlides[$l]);
+				$slides = json_decode($allSlides[$l]);
         $cpt = 0;
         for ($i = 0; $i < count($slides)/6; $i++) { ?>
             <table id="_" class="table-<?php echo $l; ?>">
@@ -148,7 +148,7 @@ if(!empty($sel_lang)){
 <form id="home_handler" method="post" action="options.php">
 	<?php settings_fields('home-settings-group'); ?>
 
-	<?php 
+	<?php
 	if(!empty($sel_lang)) {
 		foreach($sel_lang as $l) { ?>
 			<input type="hidden" id="home_content[<?php echo $l;?>]" name="home_content[<?php echo $l;?>]" type="text" />
@@ -167,5 +167,5 @@ if(!empty($sel_lang)){
 </div>
 </div>
 <?php
-} 
+}
 ?>

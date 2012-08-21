@@ -2,12 +2,12 @@
 function wpms_classifieds_init() {
 	// Add permission on role during the plugin activation
 	register_activation_hook ( __FILE__, 'wpms_classifieds_build_permissions' );
-	
+
 	add_action('admin_init', 'wpms_register');
 	add_action('admin_menu', 'wpms_home_create_menu');
 	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/languages/');
 }
- 
+
 function wpms_classifieds_build_permissions() {
 	// FIXME add permission to editor & author
 	do_action("wpms_build_premissions");

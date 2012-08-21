@@ -2,7 +2,7 @@
 function wpms_js_translation() {
 	$js_array = array (
 		"title"	=> __('Titre', 'wp-multilingual-slider'),
-		"sub" 	=> __('Sous-titre', 'wp-multilingual-slider'),
+		"sub"		=> __('Sous-titre', 'wp-multilingual-slider'),
 		"leg"		=> __('Légende', 'wp-multilingual-slider'),
 		"url"		=> __('Lien', 'wp-multilingual-slider'),
 		"img"		=> __('Image', 'wp-multilingual-slider'),
@@ -20,5 +20,5 @@ function wpms_js_translation() {
 	<script type="text/javascript">
 		var loc = <?php echo json_encode($js_array); ?>;
 	</script><?php
-} 
+}
 ?>

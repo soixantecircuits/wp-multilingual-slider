@@ -180,7 +180,7 @@
     'Chinese (Traditional)'    => 'zh-hant',
     'Zulu'    => 'zu',
     'Slavic'    => 'sla'
-); 
+);
 
 $lang_codes = array_flip($_lang_codes);
 ?>
