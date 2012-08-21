@@ -42,5 +42,5 @@ function load_conf($config)
 			add_style($value, $key);
 		}
 	}
-} ?>
-
+}
+?>

@@ -32,6 +32,4 @@ function wpms_register_mysettings() {
 	register_setting( 'home-settings-select', 'home_themes');  
 	register_setting( 'home-settings-config', 'theme_options');  
 }
-
 ?>
-

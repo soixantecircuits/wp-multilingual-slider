@@ -16,7 +16,7 @@ function print_current_slides($slides) { ?>
 				<?php if ($slides[$i]['ext'] == "") { ?>
 					<img class="png" src="<?php echo $slides[$i]['img']; ?>" alt="image description" width="488" height="306" />
 					<div class='elipsis'><strong><?php echo $slides[$i]['title']; ?></strong></div>
-				<? } else {
+				<?php } else {
 					echo $slides[$i]['ext'];
 				} ?>
 				 </div>

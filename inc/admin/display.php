@@ -1,5 +1,4 @@
 <?php
-
 function wpms_display($sel_lang) { ?>
 
 <div class="wrap">
@@ -168,4 +167,5 @@ if(!empty($sel_lang)){
 </div>
 </div>
 <?php
-} ?>
+} 
+?>

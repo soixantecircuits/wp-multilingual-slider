@@ -1,5 +1,4 @@
 <?php
-
 require_once('load_theme.php');
 require_once('home_slider.php');
 require_once("functions.php");
@@ -18,3 +17,4 @@ function wpms_shortcode() {
 		return __("Erreur lors de l'affichage du slider", "wp-multilingual-slider");
 	}
 }
+?>

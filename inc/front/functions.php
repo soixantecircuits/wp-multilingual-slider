@@ -1,5 +1,4 @@
 <?php
-
 function add_select ($name, $opt)
 {
 	echo "<tr><td><label for='$name' >$name : </label></td>";
@@ -50,5 +49,4 @@ function init_print_options ()
 		__("Sauvegarder", "wp-multilingual-slider") . '</button>';
 	echo '</form>';
 }
-
 ?>

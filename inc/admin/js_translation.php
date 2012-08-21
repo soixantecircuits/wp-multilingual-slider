@@ -1,5 +1,4 @@
 <?php
-
 function wpms_js_translation() {
 	$js_array = array (
 		"title"	=> __('Titre', 'wp-multilingual-slider'),
@@ -21,4 +20,5 @@ function wpms_js_translation() {
 	<script type="text/javascript">
 		var loc = <?php echo json_encode($js_array); ?>;
 	</script><?php
-} ?>
+} 
+?>

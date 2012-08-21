@@ -1,5 +1,4 @@
 <?php
-
  $_lang_codes = array(
     'Afar'    => 'aa',
     'Abkhazian'    => 'ab',
