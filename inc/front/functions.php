@@ -19,20 +19,20 @@ function add_script($script_src, $script_name, $require_script = array('jquery')
 {
 	wp_deregister_script($script_name);
 	wp_register_script(
-		$script_name, 
-		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/js/".$script_src, 
-		$require_script, 
-		1.0, 
+		$script_name,
+		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/js/".$script_src,
+		$require_script,
+		1.0,
 		true
 	);
-	wp_enqueue_script($script_name); 
+	wp_enqueue_script($script_name);
 }
 
 function add_style($style_src, $style_name)
 {
 	wp_register_style(
 		$style_name,
-		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/css/".$style_src, 
+		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/css/".$style_src,
 		false,
 		0.1
 	);
@@ -45,7 +45,7 @@ function init_print_options ()
 	settings_fields("home-settings-config");
 	print_options();
 	echo '</table>';
-	echo '<button type="button" class="button-primary">' . 
+	echo '<button type="button" class="button-primary">' .
 		__("Sauvegarder", "wp-multilingual-slider") . '</button>';
 	echo '</form>';
 }

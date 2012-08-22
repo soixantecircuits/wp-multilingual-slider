@@ -11,8 +11,8 @@ function wpms_init_themes_slider()
 	$myFile = file_get_contents($themes_dir . 'theme.conf');
 	if ($myFile == null) {
 		load_conf(
-			array("conf" => 
-				array("script" => 
+			array("conf" =>
+				array("script" =>
 					array(
 						$themes_name => $themes_name . ".js",
 						"main" => "main.js",

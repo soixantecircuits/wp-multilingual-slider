@@ -5,10 +5,10 @@ function prepareJSON($input)
     //Be careful with the third parameter (encoding detect list), because
     //if set wrong, some input encodings will get garbled (including UTF-8!)
     $imput = mb_convert_encoding($input, 'UTF-8', 'ASCII,UTF-8,ISO-8859-1');
-    
+
     //Remove UTF-8 BOM if present, json_decode() does not like it.
     if(substr($input, 0, 3) == pack("CCC", 0xEF, 0xBB, 0xBF)) $input = substr($input, 3);
-    
+
     return $input;
 }
 
@@ -17,7 +17,7 @@ function get_current_slides()
 	$_slides = get_option("home_content");
 	$lang = 'en-US';
 	if (function_exists('qtrans_getLanguage')) {
-	  	$lang = qtrans_getLanguage();
+		$lang = qtrans_getLanguage();
 	} else if (function_exists('icl_get_languages')) {
 		$lang = ICL_LANGUAGE_CODE;
 	}
