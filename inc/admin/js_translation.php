@@ -16,6 +16,7 @@ function wpms_js_translation() {
 		"saved"	=> __('Sauvegardé', 'wp-multilingual-slider'),
 		"ext"		=> __('Contenu externe', 'wp-multilingual-slider'),
 		"empty"	=> __('Veuillez inserer un slide au format JSON', 'wp-multilingual-slider'),
+		"themes_name" => basename(get_template_directory("Name"))
 	); ?>
 	<script type="text/javascript">
 		var loc = <?php echo json_encode($js_array); ?>;

@@ -12,7 +12,7 @@ var formfield_code = "";
 jQuery("div#code").each(function () {
 	var code = jQuery(this).attr("code_pays");
 	refresh_order(code);
-	jQuery(".table-"+code).each( function (index) {	
+	jQuery(".table-"+code).each( function (index) {
 		delete_button (index, code);
 		down_button (index, code);
 		up_button (index, code);
@@ -120,7 +120,7 @@ if(jQuery('form.content_home').length > 0) {
 			formfield_img.siblings("p").remove();
 			formfield_img.val(imgurl.attr('src'));
 			var p = jQuery(formfield_img.after(jQuery('<p>',{class:"img_home"}))).next();
-			p.append(imgurl);  
+			p.append(imgurl);
 		}
 		if(formfield_title !== "" && formfield_title.attr("value") == ""){
 			formfield_title.val(imgurl.attr('title'));
@@ -140,29 +140,35 @@ if(jQuery('form.content_home').length > 0) {
 jQuery("#select_themes").change(function update_preview() {
 	var current = jQuery('#select_themes option:selected').val();
 	var screenshot = "";
-	
+	var isInThemes = false;
+	var themes = isInThemes ? "themes/"+loc.themes_name+"/" : "";
+	if (current.indexOf("_THEMES_") != -1) {
+		isInThemes = true;
+		current = current.replace("_THEMES_", "");
+	}
+
 	if (current !== 'none') {
 		var allText = "";
 		var txtFile = new XMLHttpRequest();
-		txtFile.open("GET", "../wp-content/plugins/wp-multilingual-slider/themes/"+current+"/README.mdown", true);
+		txtFile.open("GET", "../wp-content/"+ themes +"plugins/wp-multilingual-slider/themes/"+current+"/README.mdown", true);
 		txtFile.onreadystatechange = function() {
-  			if (txtFile.readyState === 4) {
-    			if (txtFile.status === 200) {
-      			allText = txtFile.responseText; 
+			if (txtFile.readyState === 4) {
+				if (txtFile.status === 200) {
+					allText = txtFile.responseText;
 					var converter = new Showdown.converter();
 					var html = converter.makeHtml(allText);
 					jQuery("#current-theme").append(
 						'<div style="float: right;width: 50%;height: 270px;border: solid 1px;overflow-y: scroll;overflow-x: auto;position: absolute;top: 50px;right: 0px;background: #EEE;">'+html+'</div>'
 					);
-    			}
-  			}
+				}
+			}
 		}
 		txtFile.send(null);
 	}
 
 	jQuery("#current-theme").remove();
 	if (jQuery("#select_themes option:selected").attr("screenshot") == "true") {
-		screenshot = '<img id="theme_preview" src="../wp-content/plugins/wp-multilingual-slider/themes/'+current+'/screenshot.png" />';
+		screenshot = '<img id="theme_preview" src="../wp-content/'+ themes +'plugins/wp-multilingual-slider/themes/'+current+'/screenshot.png" />';
 	}
 	jQuery("#select_themes").after(
 		'<div id="current-theme" class="has-screenshot">'+
@@ -273,7 +279,7 @@ jQuery("#save_home").click('bind',function() {
 			var str = jQuery(this).val().replace(/\"/g, "\'");
 			jQuery(this).val(str);
 		});
-		jQuery("#home_content\\["+code+"\\]").attr("value", 
+		jQuery("#home_content\\["+code+"\\]").attr("value",
 			JSON.stringify(jQuery("#content_home-"+code).serializeArray())
 		);
 	});

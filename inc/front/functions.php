@@ -15,12 +15,13 @@ function add_field ($name, $opt = 0)
 	echo "<td><input name='$name' value='$opt' /></td></tr>";
 }
 
-function add_script($script_src, $script_name, $require_script = array('jquery'))
+function add_script($script_src, $script_name, $custom_themes, $require_script = array('jquery'))
 {
+	$home_themes = str_replace('_THEMES_', '', get_option('home_themes'));
 	wp_deregister_script($script_name);
 	wp_register_script(
 		$script_name,
-		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/js/".$script_src,
+		"/wp-content/".$custom_themes."plugins/wp-multilingual-slider/themes/".$home_themes."/js/".$script_src,
 		$require_script,
 		1.0,
 		true
@@ -28,11 +29,12 @@ function add_script($script_src, $script_name, $require_script = array('jquery')
 	wp_enqueue_script($script_name);
 }
 
-function add_style($style_src, $style_name)
+function add_style($style_src, $style_name, $custom_themes)
 {
+	$home_themes = str_replace('_THEMES_', '', get_option('home_themes'));
 	wp_register_style(
 		$style_name,
-		"/wp-content/plugins/wp-multilingual-slider/themes/".get_option("home_themes")."/css/".$style_src,
+		"/wp-content/".$custom_themes."plugins/wp-multilingual-slider/themes/".$home_themes."/css/".$style_src,
 		false,
 		0.1
 	);

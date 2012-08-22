@@ -5,13 +5,13 @@ require_once("js_translation.php");
 
 function wpms_get_all_themes() {
 	$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
-	$custom_dir = get_template_directory() . "/plugins/wp-mutlilingual-slider/themes/";
-	// Open a known directory, and proceed to read its js content
+	$custom_dir = get_template_directory() . "/plugins/wp-multilingual-slider/themes/";
+	 //Open a known directory, and proceed to read its js content
+	echo "<option value=".
+		__("none", "wp-multilingual-slider").">".
+		__("none", "wp-multilingual-slider")."</option>";
 	if ($handle = opendir($themes_dir)) {
 		$selected = get_option("home_themes");
-		echo "<option value=".
-			__("none", "wp-multilingual-slider").">".
-			__("none", "wp-multilingual-slider")."</option>";
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				echo "<option ".
@@ -23,15 +23,12 @@ function wpms_get_all_themes() {
 	}
 	if ($handle = opendir($custom_dir)) {
 		$selected = get_option("home_themes");
-		echo "<option value=".
-			__("none", "wp-multilingual-slider").">".
-			__("none", "wp-multilingual-slider")."</option>";
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				echo "<option ".
 					($entry == $selected ? "selected='selected'" : "").
 					(file_exists($custom_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
-					"value=$entry>$entry</option>";
+					"value=_THEMES_$entry>[Themes] $entry</option>";
 			}
 		}
 	}
