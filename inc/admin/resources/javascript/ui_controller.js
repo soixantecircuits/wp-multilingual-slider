@@ -141,11 +141,11 @@ jQuery("#select_themes").change(function update_preview() {
 	var current = jQuery('#select_themes option:selected').val();
 	var screenshot = "";
 	var isInThemes = false;
-	var themes = isInThemes ? "themes/"+loc.themes_name+"/" : "";
 	if (current.indexOf("_THEMES_") != -1) {
 		isInThemes = true;
 		current = current.replace("_THEMES_", "");
 	}
+	var themes = isInThemes ? "themes/"+loc.themes_name+"/" : "";
 
 	if (current !== 'none') {
 		var allText = "";

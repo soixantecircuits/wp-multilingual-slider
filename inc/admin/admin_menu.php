@@ -26,7 +26,7 @@ function wpms_get_all_themes() {
 		while (false !== ($entry = readdir($handle))) {
 			if ($entry != "." && $entry != "..") {
 				echo "<option ".
-					($entry == $selected ? "selected='selected'" : "").
+					("_THEMES_".$entry == $selected ? "selected='selected'" : "").
 					(file_exists($custom_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
 					"value=_THEMES_$entry>[Themes] $entry</option>";
 			}
