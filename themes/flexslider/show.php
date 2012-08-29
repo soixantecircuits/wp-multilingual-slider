@@ -23,5 +23,5 @@ function print_current_slides($slides) { ?>
 		</ul>
 		</div>
 	</div><?php
-} 
+}
 ?>

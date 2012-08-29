@@ -15,6 +15,6 @@ function print_current_slides($slides) { ?>
 	}
 	?>
 	</section>
-	<?php 
+	<?php
 }
 ?>
