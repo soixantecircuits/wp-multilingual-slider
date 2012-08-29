@@ -1,5 +1,4 @@
 <?
-
 function print_current_slides($slides) {
 	$themes_dir = plugin_dir_url(__FILE__); ?>
 	<div id="example">
@@ -26,5 +25,4 @@ function print_current_slides($slides) {
 	</div>
 <?php
 }
-
 ?>

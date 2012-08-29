@@ -1,5 +1,4 @@
 <?php
-
 function print_current_slides($slides) { ?>
 	<section id="jms-slideshow" class="jms-slideshow">
 	<?php
@@ -18,5 +17,4 @@ function print_current_slides($slides) { ?>
 	</section>
 	<?php 
 }
-
 ?>

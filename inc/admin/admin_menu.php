@@ -1,5 +1,4 @@
 <?php
-
 require_once("lang_codes.php");
 require_once("display.php");
 require_once("js_translation.php");

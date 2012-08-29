@@ -1,5 +1,4 @@
 <?php
-
 function wpms_display($sel_lang) { ?>
 
 <div class="wrap">

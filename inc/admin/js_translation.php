@@ -1,5 +1,4 @@
 <?php
-
 function wpms_js_translation() {
 	$js_array = array (
 		"title"	=> __('Titre', 'wp-multilingual-slider'),

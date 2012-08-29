@@ -1,5 +1,4 @@
 <?php
-
 function prepareJSON($input)
 {
     //This will convert ASCII/ISO-8859-1 to UTF-8.
@@ -59,3 +58,4 @@ function print_home_slider()
 		do_action('wpms_after_slider', $slides);
 	}
 }
+?>

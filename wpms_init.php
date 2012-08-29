@@ -14,5 +14,4 @@ require( dirname(__FILE__) . '/inc/front/front_init.php');
 // Plugin activation
 add_action( 'plugins_loaded', 'wpms_admin_init' );
 add_action( 'init', 'wpms_front_init');
-
 ?>
