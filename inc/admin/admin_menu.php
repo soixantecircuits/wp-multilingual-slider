@@ -51,5 +51,4 @@ function home_settings_page()
 	wpms_display($sel_lang);
 	do_action('wpms_after_admin_display');
 	wpms_js_translation();
-}
 ?>

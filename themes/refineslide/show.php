@@ -1,5 +1,4 @@
 <?php
-
 function print_current_slides($slides) { ?>
 	<ul id="images" class="rs-slider">
 		<?php
@@ -20,5 +19,4 @@ function print_current_slides($slides) { ?>
 	</ul>
 <?php 
 }
-
 ?>
