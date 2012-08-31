@@ -1,4 +1,5 @@
 <?php
+
 function wpms_init_themes_slider()
 {
 	$themes_name = get_option("home_themes");
@@ -9,7 +10,6 @@ function wpms_init_themes_slider()
 	}
 	$custom_themes = $isInThemes ? "themes/".basename(get_template_directory())."/" : "";
 	if ($themes_name == null) {
-		_e("Choose a theme for Coco slider.", "wp-multilingual-slider");
 		return;
 	}
 	$themes_dir = "wp-content/".$custom_themes."plugins/wp-multilingual-slider/themes/" . $themes_name ."/";
