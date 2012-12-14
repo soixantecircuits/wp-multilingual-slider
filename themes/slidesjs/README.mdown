@@ -1,0 +1,196 @@
+# Slidejs
+http://slidesjs.com/
+
+## DOCS
+
+### Basic markup
+
+```
+<!doctype html>
+    <head>
+        <title>Title</title>
+    
+        <style type="text/css" media="screen">
+            .slides_container {
+                width:570px;
+                height:270px;
+            }
+            .slides_container div {
+                width:570px;
+                height:270px;
+                display:block;
+            }
+        </style>
+    
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="slides.js"></script>
+    
+        <script>
+            $(function(){
+                $("#slides").slides();
+            });
+        </script>
+    </head>
+    <body>
+        <div id="slides">
+            <div class="slides_container">
+                <div>
+                    <img src="http://placehold.it/570x270">
+                </div>
+                <div>
+                    <img src="http://placehold.it/570x270">
+                </div>
+                <div>
+                    <img src="http://placehold.it/570x270">
+                </div>
+                <div>
+                    <img src="http://placehold.it/570x270">
+                </div>
+            </div>
+        </div>
+    </body>
+```
+
+### Options
+
+**preload (boolean)**
+
+Set true to preload images in an image based slideshow.  Show example
+ Default value is false.
+
+**preloadImage (string)**
+
+Name and location of loading image for preloader.  Show example
+ Default path is "/img/loading.gif".
+
+**container (string)**
+
+Class name for slides container.  Show example
+ Default class name is "slides_container".
+
+**generateNextPrev (boolean)**
+
+Auto generate next/prev buttons.  Show example
+ Default value is false.
+
+**next (string)**
+
+Class name for custom next button.  Show example
+ Default class name is "next".
+
+**prev (string)**
+
+Class name for previous button.  Show example
+ Default class name is "prev".
+
+**pagination (boolean)**
+
+If you're not using pagination you can set to false, but don't have to.  Show example
+
+**generatePagination (boolean)**
+
+Auto generate pagination.  Show example
+ Default value is true.
+
+**paginationClass (string)**
+
+Class name for pagination.  Show example
+ Default class name is "pagination".
+
+**currentClass (string)**
+
+Class name for current pagination item.  Show example
+ Default class name is "current".
+
+**fadeSpeed (number)**
+
+Set the speed of the fading animation in milliseconds.  Show example
+ Default is 350 milliseconds.
+
+**fadeEasing (string)**
+
+Set the easing of the fade animation.  Show example
+ Must include Easing plugin in your project
+
+**slideSpeed (number)**
+
+Set the speed of the sliding animation in milliseconds.  Show example
+ Default is 350 milliseconds.
+
+**slideEasing (string)**
+
+Set the easing of the sliding animation.  Show example
+ Must include Easing plugin in your project
+
+**start (number)**
+
+Set which slide you'd like to start with.  Show example
+ Default is 1 and will start on the first slide.
+
+**effect (string)**
+
+Set effect, slide or fade for next/prev and pagination. If you use just one effect name it'll be applied to both or you can state two effect names. The first name will be for next/prev and the second will be for pagination. Must be separated by a comma.  Show example
+ Default effect is "slide", which will slide on both next/prev and pagination.
+
+**crossfade (boolean)**
+
+Crossfade images in a image based slideshow.  Show example
+ Default value is false.
+
+**randomize (boolean)**
+
+Set to true to randomize slides.  Show example
+ Default value is false.
+
+**play (number)**
+
+Autoplay slideshow, a positive number will set to true and be the time between slide animation in milliseconds.  Show example
+ Default value is 0 and is false.
+
+**pause (number)**
+
+Pause slideshow on click of next/prev or pagination. A positive number will set to true and be the time of pause in milliseconds.  Show example
+ Default value is 0 and is false.
+
+**hoverPause (boolean)**
+
+Set to true and hovering over slideshow will pause it.  Show example
+ Default value is false.
+
+**autoHeight (boolean)**
+
+Set to true to auto adjust height.  Show example
+ Default value is false.
+
+**autoHeightSpeed (number)**
+
+Set auto height animation time in milliseconds.  Show example
+ Default value is 350.
+
+**bigTarget (boolean)**
+
+Set to true and the whole slide will link to next slide on click.  Show example
+ Default value is false.
+
+**animationStart() (callback)**
+
+Function called at the start of animation.  Show example
+ Default value is empty.
+
+**animationComplete() (callback)**
+
+Function called at the completion of animation  Show example
+ Default value is empty.
+Combining custom options
+
+```
+$(function(){
+      $("#slides").slides({
+        preload: true,
+        preloadImage: '/img/loading.gif',
+        play: 5000,
+        pause: 2500,
+        hoverPause: true
+      });
+    });
+```
