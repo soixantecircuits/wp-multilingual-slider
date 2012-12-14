@@ -116,6 +116,9 @@ function update_iframe (activeCount, code) {
 if(jQuery('form.content_home').length > 0) {
 	window.send_to_editor = function(html) {
 		imgurl = jQuery(html, 'img');
+		if(imgurl.href !== ''){
+			imgurl = jQuery(imgurl.html());
+		}
 		if(formfield_img !== ""){
 			formfield_img.siblings("p").remove();
 			formfield_img.val(imgurl.attr('src'));
