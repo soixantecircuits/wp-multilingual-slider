@@ -157,25 +157,26 @@ jQuery("#select_themes").change(function update_preview() {
 					allText = txtFile.responseText;
 					var converter = new Showdown.converter();
 					var html = converter.makeHtml(allText);
-					jQuery("#current-theme").append(
-						'<div style="float: right;width: 50%;height: 270px;border: solid 1px;overflow-y: scroll;overflow-x: auto;position: absolute;top: 50px;right: 0px;background: #EEE;">'+html+'</div>'
-					);
+					jQuery(".markdown").html(html);
 				}
 			}
 		}
 		txtFile.send(null);
 	}
 
-	jQuery("#current-theme").remove();
+	jQuery("#currenttheme").remove();
 	if (jQuery("#select_themes option:selected").attr("screenshot") == "true") {
 		screenshot = '<img id="theme_preview" src="../wp-content/'+ themes +'plugins/wp-multilingual-slider/themes/'+current+'/screenshot.png" />';
 	}
-	jQuery("#select_themes").after(
-		'<div id="current-theme" class="has-screenshot">'+
-			screenshot+
-			'<h3>Selected theme</h3>'+
-			'<h4>'+current+'</h4>'+
-			'<button type="button" id="save_themes" class="button-primary">'+loc.savbut+'</button>'+
+	jQuery("#selector").after(
+		'<div id="currenttheme" class="has-screenshot">'+
+		  '<div class="container width-3">'+
+				'<h3>Selected theme</h3>'+
+				'<h4>'+current+'</h4>'+
+				'<button type="button" id="save_themes" class="button-primary">'+loc.savbut+'</button>'+
+				screenshot+
+			'</div>'+	
+			'<div class="markdown width-2"></div>'+
 		'</div>'
 	);
 	update_save_themes_button();
@@ -328,7 +329,7 @@ function update_save_themes_button () {
 			content += "=";
 			content += jQuery(this).attr("value");
 		});
-		jQuery("#current-theme").append("<div class='message'>"+loc.save+"...</div>");
+		jQuery("#currenttheme").append("<div class='message'>"+loc.save+"...</div>");
 		jQuery.ajax({
 			type: "post",
 			url: "options.php",
@@ -353,31 +354,43 @@ jQuery("#save_json").click(function () {
 			var str = jQuery(this).val().replace(/"/g, "'");
 			jQuery(this).val(str);
 		});
-		content.push(code, (jQuery("#content_home-"+code).replace(/"/g, "'").serializeArray()));
+		var form = jQuery("#content_home-"+code);
+		if(form.replace !== undefined){
+			content.push(code, (form.replace(/"/g, "'").serializeArray()));
+		} else {
+			content.push(code, (form.html(form.html().replace(/"/g, "'")).serializeArray()));
+		}
 	});
 	var uriContent = "data:application/octet-stream," + encodeURIComponent(JSON.stringify(content));
 	var newWindow = window.open(uriContent, 'slides_export.json');
 });
 
 jQuery("#load_json").click(function () {
+	
 	var content = jQuery("#data_json").attr("value");
 
 	if (content != "") {
-		var obj = JSON.parse(content);
-		jQuery("div#code").each(function (index) {
-			var code = jQuery(this).attr("code_pays");
-			for (var i = 0; i < obj.length; i+=2) {
-				if (obj[i] == code) {
-					jQuery("#json_content\\["+code+"\\]").attr("value", JSON.stringify(obj[i+1]));
-				}
-			}
-		});
-		jQuery("#json_handler").submit();
+		var obj = {};
+		try
+		{
+	  	 obj = JSON.parse(this.responseText);
+	  	 jQuery("div#code").each(function (index) {
+					var code = jQuery(this).attr("code_pays");
+					for (var i = 0; i < obj.length; i+=2) {
+						if (obj[i] == code) {
+							jQuery("#json_content\\["+code+"\\]").attr("value", JSON.stringify(obj[i+1]));
+						}
+					}
+			  });
+			jQuery("#json_handler").submit();
+		}
+		catch(e)
+		{
+	  	 alert(loc.jsonformat);
+		}
 	} else {
 		alert(loc.empty);
 	}
 });
-
-
 });
 
