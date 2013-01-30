@@ -183,4 +183,3 @@
 );
 
 $lang_codes = array_flip($_lang_codes);
-?>

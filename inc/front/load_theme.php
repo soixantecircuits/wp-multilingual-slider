@@ -49,4 +49,3 @@ function load_conf($config, $custom_themes)
 		}
 	}
 }
-?>

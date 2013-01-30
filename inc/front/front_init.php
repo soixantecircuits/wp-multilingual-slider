@@ -17,4 +17,3 @@ function wpms_shortcode() {
 		return __("Erreur lors de l'affichage du slider", "wp-multilingual-slider");
 	}
 }
-?>

@@ -58,4 +58,3 @@ function print_home_slider()
 		do_action('wpms_after_slider', $slides);
 	}
 }
-?>

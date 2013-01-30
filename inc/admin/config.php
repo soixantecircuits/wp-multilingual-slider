@@ -2,8 +2,10 @@
 function wpms_classifieds_init() {
 	// Add permission on role during the plugin activation
 	register_activation_hook ( __FILE__, 'wpms_classifieds_build_permissions' );
-
-	add_action('admin_init', 'wpms_register');
+	if (isset($_GET['page']) && $_GET['page'] == 'settings_page_wp-multilingual-slider') {
+  	 add_action('admin_init', 'wpms_register');
+	}
+	
 	add_action('admin_menu', 'wpms_home_create_menu');
 	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/languages/');
 }
@@ -30,4 +32,3 @@ function wpms_home_create_menu() {
 	do_action("wpms_create_top_menu");
 	add_menu_page( __('Paramètre accueil'), 'Coco Slider', 'edit_pages', 'settings_page_wp-multilingual-slider', 'home_settings_page', WPMS_DIR.'/inc/admin/resources/images/accueil.png');
 }
-?>

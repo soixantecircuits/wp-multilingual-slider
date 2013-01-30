@@ -51,4 +51,3 @@ function init_print_options ()
 		__("Sauvegarder", "wp-multilingual-slider") . '</button>';
 	echo '</form>';
 }
-?>
