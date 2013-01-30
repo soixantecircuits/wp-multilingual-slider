@@ -1,7 +1,7 @@
 .table {
   margin-top:10px;
-  border-bottom:1px solid #CCC;
   width:500px;
+  border-bottom:1px solid #CCC;
 }
 
 #tabs .tab_select li.ui-state-default{
@@ -11,40 +11,40 @@
 }
 
 .tab_select li {
+  position: relative;
   float: left;
+  overflow: hidden;
   margin: 0;
   padding: 0;
   height: 29px;
-  line-height: 29px;
   border: 1px solid #666;
-  border-left: none;
   border-top: none;
-  overflow: hidden;
-  position: relative;
+  border-left: none;
   background: #ddd;
+  line-height: 29px;
 }
 
 #tabs .tab_select li.ui-state-active{
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
-  color: white;
   background: #ccc;
+  color: white;
 }
 
 #tabs .tab_select li a {
-  text-decoration: none;
-  color: #333;
   display: block;
-  font-family: "Trebuchet MS";
-  font-size: 14px;
   padding: 0 20px;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Trebuchet MS";
 }
 #tabs .tab_select li a:hover {
-  background: #ccc;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+  background: #ccc;
   color: #666;
 }
 
@@ -58,8 +58,8 @@
 }
 
 .table th {
-  text-align:left;
   padding: 5px 0px;
+  text-align:left;
 }
 
 .content_home input{
@@ -68,15 +68,15 @@
 }
 
 #columnizer{
-  width: 100%;
   overflow: auto;
+  width: 100%;
 }
 
 p.img_home{
-  height: 150px;
   display: block;
   overflow: hidden;
   width: 100%;
+  height: 150px;
 }
 
 p.img_home img{
@@ -85,42 +85,42 @@ p.img_home img{
 }
 
 .content_home table {
-	padding-top: 15px;
-	border: solid 1px;
+  padding-top: 15px;
+  border: solid 1px;
 }
 
 .slide_list {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 .slide_list table {
-	margin: 5px 0 3px 3px;
-	padding: 0.4em;
-/*	padding-left: 1.5em;*/
-	background-color: white;
-	width: 99%;
-	border-radius: 4px;
+  margin: 5px 0 3px 3px;
+  padding: 0.4em;
+/* padding-left: 1.5em; */
+  width: 99%;
+  border-radius: 4px;
+  background-color: white;
 }
 
 .tab {
-	padding: 10px;
+  padding: 10px;
 }
 
 #tabs {
 }
 
 #tabs .column{
-  float:left;
   display: block;
-  padding: 0px 4px 0px 4px;
-  background: #EEE;
-  border-left: 1px solid #CCC;
+  float:left;
   overflow: auto;
   margin-right: 1px;
-  border-radius: 4px;
+  padding: 0px 4px 0px 4px;
   padding-bottom: 10px;
+  border-left: 1px solid #CCC;
+  border-radius: 4px;
+  background: #EEE;
 }
 
 #tabs .column.column-1{
@@ -140,29 +140,66 @@ p.img_home img{
 }
 
 .tab_select {
-	margin: 0;
-	padding: 0;
-	float: left;
-	list-style: none;
-	height: 25px;
   display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
   width: 100%;
+  height: 25px;
+  list-style: none;
 }
 
 ul.tab_select{
-  width: 100%;
   margin: 0px 0px 10px 0px;
+  width: 100%;
 }
 
 #save_themes {
-	margin-bottom: 100px;
+  position:absolute;
+  top:1em;
+  right: 1em;
 }
 
 #data_json {
-	width: 450px;
-	height: 200px;
+  width: 450px;
+  height: 200px;
 }
 
 .io_button {
-	padding: 20px;
+  padding: 20px;
+}
+
+.has-screenshot{
+  float: left;
+  position:relative;
+  width: 100%;
+}
+
+.has-screenshot img{
+  width: 96%;
+}
+
+.width-2{
+  width: 50%;
+  float: left;
+}
+.width-3{
+  width: 33%;
+  float: left;
+}
+
+.markdown{
+  border: 1px solid #69B2CE;
+  padding: 4px;
+  background: white;
+  margin-top: 77px;
+}
+
+i.coco{
+  background-image: url(pictures.png);
+  width:32px;
+  height: 32px;
+  display: block;
+  float: left; 
+  margin: -7px 4px;
 }

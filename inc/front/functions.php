@@ -1,4 +1,15 @@
 <?php
+/**
+ * Dirty debug
+ * 
+ * */
+/*function add_scripts() {
+	wp_deregister_script('jquery');
+	wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js', '1.8');
+	wp_enqueue_script('jquery');
+}
+add_action('wp_print_scripts', 'add_scripts');*/
+
 function add_select ($name, $opt)
 {
 	echo "<tr><td><label for='$name' >$name : </label></td>";
@@ -43,11 +54,11 @@ function add_style($style_src, $style_name, $custom_themes)
 
 function init_print_options ()
 {
-	echo '<form id="the;me_options" method="post" action="options.php"><table>';
+	echo '<form id="theme_options" method="post" action="options.php"><table>';
 	settings_fields("home-settings-config");
 	print_options();
 	echo '</table>';
 	echo '<button type="button" class="button-primary">' .
-		__("Sauvegarder", "wp-multilingual-slider") . '</button>';
+		__("Save", "wp-multilingual-slider") . '</button>';
 	echo '</form>';
 }

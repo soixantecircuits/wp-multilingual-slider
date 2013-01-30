@@ -8,15 +8,15 @@ function wpms_admin_init() {
 }
 
 function wpms_register() {
+	wp_deregister_script('json2');
+	wp_register_script('json2', WPMS_DIR.'/inc/admin/resources/javascript/json2.js');
 	wp_deregister_script('showdown');
 	wp_register_script('showdown', WPMS_DIR.'/inc/admin/resources/javascript/showdown.js');
 	wp_enqueue_script('showdown');
 	wp_enqueue_script( 'accueil_script', WPMS_DIR.'/inc/admin/resources/javascript/ui_controller.js', array('jquery'), 0.1, TRUE );
 	wp_register_style('myStyleSheets', WPMS_DIR.'/inc/admin/resources/css/style_home.css');
 	wp_enqueue_style( 'myStyleSheets');
-	//Never do THAT
-	//Hack
-	//wp_register_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js' );
+
 	wp_enqueue_script( 'jquery-ui-core' );
 	wp_enqueue_script( 'jquery-ui-sortable' );
 	wp_enqueue_script( 'jquery-ui-tabs' );

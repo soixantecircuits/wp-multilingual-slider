@@ -14,6 +14,6 @@ function wpms_shortcode() {
 	if (function_exists('print_home_slider')) {
 		print_home_slider();
 	} else {
-		return __("Erreur lors de l'affichage du slider", "wp-multilingual-slider");
+		return __("Coco slider seems not to be installed. Please activate it, or download it.", "wp-multilingual-slider");
 	}
 }

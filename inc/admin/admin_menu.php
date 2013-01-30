@@ -3,6 +3,17 @@ require_once("lang_codes.php");
 require_once("display.php");
 require_once("js_translation.php");
 
+function wpms_show_message()
+{
+	$themes_name = get_option("home_themes");
+	if ($themes_name == null)
+	{
+		echo '<div id="message" class="error">';
+		echo "<p><strong>".__("Choose a theme for Coco slider.", "wp-multilingual-slider")."</strong></p></div>";
+	}
+}
+add_action('admin_notices', 'wpms_show_message');
+
 function wpms_get_all_themes() {
 	$themes_dir = ABSPATH . "/wp-content/plugins/wp-multilingual-slider/themes/";
 	$custom_dir = get_template_directory() . "/plugins/wp-multilingual-slider/themes/";
