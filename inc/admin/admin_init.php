@@ -27,12 +27,4 @@ function wpms_register() {
 		wp_enqueue_script('thickbox');
 	}
 	wp_enqueue_script('media-upload');
-	wpms_register_mysettings();
-}
-
-function wpms_register_mysettings() {
-	//register our settings
-	register_setting( 'home-settings-group', 'home_content');
-	register_setting( 'home-settings-select', 'home_themes');
-	register_setting( 'home-settings-config', 'theme_options');
 }

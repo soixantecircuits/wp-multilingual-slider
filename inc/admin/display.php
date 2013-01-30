@@ -110,7 +110,7 @@ if(!empty($sel_lang)){
 ?>
 </div>
 
-<form id="home_handler" method="post" action="options.php">
+<form id="home_handler" method="post" action="/">
   <?php settings_fields('home-settings-group'); ?>
 
   <?php
@@ -132,15 +132,13 @@ if(!empty($sel_lang)){
 <div id="tabs-options">
     <h2><?php _e("Slider's option", 'wp-multilingual-slider');?></h2>
   <div class="container">
-    <form id="home_themes" method="post" action="options.php">
+    <form id="home_themes" method="post" action="/">
       <div class="param hide">
         <?php settings_fields('home-settings-select'); ?>
       </div>
       <div id="selector" class="selector">
         <a href="<?php echo site_url(); ?>" type="button" target="_blank" class="button-secondary"><?php _e("See slides", "wp-multilingual-slider"); ?></a>
-        <select id="select_themes" name="home_themes">
-          <?php wpms_get_all_themes(); ?>
-        </select>
+        <?php wpms_get_all_themes(); ?>
       </div>
     </form>
     <?php
@@ -153,7 +151,7 @@ if(!empty($sel_lang)){
 
 <div id="tabs-import">
   <h2><?php _e("Import or export your slides", 'wp-multilingual-slider');?></h2>
-  <form id="json_handler" method="post" action="options.php">
+  <form id="json_handler" method="post" action="/">
     <?php settings_fields('home-settings-group'); ?>
 
     <?php
