@@ -1,10 +1,14 @@
 <?php
+	global $wp_multilingual_slider_version;
+  $wp_multilingual_slider_version = "0.9";
+
 function wpms_classifieds_init() {
 	// Add permission on role during the plugin activation
 	register_activation_hook ( __FILE__, 'wpms_classifieds_build_permissions' );
 	if (isset($_GET['page']) && $_GET['page'] == 'settings_page_wp-multilingual-slider') {
   	 add_action('admin_init', 'wpms_register');
 	}
+	add_action('admin_init', 'wpms_init');
 	add_action('admin_init', 'wpms_register_mysettings');
 	add_action('admin_menu', 'wpms_home_create_menu');
 	load_plugin_textdomain( 'wp-multilingual-slider', 'wp-content/plugins/wp-multilingual-slider/languages/');
@@ -25,6 +29,11 @@ function wpms_classifieds_build_permissions() {
 			unset($r);
 		}
 	}
+}
+
+function wpms_init(){
+	global $wp_multilingual_slider_version;
+	update_option("wp_multilingual_slider_version", $wp_multilingual_slider_version);
 }
 
 function wpms_home_create_menu() {

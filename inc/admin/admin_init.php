@@ -28,3 +28,8 @@ function wpms_register() {
 	}
 	wp_enqueue_script('media-upload');
 }
+
+function wpms_version(){
+	$installed_ver = get_option( "wp_multilingual_slider_version" );
+	echo "<!-- wpms version : $installed_ver -->";
+}

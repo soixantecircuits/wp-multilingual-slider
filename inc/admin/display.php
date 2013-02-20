@@ -1,6 +1,7 @@
 <?php
-function wpms_display($sel_lang) { ?>
-
+function wpms_display($sel_lang) { 
+  wpms_version();
+?>
 <div class="wrap">
  <i class="coco"></i><h1><?php _e("Coco slider - Bring easy multilingual sliding to wordpress","wp-multilingual-slider")?></h1> 
 <div id="tabs">
