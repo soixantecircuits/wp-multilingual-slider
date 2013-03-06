@@ -3,12 +3,6 @@
  * Dirty debug
  * 
  * */
-/*function add_scripts() {
-	wp_deregister_script('jquery');
-	wp_register_script('jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js', '1.8');
-	wp_enqueue_script('jquery');
-}
-add_action('wp_print_scripts', 'add_scripts');*/
 
 function add_select ($name, $opt)
 {
