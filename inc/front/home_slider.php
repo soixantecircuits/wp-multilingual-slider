@@ -21,7 +21,12 @@ function get_current_slides()
 	} else if (function_exists('icl_get_languages')) {
 		$lang = ICL_LANGUAGE_CODE;
 	}
-	$_slides = json_decode($_slides[$lang]);
+	$_slides_bis = json_decode($_slides[$lang]);
+	if($_slides_bis == null){
+		$_slides = json_decode($_slides['fr-FR']);
+	} else {
+		$_slides = $_slides_bis;
+	}
 	$slides = null;
 	for ($i = 0; $i < count($_slides)/6; $i++) {
 		$slides[] = array(
@@ -51,10 +56,11 @@ function wpms_add_admin_bar($wp_admin_bar) {
 function print_home_slider()
 {
 	add_action( 'admin_bar_menu', 'wpms_add_admin_bar', 70 );
+	wpms_init_themes_slider();
 	$slides = get_current_slides();
 	if (count($slides) > 0 && function_exists("print_current_slides")) {
 		do_action('wpms_before_slider', $slides);
-		print_current_slides($slides);
+			print_current_slides($slides);
 		do_action('wpms_after_slider', $slides);
 	}
 }

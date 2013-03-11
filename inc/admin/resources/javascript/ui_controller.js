@@ -370,13 +370,13 @@ jQuery("#save_json").click(function () {
 
 jQuery("#load_json").click(function () {
 	
-	var content = jQuery("#data_json").attr("value");
+	var content = jQuery("#data_json").val();
 
-	if (content != "") {
+	if (content !== "") {
 		var obj = {};
 		try
 		{
-	  	 obj = JSON.parse(this.responseText);
+	  	 obj = JSON.parse(content);
 	  	 jQuery("div#code").each(function (index) {
 					var code = jQuery(this).attr("code_pays");
 					for (var i = 0; i < obj.length; i+=2) {

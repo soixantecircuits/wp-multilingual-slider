@@ -5,7 +5,6 @@ require_once("functions.php");
 
 function wpms_front_init() {
 	if (!is_admin()) {
-		wpms_init_themes_slider();
 		add_shortcode("display_slider", "wpms_shortcode");
 	}
 }
