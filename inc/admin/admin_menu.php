@@ -20,8 +20,8 @@ function wpms_get_all_themes() {
 	$custom_dir = get_template_directory() . "/plugins/wp-multilingual-slider/themes/";
 	 //Open a known directory, and proceed to read its js content
 	echo "<select id='select_themes' name='home_themes'>".
-				"<option value=".
-		__("none", "wp-multilingual-slider").">".
+				"<option value='".
+		__("none", "wp-multilingual-slider")."'>".
 		__("none", "wp-multilingual-slider")."</option>";
 	if ($handle = opendir($themes_dir)) {
 		$selected = get_option("home_themes");
@@ -30,21 +30,23 @@ function wpms_get_all_themes() {
 				echo "<option ".
 					($entry == $selected ? "selected='selected'" : "").
 					(file_exists($themes_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
-					"value=$entry>$entry</option>";
+					"value='$entry'>$entry</option>";
 			}
 		}
 	}
-	if ($handle = opendir($custom_dir)) {
+
+	if (is_dir($custom_dir) && $handle = opendir($custom_dir)) {
 		$selected = get_option("home_themes");
 		while (false !== ($entry = readdir($handle))) {
 			if (is_dir($custom_dir.$entry) && $entry!= "." && $entry!= "..") {
 				echo "<option ".
 					("_THEMES_".$entry == $selected ? "selected='selected'" : "").
 					(file_exists($custom_dir . $entry . "/screenshot.png") ? "screenshot='true'" : "").
-					"value=_THEMES_$entry>[Themes] $entry</option></select>";
+					"value='_THEMES_$entry'>[Themes] $entry</option>";
 			}
 		}
 	}
+	echo "</select>";
 }
 
 function home_settings_page()

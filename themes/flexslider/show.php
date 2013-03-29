@@ -8,7 +8,7 @@ function print_current_slides($slides) { ?>
 			<li><?php
 			if ($s['ext'] == "") { ?>
 				<img class="png" src="<?php echo $s['img']; ?>" alt="image description" width="488" height="306" onclick="window.location = '<?php echo $s['url']; ?>'" />
-				<div class=flex-caption>
+				<div class="flex-caption">
 					<div class="holder">
 						<strong><?php echo $s['title']; ?></strong>
 						<h2><?php echo $s['sub']; ?></h2>
