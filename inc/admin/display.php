@@ -152,7 +152,7 @@ if(!empty($sel_lang)){
 
 <div id="tabs-import">
   <h2><?php _e("Import or export your slides", 'wp-multilingual-slider');?></h2>
-  <form id="json_handler" method="post" action="/">
+  <form id="json_handler" method="post" action="options.php">
     <?php settings_fields('home-settings-group'); ?>
 
     <?php
