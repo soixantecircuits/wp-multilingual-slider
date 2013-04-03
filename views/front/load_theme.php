@@ -16,7 +16,7 @@ function wpms_init_themes_slider()
   $show_file = ABSPATH . $themes_dir . "show.php";
   if(file_exists($show_file)){
     require $show_file; 
-    $myFile = file_get_contents($themes_dir . 'theme.conf');
+    $myFile = file_get_contents($themes_dir . 'theme.json');
     if ($myFile == null) {
       load_conf(
         array("conf" =>
