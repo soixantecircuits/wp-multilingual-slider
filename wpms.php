@@ -28,8 +28,8 @@ License:
 define('WPMS_FILE_NAME', basename(dirname(__FILE__)));
 define('WPMS_DIR', WP_PLUGIN_URL.'/'.WPMS_FILE_NAME);
 
-require( dirname(__FILE__) . '/inc/admin/admin_init.php');
-require( dirname(__FILE__) . '/inc/front/front_init.php');
+require( dirname(__FILE__) . '/views/admin/admin_init.php');
+require( dirname(__FILE__) . '/views/front/front_init.php');
 
 class WPMS {
 
@@ -122,7 +122,7 @@ class WPMS {
 	public function register_admin_styles() {
 
 		// TODO:	Change 'plugin-name' to the name of your plugin
-		wp_enqueue_style( 'plugin-name-admin-styles', plugins_url( 'plugin-name/css/admin.css' ) );
+		wp_enqueue_style( 'wpms-admin-styles', plugins_url( 'wp-multilingual-slider/css/admin/admin.css' ) );
 
 	} // end register_admin_styles
 
@@ -132,7 +132,22 @@ class WPMS {
 	public function register_admin_scripts() {
 
 		// TODO:	Change 'plugin-name' to the name of your plugin
-		wp_enqueue_script( 'plugin-name-admin-script', plugins_url( 'plugin-name/js/admin.js' ), array('jquery') );
+        wp_deregister_script('json2');
+        wp_enqueue_script( 'json2', plugins_url( 'wp-multilingual-slider/js/admin/json2.js' ));
+        wp_deregister_script('showdown');
+        wp_enqueue_script( 'showdown', plugins_url( 'wp-multilingual-slider/js/admin/showdown.js' ));
+		wp_enqueue_script( 'wpms-admin-script', plugins_url( 'wp-multilingual-slider/js/admin/ui_controller.js' ), array('jquery') );
+
+        wp_enqueue_script( 'jquery-ui-core' );
+        wp_enqueue_script( 'jquery-ui-sortable' );
+        wp_enqueue_script( 'jquery-ui-tabs' );
+
+        if(function_exists("add_thickbox")){
+            add_thickbox();
+        }else{
+            wp_enqueue_script('thickbox');
+        }
+        wp_enqueue_script('media-upload');
 
 	} // end register_admin_scripts
 
