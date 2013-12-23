@@ -115,7 +115,7 @@ function update_iframe (activeCount, code) {
 
 if(jQuery('form.content_home').length > 0) {
 	window.send_to_editor = function(html) {
-		imgurl = jQuery(html, 'img');
+		imgurl = jQuery(html).find('img');
 		if( (imgurl.attr('href') !== '') && (imgurl.attr("href") !== undefined)){
 			imgurl = jQuery(imgurl.html());
 		}
