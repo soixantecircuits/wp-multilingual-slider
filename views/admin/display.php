@@ -27,7 +27,7 @@ if(!empty($sel_lang)){
     foreach($sel_lang as $l) { ?>
         <div id="column-<?php echo $l; ?>" class="column column-<?php echo count($sel_lang); ?>">
         <form id="content_home-<?php echo $l; ?>" class="content_home">
-        <h3><img src="<?php echo WPMS_DIR; ?>/images/<?php echo $l ?>.png"/> <?php _e("Slide for ", "wp-multilingual-slider"); ?> <?php _e($lang_codes[$l]);?> :</h3>
+        <h3><img class="flags" src="<?php echo WPMS_DIR; ?>/images/flags/64/<?php echo strtoupper(substr ( $l, 0, 2)) ?>.png"/> <?php _e("Slide for ", "wp-multilingual-slider"); ?> <?php _e($lang_codes[$l]);?> :</h3>
         <p><?php _e('To add a slide in', 'wp-multilingual-slider'); echo " " . $l;?> <?php _e('click on <i>Add a slide ', 'wp-multilingual-slider');?> <?php echo _e($lang_codes[$l]);?></i></p>
         <button type="button" name="button_<?php echo $l;?>" code_pays="<?php echo $l;?>" id="add_slide-<?php echo $l; ?>" class="add button-primary">
             <?php echo (__("Add a slide", 'wp-multilingual-slider')." ".$l); ?>

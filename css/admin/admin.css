@@ -203,3 +203,13 @@ i.coco{
   float: left; 
   margin: -7px 4px;
 }
+
+img.flags {
+  height: 24px;
+  padding-top: 0;
+  float: left;
+  margin: 0px;
+  margin-top: -3px;
+  margin-right: 10px;
+}
+}
