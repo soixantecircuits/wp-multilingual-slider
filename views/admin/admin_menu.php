@@ -60,7 +60,7 @@ function home_settings_page()
 	} else if(function_exists("qtrans_init")) {
 		$sel_lang = qtrans_getSortedLanguages();
 	} else {
-		$sel_lang = Array(0 => get_bloginfo('language'));
+		$sel_lang = Array(0 => substr(get_bloginfo('language'), 0, 2));
 	}
 	do_action('wpms_before_admin_display', $sel_lang);
 	wpms_display($sel_lang);
