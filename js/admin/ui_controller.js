@@ -199,7 +199,11 @@ jQuery(document).ready(function($) {
   });
 
   $(function() {
-    $("#tabs").tabs();
+    $("#tabs").tabs({
+      beforeActivate: function( event, ui ) {
+        window.location.hash = ui.newPanel.attr('id');
+      }
+    });
   });
 
   /***ADD SLIDE***/

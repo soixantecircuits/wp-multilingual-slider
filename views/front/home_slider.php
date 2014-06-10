@@ -15,7 +15,7 @@ function prepareJSON($input)
 function get_current_slides()
 {
 	$_slides = get_option("home_content");
-	$lang = 'en-US';
+	$lang = 'en';
 	if (function_exists('qtrans_getLanguage')) {
 		$lang = qtrans_getLanguage();
 	} else if (function_exists('icl_get_languages')) {
@@ -23,7 +23,7 @@ function get_current_slides()
 	}
 	$_slides_bis = json_decode($_slides[$lang]);
 	if($_slides_bis == null){
-		$_slides = json_decode($_slides['fr-FR']);
+		$_slides = json_decode($_slides['fr']);
 	} else {
 		$_slides = $_slides_bis;
 	}
