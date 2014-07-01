@@ -157,7 +157,7 @@ class WPMS {
 	public function register_plugin_styles() {
 
 		// TODO:	Change 'plugin-name' to the name of your plugin
-		wp_enqueue_style( 'plugin-name-plugin-styles', plugins_url( 'plugin-name/css/display.css' ) );
+//		wp_enqueue_style( 'plugin-name-plugin-styles', plugins_url( 'plugin-name/css/display.css' ) );
 
 	} // end register_plugin_styles
 
@@ -167,7 +167,7 @@ class WPMS {
 	public function register_plugin_scripts() {
 
 		// TODO:	Change 'plugin-name' to the name of your plugin
-		wp_enqueue_script( 'plugin-name-plugin-script', plugins_url( 'plugin-name/js/display.js' ), array('jquery') );
+//		wp_enqueue_script( 'plugin-name-plugin-script', plugins_url( 'plugin-name/js/display.js' ), array('jquery') );
 
 	} // end register_plugin_scripts
 
