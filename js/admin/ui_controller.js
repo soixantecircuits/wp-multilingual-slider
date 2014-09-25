@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
 
   if($('form.content_home').length > 0) {
     window.send_to_editor = function(html) {
-      imgurl = $(html).find('img');
+      imgurl = $(html).is('img')? $(html) : $(html).find('img');
       if( (imgurl.attr('href') !== '') && (imgurl.attr("href") !== undefined)){
         imgurl = $(imgurl.html());
       }
